@@ -11,6 +11,7 @@ public class InputMgr : AComponent {
 	//Eventos a los que quiero avisar. El raton o cualquier dispositivo de puntero a presionado sobre alguna parte de la pantalla.
 	public delegate void PointAndClickEvent(GameObject onCollision,Vector3 point, float distance);
 	public delegate void ReturnDel();
+    public delegate void Move(Vector3 direction);
 
     //Enumerado de diferentes eventos de un boton.
     protected enum TButtonEvent { BEGIN, PRESSED, END, BEGIN_OVER, END_OVER };
@@ -33,9 +34,21 @@ public class InputMgr : AComponent {
 		m_pointAndClickButton = pointAndClickButton;
 		m_pointAndClickActive = pointAndClickActive;
 	}
-	
-	//registramos al evento Return
-	public void RegisterReturn(AComponent component, ReturnDel ret)
+
+    public Move RegisterMove
+    {
+        //get { return m_DelegateMove; }
+        set { m_DelegateMove += value; }
+    }
+
+    public Move UnRegisterMove
+    {
+        //get { return m_DelegateMove; }
+        set { m_DelegateMove -= value; }
+    }
+
+    //registramos al evento Return
+    public void RegisterReturn(AComponent component, ReturnDel ret)
 	{
 		//TODO 1: Registramos los delegados usando la calse TReturnData 
 		if ( m_returnDelegate.ContainsKey(component.GetID()))
@@ -155,10 +168,18 @@ public class InputMgr : AComponent {
 	protected override void Update()
 	{
 		base.Update();
-		OnReturn();
+        //aqui implementamos el move
+        Vector3 move = Vector3.zero;
+        if(Input.GetKey(KeyCode.W))
+        {
+            move.y = 1;
+        }
+
+        m_DelegateMove(move);
+		//OnReturn();
 		//PointAndClick()
-		if(m_pointAndClickActive)
-			OnClick();
+		//if(m_pointAndClickActive)
+			//OnClick();
 	}
 	
 	//Comprobamos si se ha pulsado el Return.
@@ -351,6 +372,8 @@ public class InputMgr : AComponent {
     private GameObject m_objectTouch;
 
     private Camera m_cameraUsedToTouch = null;
+
+    private Move m_DelegateMove;
 	
 	protected bool m_pointAndClickActive = false;
     protected TMouseButtonID m_pointAndClickButton = TMouseButtonID.LEFT;
