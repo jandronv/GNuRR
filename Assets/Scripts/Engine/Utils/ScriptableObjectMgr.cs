@@ -46,7 +46,7 @@ public static class ScriptableObjectMgr
         else
         {
             EditorUtility.SetDirty(t);
-            EditorApplication.SaveAssets();
+            AssetDatabase.SaveAssets();
         }
         AssetDatabase.SaveAssets();
     }

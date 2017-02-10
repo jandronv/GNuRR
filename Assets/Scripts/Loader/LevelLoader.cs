@@ -5,18 +5,40 @@ using System;
 using UnityEditor;
 using System.IO;
 
+
+public enum Tiles{ TILE_0 = 0 }
+
+[Serializable]
+public class TileTranslate
+{
+    public Tiles _tiles;
+    public GameObject _prefab;
+}
+
+
 public class LevelLoader : MonoBehaviour
 {
 
-
+    public const string PREFAB_PATH = "Assets/Prefabs/";
     public TextAsset level_JSON;
+    public string _prefabName;
     public float scale = 1;
     public Dictionary<int, GameObject> tileSet; 
-  
+    public TileTranslate[] _arrayPrefabs;
+
     private TileLevel level;
     private Sprite[] spriteSheet;
     private int[,] matrixLevel;
     
+
+    void Awake()
+    {
+        tileSet = new Dictionary<int, GameObject>();
+        foreach(var item in _arrayPrefabs)
+        {
+            tileSet.Add((int)item._tiles, item._prefab);
+        }
+    }
 
 
 
@@ -62,7 +84,7 @@ public class LevelLoader : MonoBehaviour
         string path = level.getPathSpriteSheet(0);
         spriteSheet = Resources.LoadAll<Sprite>(path);
 
-        
+        GameObject ground = new GameObject("Ground");
         //Recorremos los layers
         foreach (Layers l in level.layers)
         {
@@ -83,6 +105,7 @@ public class LevelLoader : MonoBehaviour
                         if (matrixLevel[i,j] != 0) {
                             //TODO Crear el esprite bien, ahora solo se crea un cubo en las pos i j
                             GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                            cube.transform.parent = ground.transform; //pone como padre del cubo el go ground.
                             cube.transform.position = new Vector3(i, j, 0);
                             //Crear prefabs
 
@@ -95,6 +118,8 @@ public class LevelLoader : MonoBehaviour
             {
                 print("Creando colliders...");
             }
+            PrefabUtility.CreatePrefab(PREFAB_PATH+_prefabName+".prefab", ground);
+            Destroy(ground);
         }
 
         /**

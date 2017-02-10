@@ -195,7 +195,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level_JSON: {fileID: 4900000, guid: 122b9aa9072a36a499f0504638ef639e, type: 3}
+  _prefabName: nivelPrueba
   scale: 1
+  _arrayPrefabs:
+  - _tiles: 0
+    _prefab: {fileID: 1843840772359142, guid: 5d25bc3e796f219428e74680671fc8af, type: 2}
 --- !u!1 &2020466125
 GameObject:
   m_ObjectHideFlags: 0
