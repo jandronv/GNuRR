@@ -17,7 +17,7 @@ public class LevelLoaderEditor : Editor
         // Creates the load level button.
         if (GUILayout.Button("Load Level"))
         {
-            levelLoader.Start();
+            levelLoader.InicializarLevel();
         }
 
         // Creates the clear level button.

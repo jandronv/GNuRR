@@ -224,7 +224,7 @@ public class GameMgr
 
 	protected void ProcessBaseConfiguration()
 	{
-        GameMgrConfig gameMgrConfig = ScriptableObjectMgr.Load<GameMgrConfig>(CONFIGURATION_FOLDER+"/"+CONFIGURATION_FILE);
+        /*GameMgrConfig gameMgrConfig = ScriptableObjectMgr.Load<GameMgrConfig>(CONFIGURATION_FOLDER+"/"+CONFIGURATION_FILE);
 
         m_storageFileName = gameMgrConfig.m_storageMgrConfig.StorageFileName;
 
@@ -234,7 +234,7 @@ public class GameMgr
         m_MM_RecolectUnityAssets = gameMgrConfig.m_memoryMgrConfig.RecollectUnityAssets;
 		
         m_IM_buttonId = gameMgrConfig.m_inputMgrConfig.ButtonIdToPointAndClick;
-        m_IM_PAndCActive = gameMgrConfig.m_inputMgrConfig.PointAndClickActive;
+        m_IM_PAndCActive = gameMgrConfig.m_inputMgrConfig.PointAndClickActive;*/
 
 	}
 

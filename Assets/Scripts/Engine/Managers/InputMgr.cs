@@ -11,7 +11,14 @@ public class InputMgr : AComponent {
 	//Eventos a los que quiero avisar. El raton o cualquier dispositivo de puntero a presionado sobre alguna parte de la pantalla.
 	public delegate void PointAndClickEvent(GameObject onCollision,Vector3 point, float distance);
 	public delegate void ReturnDel();
-    public delegate void Move(Vector3 direction);
+    public delegate void Move(float directionX, bool jump);
+    public delegate void Fire();
+    public delegate void RecargaPelusas();
+
+    private float contadorDiparo = 0;
+    public float _coolDawnDisparo = 0.5f;
+    
+    public float _coolDawnRecarga = 0.5f;
 
     //Enumerado de diferentes eventos de un boton.
     protected enum TButtonEvent { BEGIN, PRESSED, END, BEGIN_OVER, END_OVER };
@@ -45,6 +52,26 @@ public class InputMgr : AComponent {
     {
         //get { return m_DelegateMove; }
         set { m_DelegateMove -= value; }
+    }
+
+    public Fire RegisterFire
+    {
+        set { m_DelegateFire += value; }
+    }
+
+    public Fire UnRegisterFire
+    {
+        set { m_DelegateFire -= value; }
+    }
+
+    public RecargaPelusas RegisterRecargarPelusas
+    {
+        set { m_DelegateRecargarPelusas += value; }
+    }
+
+    public RecargaPelusas UnRegisterRecargarPelusas
+    {
+        set { m_DelegateRecargarPelusas -= value; }
     }
 
     //registramos al evento Return
@@ -168,22 +195,44 @@ public class InputMgr : AComponent {
 	protected override void Update()
 	{
 		base.Update();
-        //aqui implementamos el move
-        Vector3 move = Vector3.zero;
-        if(Input.GetKey(KeyCode.W))
+
+   
+        moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, 0);
+        moveDirection = transform.TransformDirection(moveDirection);
+        //Movimiento lateral TODO esto es eficiente? o declaramos varaible
+
+        bool jump = Input.GetButton("Jump");
+
+        m_DelegateMove(Input.GetAxis("Horizontal"), jump);
+
+        //TODO Diferencia con SendMenssege
+        if (Input.GetButton("Fire") && contadorDiparo > _coolDawnDisparo)
         {
-            move.y = 1;
+            m_DelegateFire();
+            contadorDiparo = 0;
+        }
+        contadorDiparo +=Time.deltaTime;
+
+        //TODO Recargar
+        if (Input.GetButtonDown("Recargar"))
+        {
+            m_DelegateRecargarPelusas();
+            /*_TiempoCoolDawnRecarga += Time.deltaTime;
+            if (_TiempoCoolDawnRecarga >= _coolDawnRecarga)
+            {
+                m_DelegateRecargarPelusas();
+            }*/
+        }
+        else if(Input.GetButtonUp("Recargar"))
+        {
+            _TiempoCoolDawnRecarga = 0;
         }
 
-        m_DelegateMove(move);
-		//OnReturn();
-		//PointAndClick()
-		//if(m_pointAndClickActive)
-			//OnClick();
-	}
-	
-	//Comprobamos si se ha pulsado el Return.
-	protected void OnReturn()
+     
+    }
+
+    //Comprobamos si se ha pulsado el Return.
+    protected void OnReturn()
 	{
 		#if UNITY_IPHONE || UNITY_ANDROID
 			//TODO
@@ -353,8 +402,9 @@ public class InputMgr : AComponent {
 
 	
 	private InputController m_currentController = null;
-	
-	protected Dictionary<int,TReturnData> m_returnDelegate = new Dictionary<int,TReturnData>();
+
+
+    protected Dictionary<int,TReturnData> m_returnDelegate = new Dictionary<int,TReturnData>();
 	protected Dictionary<int,AComponent> m_returnDelegateGameObj = new Dictionary<int, AComponent>();
     //Eventos de Point And click
 	protected PointAndClickEvent m_pcBegin;
@@ -363,18 +413,23 @@ public class InputMgr : AComponent {
 	//Eventos de boton pulsado y soltado.
 	
 	private Vector3 m_targetPoint;
+    private Vector3 moveDirection = Vector3.zero;
 
-	private float m_distanceTotouch;
-	
-	private bool m_pressed = false;
+    private float m_distanceTotouch;
+    private float _TiempoCoolDawnRecarga = 0;
+
+    private bool m_pressed = false;
 	private bool m_alertShow = false;
+    private bool m_direction = true;
 
     private GameObject m_objectTouch;
 
     private Camera m_cameraUsedToTouch = null;
 
     private Move m_DelegateMove;
-	
-	protected bool m_pointAndClickActive = false;
+    private Fire m_DelegateFire;
+    private RecargaPelusas m_DelegateRecargarPelusas;
+
+    protected bool m_pointAndClickActive = false;
     protected TMouseButtonID m_pointAndClickButton = TMouseButtonID.LEFT;
 }

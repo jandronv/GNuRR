@@ -43,7 +43,9 @@ public class EnemyGenerator : AComponent {
 			//Par instanciarlo usamos el SpawnerMgr. Si lo usamos podremos utilizar el pool de objetos precargados
 			//lo que nos ayudara a reducir la fragmentacio nde memoria.
 			GameMgr.GetInstance().GetSpawnerMgr().CreateNewGameObject(_prefabs[enemyIdx],position,Quaternion.identity);
-		}
+            //GameMgr.GetInstance().GetSpawnerMgr().DestroyGameObject()
+
+        }
 	}
 	
 

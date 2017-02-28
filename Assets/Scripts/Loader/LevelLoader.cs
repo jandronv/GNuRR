@@ -5,23 +5,50 @@ using System;
 using UnityEditor;
 using System.IO;
 
+
+public enum Tiles{ TILE_0 = 0, TILE_1, TILE_2, TILE_3, TILE_4, TILE_5, TILE_6, TILE_7, TILE_8 }
+
+/// <summary>
+/// Clase para asociar los tiles 2d con los prefabs 3d
+/// </summary>
+[Serializable]
+public class TileTranslate
+{
+    public Tiles _tiles;
+    public GameObject _prefab;
+}
+
+
 public class LevelLoader : MonoBehaviour
 {
 
-
+    public const string PREFAB_PATH = "Assets/Prefabs/";
     public TextAsset level_JSON;
+    public string _prefabName;
     public float scale = 1;
     public Dictionary<int, GameObject> tileSet; 
-  
+    public TileTranslate[] _arrayPrefabs;
+
     private TileLevel level;
-    private Sprite[] spriteSheet;
+    //public Sprite[] spriteSheetLevel;
     private int[,] matrixLevel;
     
 
-
-
-    public void Start()
+    public void InicializarLevel()
     {
+        //Inicializamos el diccionario, asociamos tiles con cubos
+        tileSet = new Dictionary<int, GameObject>();
+        foreach (var item in _arrayPrefabs)
+        {
+           if( !tileSet.ContainsKey((int)item._tiles))                
+           {
+            
+                tileSet.Add((int)item._tiles, item._prefab);
+
+            }
+
+        }
+
         //Cargamos los datos del JSON en nuestra clase
         LoadFile(level_JSON);
         //Generamos el nivel con los datos del JSON
@@ -57,12 +84,9 @@ public class LevelLoader : MonoBehaviour
     }
     private void CreateScene()
     {
-        // TODO  
-        //Cargamos el tile map
-        string path = level.getPathSpriteSheet(0);
-        spriteSheet = Resources.LoadAll<Sprite>(path);
-
-        
+  
+        //Creamos el padre de todos los cubos del nivel
+        GameObject ground = new GameObject("Ground");
         //Recorremos los layers
         foreach (Layers l in level.layers)
         {
@@ -81,10 +105,23 @@ public class LevelLoader : MonoBehaviour
                     for (int j = 0;j < l.width;j++)
                     {
                         if (matrixLevel[i,j] != 0) {
-                            //TODO Crear el esprite bien, ahora solo se crea un cubo en las pos i j
-                            GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                            cube.transform.position = new Vector3(i, j, 0);
-                            //Crear prefabs
+
+                            if (tileSet.ContainsKey(matrixLevel[i, j]))
+                            {
+                                GameObject g = tileSet[matrixLevel[i, j] -1];
+                                //GameObject g = tileSet[0];
+                                GameObject tile = Instantiate(g, new Vector3(i, j, 0), Quaternion.Euler(new Vector3(0, 0, 90)) );
+                                tile.transform.parent = ground.transform; //pone como padre del cubo el go ground.
+                                //tile.transform.position = new Vector3(i, j, 0);
+                                //PrefabUtility.InstantiatePrefab(g);
+                            }
+                            else {
+                                Debug.Log("Tiled Nº:"+ matrixLevel[i, j]+", no ha sido encontrado.");
+                            }
+
+                            //GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                            //cube.transform.parent = ground.transform;
+                            //cube.transform.position = new Vector3(i, j, 0);
 
                         }
                     }
@@ -95,6 +132,10 @@ public class LevelLoader : MonoBehaviour
             {
                 print("Creando colliders...");
             }
+            //Giramos el nivel, ya que indicar 'generar de arriba izq' no funciona con el tiled
+            ground.transform.Rotate(new Vector3(0f,0f,-90.0f));
+            PrefabUtility.CreatePrefab(PREFAB_PATH+_prefabName+".prefab", ground);
+            //Destroy(ground);
         }
 
         /**
