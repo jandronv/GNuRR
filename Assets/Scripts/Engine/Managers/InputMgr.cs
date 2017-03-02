@@ -225,7 +225,7 @@ public class InputMgr : AComponent {
         }
         else if(Input.GetButtonUp("Recargar"))
         {
-            _TiempoCoolDawnRecarga = 0;
+            
             m_DelegateRecargarPelusas(false);
         }
 

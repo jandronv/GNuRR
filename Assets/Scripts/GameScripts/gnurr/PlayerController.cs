@@ -11,8 +11,9 @@ public class PlayerController : MonoBehaviour {
     public float _speed = 6.0F;
     public float _jumpSpeed = 8.0F;
     public float _gravity = 20.0F;
+    public int _NumFire = 1;
+    public int _NumRecarga = 1;
 
-    //TODO Crear un manager
     private Animator _animations;
 
     //TODO Atributos para el Fire()
@@ -44,8 +45,9 @@ public class PlayerController : MonoBehaviour {
 
     private void RecargaPelusas(bool estado)
     {
-
-        m_Player.AumentaVida(1);
+        if (estado) {
+            m_Player.AumentaVida(_NumRecarga);
+        } 
     }
 
     private void Move(float directionX, bool jump)
@@ -99,7 +101,7 @@ public class PlayerController : MonoBehaviour {
         Destroy(bullet, _destroyBullet);
 
         //Restamos vida
-        m_Player.RestarVida(1);
+        m_Player.RestarVida(_NumFire);
     }
 
 }
