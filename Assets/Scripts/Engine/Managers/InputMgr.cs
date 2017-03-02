@@ -13,7 +13,7 @@ public class InputMgr : AComponent {
 	public delegate void ReturnDel();
     public delegate void Move(float directionX, bool jump);
     public delegate void Fire();
-    public delegate void RecargaPelusas();
+    public delegate void RecargaPelusas(bool estado);
 
     private float contadorDiparo = 0;
     public float _coolDawnDisparo = 0.5f;
@@ -213,10 +213,10 @@ public class InputMgr : AComponent {
         }
         contadorDiparo +=Time.deltaTime;
 
-        //TODO Recargar
+        //TODO Crear corutina??
         if (Input.GetButtonDown("Recargar"))
         {
-            m_DelegateRecargarPelusas();
+            m_DelegateRecargarPelusas(true);
             /*_TiempoCoolDawnRecarga += Time.deltaTime;
             if (_TiempoCoolDawnRecarga >= _coolDawnRecarga)
             {
@@ -226,6 +226,7 @@ public class InputMgr : AComponent {
         else if(Input.GetButtonUp("Recargar"))
         {
             _TiempoCoolDawnRecarga = 0;
+            m_DelegateRecargarPelusas(false);
         }
 
      

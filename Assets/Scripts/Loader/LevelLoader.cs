@@ -110,7 +110,7 @@ public class LevelLoader : MonoBehaviour
                             {
                                 GameObject g = tileSet[matrixLevel[i, j] -1];
                                 //GameObject g = tileSet[0];
-                                GameObject tile = Instantiate(g, new Vector3(i, j, 0), Quaternion.Euler(new Vector3(0, 0, 90)) );
+                                GameObject tile = Instantiate(g, new Vector3(i, j, 0), Quaternion.Euler(new Vector3(0, -90, -90)) );
                                 tile.transform.parent = ground.transform; //pone como padre del cubo el go ground.
                                 //tile.transform.position = new Vector3(i, j, 0);
                                 //PrefabUtility.InstantiatePrefab(g);

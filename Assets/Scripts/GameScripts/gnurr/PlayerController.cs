@@ -12,7 +12,8 @@ public class PlayerController : MonoBehaviour {
     public float _jumpSpeed = 8.0F;
     public float _gravity = 20.0F;
 
-
+    //TODO Crear un manager
+    private Animator _animations;
 
     //TODO Atributos para el Fire()
     public GameObject bulletPrefab;
@@ -30,6 +31,9 @@ public class PlayerController : MonoBehaviour {
         GameMgr.GetInstance().GetServer<InputMgr>().RegisterMove = Move;
         GameMgr.GetInstance().GetServer<InputMgr>().RegisterFire = Fire;
         GameMgr.GetInstance().GetServer<InputMgr>().RegisterRecargarPelusas = RecargaPelusas;
+
+        _animations = GetComponentInChildren<Animator>();
+
     }
 	
 	// Update is called once per frame
@@ -38,7 +42,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 
-    private void RecargaPelusas()
+    private void RecargaPelusas(bool estado)
     {
 
         m_Player.AumentaVida(1);
@@ -47,15 +51,19 @@ public class PlayerController : MonoBehaviour {
     private void Move(float directionX, bool jump)
     {
         Vector3 direction;
-        
+        //TODO Llamara a todas las animaciones
+        //_animations.SetBool("isGrounded", m_CharacterController.isGrounded);
+        //_animations.SetFloat("VelocidadX", directionX);
+
         if (directionX > 0)
         {
-            m_Player.FlipInX(true);
+            m_Player.FlipInX(false);
         } else if (directionX < 0)
         {
-            m_Player.FlipInX(false);
+            m_Player.FlipInX(true);
         }
 
+        //Estas saltando
         if (!m_CharacterController.isGrounded)
         {
             direction = new Vector3(directionX * _speedInJump, m_CharacterController.velocity.y, 0);
@@ -65,7 +73,7 @@ public class PlayerController : MonoBehaviour {
             direction = new Vector3(directionX * _speed, m_CharacterController.velocity.y, 0);
         }
 
-        //Move del CharacterController de Unity
+        //Estas en el suelo y vas a saltar
         if (m_CharacterController.isGrounded && jump)
         {
             direction.y = _jumpSpeed;
@@ -79,6 +87,8 @@ public class PlayerController : MonoBehaviour {
     //TODO Crear un numero fijo de balas. No crear balas continuamente.
     private void Fire()
     {
+        //Puedes cambiar al estado anterior si se ha terminado la animación??
+        //_animations.SetBool("Fire", true);
         // Create the Bullet from the Bullet Prefab
        var bullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
 
