@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour {
 
     private CharacterController m_CharacterController;
     private Player m_Player;
+    private bool SentidoBulet = false;
     public float _speedInJump = 6.0F;
     public float _speed = 6.0F;
     public float _jumpSpeed = 8.0F;
@@ -59,9 +60,11 @@ public class PlayerController : MonoBehaviour {
 
         if (directionX > 0)
         {
+            SentidoBulet = false;
             m_Player.FlipInX(false);
         } else if (directionX < 0)
         {
+            SentidoBulet = true;
             m_Player.FlipInX(true);
         }
 
@@ -95,8 +98,14 @@ public class PlayerController : MonoBehaviour {
        var bullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
 
         // Add velocity to the bullet
-        bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * _velocityBullet;
-
+        if (SentidoBulet) {
+            //Cambiamos el sentido de la flecha azul
+            bullet.GetComponent<Rigidbody>().velocity = -1*(bullet.transform.forward) * _velocityBullet;
+        }
+        else
+        {
+            bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * _velocityBullet;
+        }
         // Destroy the bullet after 2 seconds
         Destroy(bullet, _destroyBullet);
 

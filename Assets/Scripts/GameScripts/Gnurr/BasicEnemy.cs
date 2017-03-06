@@ -27,6 +27,13 @@ public class BasicEnemy : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        other.GetComponent<Player>().RestarVida(EnemyAttack);
+        if (other.tag == "Bullet")
+        {
+
+            Debug.Log("Entra el proyectil.");
+        }
+
     }
+
+    
 }

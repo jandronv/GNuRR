@@ -23,5 +23,7 @@ public class CameraScript : MonoBehaviour {
         this.transform.position = new Vector3(Target.position.x + offSetX , Target.position.y + offSetY, Target.position.z + offSetZ);
 
         //TODO Rotation
-	}
+        this.transform.rotation = new Quaternion(Target.rotation.x, Target.rotation.y, Target.rotation.z, Target.rotation.w);
+
+    }
 }
