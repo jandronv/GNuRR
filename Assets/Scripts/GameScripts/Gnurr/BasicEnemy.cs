@@ -8,7 +8,7 @@ public class BasicEnemy : MonoBehaviour {
     public Transform Pos2;
 
     public int EnemyAttack;
-
+    public int EnemyLife;
     private Vector3 m_pos1;
     private Vector3 m_pos2;
     public float speed = 0.50f;
@@ -29,11 +29,17 @@ public class BasicEnemy : MonoBehaviour {
     {
         if (other.tag == "Bullet")
         {
-
+            //Destroy(this);
             Debug.Log("Entra el proyectil.");
         }
+        if (other.tag == "Player")
+        {
+
+            Debug.Log("Entra el personaje.");
+        }
+
 
     }
 
-    
+
 }

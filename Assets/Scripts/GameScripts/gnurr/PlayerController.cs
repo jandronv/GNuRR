@@ -55,15 +55,17 @@ public class PlayerController : MonoBehaviour {
     {
         Vector3 direction;
         //TODO Llamara a todas las animaciones
-        //_animations.SetBool("isGrounded", m_CharacterController.isGrounded);
-        //_animations.SetFloat("VelocidadX", directionX);
-
+        
         if (directionX > 0)
         {
+            _animations.SetFloat("VelocidadX", directionX);
+
             SentidoBulet = false;
             m_Player.FlipInX(false);
         } else if (directionX < 0)
         {
+            _animations.SetFloat("VelocidadX", -1*directionX);
+
             SentidoBulet = true;
             m_Player.FlipInX(true);
         }
@@ -87,19 +89,24 @@ public class PlayerController : MonoBehaviour {
         direction.y -= _gravity * Time.deltaTime;
         m_CharacterController.Move(direction * Time.deltaTime);
 
+        _animations.SetBool("isGrounded", m_CharacterController.isGrounded);
+        
     }
 
     //TODO Crear un numero fijo de balas. No crear balas continuamente.
     private void Fire()
     {
         //Puedes cambiar al estado anterior si se ha terminado la animación??
-        //_animations.SetBool("Fire", true);
+        _animations.SetBool("Fire", true);
         // Create the Bullet from the Bullet Prefab
-       var bullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
-
+        
+        var bullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
+        
         // Add velocity to the bullet
         if (SentidoBulet) {
-            //Cambiamos el sentido de la flecha azul
+
+            //Hacia la izquierda
+            
             bullet.GetComponent<Rigidbody>().velocity = -1*(bullet.transform.forward) * _velocityBullet;
         }
         else
@@ -111,6 +118,8 @@ public class PlayerController : MonoBehaviour {
 
         //Restamos vida
         m_Player.RestarVida(_NumFire);
+
+        _animations.SetBool("Fire", false);
     }
 
 }
