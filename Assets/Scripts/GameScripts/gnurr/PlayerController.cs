@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour {
     //TODO Atributos para el Fire()
     public GameObject bulletPrefab;
     public Transform bulletSpawn;
+    public Transform bulletSpawn2;
     public float _destroyBullet = 2.0f;
     public float _velocityBullet = 6.0f;
 
@@ -83,6 +84,7 @@ public class PlayerController : MonoBehaviour {
         //Estas en el suelo y vas a saltar
         if (m_CharacterController.isGrounded && jump)
         {
+            gameObject.SendMessage("isJump",true);
             direction.y = _jumpSpeed;
             //direction = new Vector3(directionX * _speedInJump, m_CharacterController.velocity.y, 0);
         }
@@ -100,22 +102,25 @@ public class PlayerController : MonoBehaviour {
         _animations.SetBool("Fire", true);
         // Create the Bullet from the Bullet Prefab
         
-        var bullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
         
         // Add velocity to the bullet
         if (SentidoBulet) {
 
             //Hacia la izquierda
-            
-            bullet.GetComponent<Rigidbody>().velocity = -1*(bullet.transform.forward) * _velocityBullet;
+            var bullet2 = (GameObject)Instantiate(bulletPrefab, bulletSpawn2.position, bulletSpawn2.rotation);
+            bullet2.GetComponent<Rigidbody>().velocity = (bullet2.transform.forward) * _velocityBullet;
+            Destroy(bullet2, _destroyBullet);
+
         }
         else
         {
+            var bullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
             bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * _velocityBullet;
+            Destroy(bullet, _destroyBullet);
         }
         // Destroy the bullet after 2 seconds
-        Destroy(bullet, _destroyBullet);
-
+       
+      
         //Restamos vida
         m_Player.RestarVida(_NumFire);
 

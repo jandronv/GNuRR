@@ -13,17 +13,34 @@ public class CameraScript : MonoBehaviour {
     public float RotationX;
     public float RotationY;
     public float RotationZ;
-    // Use this for initialization
+
+    //TODO si saltamos tendriamos que ignorar el salto.
+    private bool isGrounded = true;
+
+
     void Start () {
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        this.transform.position = new Vector3(Target.position.x + offSetX , Target.position.y + offSetY, Target.position.z + offSetZ);
+
+        if (isGrounded)
+        {
+            this.transform.position = new Vector3(Target.position.x + offSetX, offSetY, Target.position.z + offSetZ);
+        } else
+        {
+            this.transform.position = new Vector3(Target.position.x + offSetX, Target.position.y + offSetY, Target.position.z + offSetZ);
+        }
+
 
         //TODO Rotation
-        this.transform.rotation = new Quaternion(Target.rotation.x, Target.rotation.y, Target.rotation.z, Target.rotation.w);
+        this.transform.rotation = new Quaternion(RotationX, RotationY, RotationY, Target.rotation.w);
 
+    }
+
+    void isJump(bool jump)
+    {
+        isGrounded = jump;
     }
 }

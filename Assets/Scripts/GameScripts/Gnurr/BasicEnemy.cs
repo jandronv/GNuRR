@@ -13,15 +13,41 @@ public class BasicEnemy : MonoBehaviour {
     private Vector3 m_pos2;
     public float speed = 0.50f;
 
+    public bool sentido = true;
+    public float delay = 0.3f;
+  
+
     void Start()
     {
         m_pos1 = Pos1.position;
         m_pos2 = Pos2.position;
-
+        
     }
     void Update()
     {
-        transform.position = Vector3.Lerp(m_pos1, m_pos2, Mathf.PingPong(Time.time * speed, 1.0f));
+
+        float aux = Mathf.PingPong(Time.time * speed, 1.0f);
+        //TODO Hacer con corrutina
+        transform.position = Vector3.Lerp(m_pos1, m_pos2, aux);
+       
+        delay += Time.deltaTime;
+
+        Debug.Log("Valor delay:" + delay);
+        Debug.Log("Valor Aux:" + aux);
+        //TODO Flip
+        if (aux > 0.95f && delay >= 0.3)
+        {
+            this.transform.rotation = new Quaternion(0.0f, 180.0f, 0f, 0f);
+            delay = 0.0f;
+
+        }
+
+        if (aux < 0.09f && delay >= 0.3)
+        {
+            this.transform.rotation = new Quaternion(0.0f, 0.0f, 0f, 0f);
+            delay = 0.0f;
+        }
+        
     }
 
 
@@ -29,7 +55,12 @@ public class BasicEnemy : MonoBehaviour {
     {
         if (other.tag == "Bullet")
         {
-            //Destroy(this);
+            EnemyLife--;
+            if (EnemyAttack == 0)
+            {
+                //Destroy(this);
+            }
+
             Debug.Log("Entra el proyectil.");
         }
         if (other.tag == "Player")
