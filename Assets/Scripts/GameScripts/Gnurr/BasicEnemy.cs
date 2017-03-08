@@ -31,9 +31,6 @@ public class BasicEnemy : MonoBehaviour {
         transform.position = Vector3.Lerp(m_pos1, m_pos2, aux);
        
         delay += Time.deltaTime;
-
-        Debug.Log("Valor delay:" + delay);
-        Debug.Log("Valor Aux:" + aux);
         //TODO Flip
         if (aux > 0.95f && delay >= 0.3)
         {

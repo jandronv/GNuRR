@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour {
     public int _NumRecarga = 1;
 
     private Animator _animations;
-
+    private GameObject _camera;
     //TODO Atributos para el Fire()
     public GameObject bulletPrefab;
     public Transform bulletSpawn;
@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        _camera = GameObject.FindGameObjectWithTag("Camera");
+
         m_CharacterController = GetComponent<CharacterController>();
         m_Player = GetComponent<Player>();
         GameMgr.GetInstance().GetServer<InputMgr>().RegisterMove = Move;
@@ -84,7 +86,8 @@ public class PlayerController : MonoBehaviour {
         //Estas en el suelo y vas a saltar
         if (m_CharacterController.isGrounded && jump)
         {
-            gameObject.SendMessage("isJump",true);
+
+             
             direction.y = _jumpSpeed;
             //direction = new Vector3(directionX * _speedInJump, m_CharacterController.velocity.y, 0);
         }
@@ -92,7 +95,7 @@ public class PlayerController : MonoBehaviour {
         m_CharacterController.Move(direction * Time.deltaTime);
 
         _animations.SetBool("isGrounded", m_CharacterController.isGrounded);
-        
+        _camera.SendMessage("isJump", m_CharacterController.isGrounded);
     }
 
     //TODO Crear un numero fijo de balas. No crear balas continuamente.
