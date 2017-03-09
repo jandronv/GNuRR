@@ -6,7 +6,7 @@ using UnityEditor;
 using System.IO;
 
 
-public enum Tiles{TILE_1 = 0, TILE_2, TILE_3, TILE_4, TILE_5, TILE_6}
+public enum Tiles{ TILE_0=0, TILE_1, TILE_2, TILE_3, TILE_4, TILE_5, TILE_6, TILE_7, TILE_8, TILE_9, TILE_10, TILE_11, TILE_12}
 
 /// <summary>
 /// Clase para asociar los tiles 2d con los prefabs 3d
@@ -110,7 +110,7 @@ public class LevelLoader : MonoBehaviour
                             {
                                 GameObject g = tileSet[matrixLevel[i, j] - 1];
                                 //GameObject g = tileSet[0];
-                                GameObject tile = Instantiate(g, new Vector3(i, j, 0), Quaternion.Euler(new Vector3(-90, 90, 0)) );
+                                GameObject tile = Instantiate(g, new Vector3(i, j, 0), Quaternion.Euler(new Vector3(-90, 0, 90)) );
                                 tile.transform.parent = ground.transform; //pone como padre del cubo el go ground.
                                 //tile.transform.position = new Vector3(i, j, 0);
                                 //PrefabUtility.InstantiatePrefab(g);
@@ -133,7 +133,7 @@ public class LevelLoader : MonoBehaviour
                 print("Creando colliders...");
             }
             //Giramos el nivel, ya que indicar 'generar de arriba izq' no funciona con el tiled
-            ground.transform.Rotate(new Vector3(0f,0f,0.0f));
+            ground.transform.Rotate(new Vector3(0f,0f,-90.0f));
             PrefabUtility.CreatePrefab(PREFAB_PATH+_prefabName+".prefab", ground);
             //Destroy(ground);
         }

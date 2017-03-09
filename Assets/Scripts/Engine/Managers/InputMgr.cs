@@ -417,12 +417,10 @@ public class InputMgr : AComponent {
     private Vector3 moveDirection = Vector3.zero;
 
     private float m_distanceTotouch;
-    private float _TiempoCoolDawnRecarga = 0;
-
+   
     private bool m_pressed = false;
 	private bool m_alertShow = false;
-    private bool m_direction = true;
-
+   
     private GameObject m_objectTouch;
 
     private Camera m_cameraUsedToTouch = null;

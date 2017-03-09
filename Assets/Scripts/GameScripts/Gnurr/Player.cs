@@ -5,15 +5,17 @@ using UnityEngine;
 public class Player : MonoBehaviour {
 
     public float _VidaMax = 15;
-    public float _VidaMin = 1;
+    public float _VidaMin = 5;
     public float _PorcentajeRestarVida=0.90f;
     public float _PorcentajeAumetarVida = 1.2f;
     public float _Vida = 15;
     public int _BolaPelusas = 5;
     public SpriteRenderer _SpriteGnurr;
+    public GameObject InitialZone;
 
-	// Use this for initialization
-	void Start () {
+
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -27,17 +29,37 @@ public class Player : MonoBehaviour {
 
         if (_VidaMin == _Vida - numVidas)
         {
-
+            //TODO Morir
+            Vector3 scale = new Vector3(_VidaMin / _VidaMax, _VidaMin / _VidaMax, _VidaMin / _VidaMax);
+            this.transform.localScale = scale;
+            _Vida -= numVidas;
         } else if ((_Vida - numVidas) > _VidaMin)
         {
+            _Vida -= numVidas;
+            Vector3 scale = new Vector3(_Vida / _VidaMax, _Vida / _VidaMax, _Vida / _VidaMax);
+            this.transform.localScale = scale;
+        }      
+    }
+    
+
+    //TODO hacer todo en una funcion
+    public void RestaVidaEnemigo(int numVidas)
+    {
+
+        if ((_Vida - numVidas) < _VidaMin)
+        {
+            this.gameObject.transform.position = InitialZone.transform.position;
+            this._Vida = 20;
+            Vector3 scale = new Vector3(_Vida / _VidaMax, _Vida / _VidaMax, _Vida / _VidaMax);
+            this.transform.localScale = scale;
+        } else if ((_Vida - numVidas) >= _VidaMin)
+        {
+            _Vida -= numVidas;
+            Vector3 scale = new Vector3(_Vida / _VidaMax, _Vida / _VidaMax, _Vida / _VidaMax);
+            this.transform.localScale = scale;
+        } 
 
 
-        }
-        _Vida -= numVidas;
-
-        Vector3 scale = new Vector3(_Vida / _VidaMax, _Vida / _VidaMax, _Vida / _VidaMax);
-
-        this.transform.localScale = scale;
     }
 
     public void AumentaVida(int numVidas)

@@ -36,7 +36,7 @@ public class CameraScript : MonoBehaviour {
         {
             this.transform.position = new Vector3(Target.position.x + offSetX, Target.position.y + offSetY, Target.position.z + offSetZ);
             _lockY = transform.position.y + offSetY;
-            Debug.Log("Valor lock: " + _lockY + " Suma: " + Target.position.y + offSetY);
+            //Debug.Log("Valor lock: " + _lockY + " Suma: " + Target.position.y + offSetY);
 
         }
         //TODO Rotation
@@ -47,7 +47,7 @@ public class CameraScript : MonoBehaviour {
     public void isJump(bool jump)
     {
 
-        Debug.Log("Llega mensaje");
+       
         //Ground = jump;
     }
 }

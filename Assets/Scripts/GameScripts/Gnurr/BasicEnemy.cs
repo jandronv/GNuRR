@@ -52,18 +52,23 @@ public class BasicEnemy : MonoBehaviour {
     {
         if (other.tag == "Bullet")
         {
-            EnemyLife--;
-            if (EnemyAttack == 0)
+            Destroy(other.gameObject);
+            
+            if (EnemyLife > 0)
             {
-                //Destroy(this);
-            }
+                EnemyLife--;
+                Debug.Log("Vida enemigo: " + EnemyLife);
 
-            Debug.Log("Entra el proyectil.");
+            } else Destroy(gameObject);
+
+          
+
+            //Debug.Log("Entra el proyectil.");
         }
         if (other.tag == "Player")
         {
-
-            Debug.Log("Entra el personaje.");
+            other.GetComponent<Player>().RestaVidaEnemigo(EnemyAttack);
+            //Debug.Log("Entra el personaje.");
         }
 
 

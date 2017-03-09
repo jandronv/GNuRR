@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour {
     {
         if (estado) {
             m_Player.AumentaVida(_NumRecarga);
+            _animations.SetTrigger("Recargar");
         } 
     }
 
@@ -101,33 +102,33 @@ public class PlayerController : MonoBehaviour {
     //TODO Crear un numero fijo de balas. No crear balas continuamente.
     private void Fire()
     {
-        //Puedes cambiar al estado anterior si se ha terminado la animación??
-        _animations.SetBool("Fire", true);
-        // Create the Bullet from the Bullet Prefab
-        
-        
-        // Add velocity to the bullet
-        if (SentidoBulet) {
 
-            //Hacia la izquierda
-            var bullet2 = (GameObject)Instantiate(bulletPrefab, bulletSpawn2.position, bulletSpawn2.rotation);
-            bullet2.GetComponent<Rigidbody>().velocity = (bullet2.transform.forward) * _velocityBullet;
-            Destroy(bullet2, _destroyBullet);
+        if (m_Player.GetVida() > m_Player._VidaMin) {
+           
+            _animations.SetTrigger("Fire");
+            // Create the Bullet from the Bullet Prefab
 
+            // Add velocity to the bullet
+            if (SentidoBulet) {
+
+                //Hacia la izquierda
+                var bullet2 = (GameObject)Instantiate(bulletPrefab, bulletSpawn2.position, bulletSpawn2.rotation);
+                bullet2.GetComponent<Rigidbody>().velocity = (bullet2.transform.forward) * _velocityBullet;
+                Destroy(bullet2, _destroyBullet);
+
+            }
+            else
+            {
+                var bullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
+                bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * _velocityBullet;
+                Destroy(bullet, _destroyBullet);
+            }
+            // Destroy the bullet after 2 seconds
+
+
+            //Restamos vida
+            m_Player.RestarVida(_NumFire);
         }
-        else
-        {
-            var bullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
-            bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * _velocityBullet;
-            Destroy(bullet, _destroyBullet);
-        }
-        // Destroy the bullet after 2 seconds
-       
-      
-        //Restamos vida
-        m_Player.RestarVida(_NumFire);
-
-        _animations.SetBool("Fire", false);
     }
 
 }
