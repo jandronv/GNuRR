@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour {
         m_CharacterController.Move(direction * Time.deltaTime);
 
         _animations.SetBool("isGrounded", m_CharacterController.isGrounded);
-        _camera.SendMessage("isJump", m_CharacterController.isGrounded);
+        
     }
 
     //TODO Crear un numero fijo de balas. No crear balas continuamente.
