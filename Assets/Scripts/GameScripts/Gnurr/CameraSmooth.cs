@@ -7,19 +7,21 @@ public class CameraSmooth : MonoBehaviour {
 
     private Transform cameraWindow;
     private CameraBoundary mCameraBoundary;
-    public float _targetPositionY;
+    private float _targetPositionY;
     private float _targetPositionX;
   
     //Nuevos valores de la posicion de la camara
-    private float x, y;
-    public float smoothTime = 0.5F;
+    private float x, y, z;
     private Vector3 velocity = Vector3.zero;
-   
+
+    public float offSetX, offSetY, offSetZ;
+    public Vector2 smoothing;
 
 
     void Awake()
     {
-        
+
+        z = transform.position.z;
         mCameraBoundary = GameObject.Find("Boundary").GetComponent<CameraBoundary>();
         _targetPositionY = mCameraBoundary.y;
     }
@@ -31,21 +33,25 @@ public class CameraSmooth : MonoBehaviour {
 
     void Update()
     {
+        x = transform.position.x;
+        y = transform.position.y;
 
         _targetPositionX = mCameraBoundary.x;
         _targetPositionY = mCameraBoundary.y;
 
-
-        //TODO regular el +3 ese muy gincho
-        if (mCameraBoundary.lookAhead == 1) {
-            transform.position = Vector3.SmoothDamp(transform.position, new Vector3(_targetPositionX + 2, _targetPositionY +2, transform.position.z), ref velocity, smoothTime);
+        Debug.Log(Mathf.Round(x)+" "+ Mathf.Round(_targetPositionX));
+        if (mCameraBoundary.lookAhead == 1 && (Mathf.Round(x) == Mathf.Round(_targetPositionX))) { //La camara no se esta moviendo
+            x = Mathf.SmoothDamp(x, _targetPositionX + offSetX, ref velocity.x, smoothing.x);
+        } else if (mCameraBoundary.lookAhead == -1 && (Mathf.Round(x) == Mathf.Round(_targetPositionX))) {
+            x = Mathf.SmoothDamp(x, _targetPositionX - offSetX, ref velocity.x, smoothing.x);
+        } else {
+            x = Mathf.SmoothDamp(x, _targetPositionX , ref velocity.x, smoothing.x); //La camara se está moviendo
         }
+      
+        y = Mathf.SmoothDamp(y, _targetPositionY + offSetY, ref velocity.y, smoothing.y);
 
-        else if (mCameraBoundary.lookAhead == -1) {
-            transform.position = Vector3.SmoothDamp(transform.position, new Vector3(_targetPositionX - 2, _targetPositionY + 2, transform.position.z), ref velocity, smoothTime);
-        }
-        else
-            transform.position = Vector3.SmoothDamp(transform.position, new Vector3(_targetPositionX, _targetPositionY + 2, transform.position.z), ref velocity, smoothTime);
+        transform.position = new Vector3(x, y , z + offSetZ);
+
     }
 
  
