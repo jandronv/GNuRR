@@ -17,7 +17,7 @@ public class CameraBoundary : MonoBehaviour {
     public int lookAhead;
 
     private float Maxdistance;
-    private float distanceY1;
+   // private float distanceY1;
 
     void Awake() {
 
@@ -35,7 +35,7 @@ public class CameraBoundary : MonoBehaviour {
         y = transform.position.y;
         lookAhead = 0;
         Maxdistance = ((_WidowsBoxCollider.bounds.size.x / 2) - (_PlayerCollider.bounds.size.x / 2));
-        distanceY1 = ((_WidowsBoxCollider.bounds.size.y / 2) - (_PlayerCollider.bounds.size.y / 2));
+        //distanceY1 = ((_WidowsBoxCollider.bounds.size.y / 2) - (_PlayerCollider.bounds.size.y / 2));
     }
 
     void Update()

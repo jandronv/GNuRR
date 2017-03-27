@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour {
     public int _NumRecarga = 1;
 
     private Animator _animations;
-    private GameObject _camera;
+    //private GameObject _camera;
     //TODO Atributos para el Fire()
     public GameObject bulletPrefab;
     public Transform bulletSpawn;
@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        _camera = GameObject.FindGameObjectWithTag("Camera");
+        //_camera = GameObject.FindGameObjectWithTag("Camera");
 
         m_CharacterController = GetComponent<CharacterController>();
         m_Player = GetComponent<Player>();
