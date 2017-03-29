@@ -41,7 +41,7 @@ public class CameraSmooth : MonoBehaviour {
         _targetPositionX = mCameraBoundary.x;
         _targetPositionY = mCameraBoundary.y;
 
-        Debug.Log("Camara "+Mathf.Round(x)+" Boundary "+ Mathf.Round(_targetPositionX));
+       // Debug.Log("Camara "+Mathf.Round(x)+" Boundary "+ Mathf.Round(_targetPositionX));
         if (mCameraBoundary.lookAhead == 1 && (Mathf.Round(x) == Mathf.Round(_targetPositionX))) { 
             x = Mathf.SmoothDamp(x, _targetPositionX , ref velocity.x, smoothing.x);
         } else if (mCameraBoundary.lookAhead == -1 && (Mathf.Round(x) == Mathf.Round(_targetPositionX))) {

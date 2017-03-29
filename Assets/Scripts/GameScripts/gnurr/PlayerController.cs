@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour {
         GameMgr.GetInstance().GetServer<InputMgr>().RegisterMove = Move;
         GameMgr.GetInstance().GetServer<InputMgr>().RegisterFire = Fire;
         GameMgr.GetInstance().GetServer<InputMgr>().RegisterRecargarPelusas = RecargaPelusas;
+        GameMgr.GetInstance().GetServer<InputMgr>().RegisterCargaPelusas = CargaPelusas;
 
         _animations = GetComponentInChildren<Animator>();
 
@@ -47,12 +48,50 @@ public class PlayerController : MonoBehaviour {
 	}
 
 
-    private void RecargaPelusas(bool estado)
+    private void CargaPelusas(int numPelusas)
     {
-        if (estado) {
-            m_Player.AumentaVida(_NumRecarga);
-            _animations.SetTrigger("Recargar");
-        } 
+
+        
+
+        if (numPelusas > (m_Player.GetVida() - m_Player._VidaMin))
+        {
+            numPelusas = (int)(m_Player.GetVida() - m_Player._VidaMin);
+        }
+
+        if (m_Player.GetVida() > m_Player._VidaMin )
+        {
+            _animations.SetTrigger("Fire");
+            if (SentidoBulet)
+            {
+
+                //Hacia la izquierda
+                var bullet2 = (GameObject)Instantiate(bulletPrefab, bulletSpawn2.position, bulletSpawn2.rotation);
+                bullet2.transform.localScale = new Vector3(bullet2.transform.localScale.x * numPelusas, bullet2.transform.localScale.y * numPelusas, bullet2.transform.localScale.z * numPelusas);
+                bullet2.GetComponent<Rigidbody>().velocity = (bullet2.transform.forward) * _velocityBullet;
+
+                Destroy(bullet2, _destroyBullet);
+
+            }
+            else
+            {
+                var bullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
+                bullet.transform.localScale = new Vector3(bullet.transform.localScale.x * numPelusas, bullet.transform.localScale.y * numPelusas, bullet.transform.localScale.z * numPelusas);
+                bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * _velocityBullet;
+                Destroy(bullet, _destroyBullet);
+            }
+            //Restamos vida
+            Debug.Log("Cargando ataque especial!! " + numPelusas);
+            m_Player.RestarVida(numPelusas);
+        }
+
+    }
+
+    private void RecargaPelusas()
+    {
+       
+        Debug.Log("Recargando pelusas.");
+        m_Player.AumentaVida(_NumRecarga);
+        _animations.SetTrigger("Recargar");
     }
 
     private void Move(float directionX, bool jump)

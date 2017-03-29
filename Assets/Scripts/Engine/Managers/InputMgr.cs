@@ -13,11 +13,17 @@ public class InputMgr : AComponent {
 	public delegate void ReturnDel();
     public delegate void Move(float directionX, bool jump);
     public delegate void Fire();
-    public delegate void RecargaPelusas(bool estado);
+    public delegate void RecargaPelusas();
+    public delegate void CargaPelusas(int numPelusas);
 
-    private float contadorDiparo = 0;
+    private float _contadorRecarga = 0f;
+    private float _contadorDiparo = 0f;
+    private float _contadorCarga = 0;
+    private int _numPelusasCarga = 0;
+
+    public int TamPelusaRecarga = 5;
     public float _coolDawnDisparo = 0.5f;
-    
+    public float _coolDawnCarga = 0.5f;
     public float _coolDawnRecarga = 0.5f;
 
     //Enumerado de diferentes eventos de un boton.
@@ -72,6 +78,16 @@ public class InputMgr : AComponent {
     public RecargaPelusas UnRegisterRecargarPelusas
     {
         set { m_DelegateRecargarPelusas -= value; }
+    }
+
+    public CargaPelusas RegisterCargaPelusas
+    {
+        set { m_DelegateCargaPelusas += value; }
+    }
+
+    public CargaPelusas UnRegisterCargaPelusas
+    {
+        set { m_DelegateCargaPelusas -= value; }
     }
 
     //registramos al evento Return
@@ -205,28 +221,34 @@ public class InputMgr : AComponent {
 
         m_DelegateMove(Input.GetAxis("Horizontal"), jump);
 
-        //TODO Diferencia con SendMenssege
-        if (Input.GetButton("Fire") && contadorDiparo > _coolDawnDisparo)
+        //Carga Pelusas
+        if (Input.GetButton("Fire") && _contadorCarga > _coolDawnCarga && _numPelusasCarga < TamPelusaRecarga)
         {
-            m_DelegateFire();
-            contadorDiparo = 0;
-        }
-        contadorDiparo +=Time.deltaTime;
+            _numPelusasCarga++;
+            _contadorCarga = 0;
+            Debug.Log("Aumentando Pelusas: " + _numPelusasCarga);
 
-        //TODO Crear corutina??
-        if (Input.GetButtonDown("Recargar"))
-        {
-            m_DelegateRecargarPelusas(true);
-            /*_TiempoCoolDawnRecarga += Time.deltaTime;
-            if (_TiempoCoolDawnRecarga >= _coolDawnRecarga)
-            {
-                m_DelegateRecargarPelusas();
-            }*/
         }
-        else if(Input.GetButtonUp("Recargar"))
+        else if (Input.GetButtonUp("Fire") && _numPelusasCarga > 0)
         {
-            
-            m_DelegateRecargarPelusas(false);
+            m_DelegateCargaPelusas(_numPelusasCarga);
+            _numPelusasCarga = 0;
+            //TODO
+        }
+        
+        _contadorCarga += Time.deltaTime;
+        
+      
+        if (Input.GetButton("Recargar") && _contadorRecarga > _coolDawnRecarga)
+        {
+            m_DelegateRecargarPelusas();
+            _contadorRecarga = 0f;
+        }
+        _contadorRecarga += Time.deltaTime;
+
+        if (Input.GetButtonUp("Cargar"))
+        {
+
         }
 
      
@@ -428,6 +450,7 @@ public class InputMgr : AComponent {
     private Move m_DelegateMove;
     private Fire m_DelegateFire;
     private RecargaPelusas m_DelegateRecargarPelusas;
+    private CargaPelusas m_DelegateCargaPelusas;
 
     protected bool m_pointAndClickActive = false;
     protected TMouseButtonID m_pointAndClickButton = TMouseButtonID.LEFT;

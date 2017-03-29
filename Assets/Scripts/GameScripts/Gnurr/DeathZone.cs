@@ -18,7 +18,9 @@ public class DeathZone : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        other.gameObject.transform.position = InitialZone.transform.position;
-        other.GetComponent<Player>().RestaVidaEnemigo(deatZone);
+        if (other.tag == "Player") {
+            other.gameObject.transform.position = InitialZone.transform.position;
+            other.GetComponent<Player>().RestaVidaEnemigo(deatZone);
+        }
     }
 }
