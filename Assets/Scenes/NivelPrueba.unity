@@ -1291,7 +1291,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 100
-  field of view: 28
+  field of view: 24
   orthographic: 0
   orthographic size: 2.87
   m_Depth: 0
@@ -1318,11 +1318,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13d9a4f061debd64db87b9ffd94bfdc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smoothTime: 0.3
   offSetX: 3
   offSetY: 2
   offSetZ: 0
-  smoothing: {x: 0.55, y: 1}
+  smoothing: {x: 1, y: 0.2}
 --- !u!1 &36241429
 GameObject:
   m_ObjectHideFlags: 0
@@ -37495,7 +37494,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.9899042, y: 3.2943842, z: 1}
+  m_Size: {x: 3.062002, y: 3.704455, z: 1}
   m_Center: {x: -0.12771988, y: 1.1471939, z: 0.000000037252903}
 --- !u!4 &1011059416
 Transform:
