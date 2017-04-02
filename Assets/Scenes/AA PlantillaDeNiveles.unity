@@ -1325,7 +1325,7 @@ MonoBehaviour:
   offSetX: 3.41
   offSetY: 1.11
   offSetZ: -5.81
-  smoothing: {x: 1, y: 0.3}
+  smoothing: {x: 0.7, y: 0.3}
 --- !u!1 &36241429
 GameObject:
   m_ObjectHideFlags: 0
