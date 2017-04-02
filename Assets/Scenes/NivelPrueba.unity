@@ -1081,7 +1081,7 @@ GameObject:
   - component: {fileID: 31020733}
   - component: {fileID: 31020732}
   - component: {fileID: 31020731}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tl1_flyL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1246,7 +1246,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 33867977}
   m_LocalRotation: {x: 0.05704127, y: 0, z: 0, w: 0.9983719}
-  m_LocalPosition: {x: 5.232, y: -9.38, z: -17.39}
+  m_LocalPosition: {x: 50.33, y: -11.11, z: -5.29}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 769593808}
@@ -1291,7 +1291,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 100
-  field of view: 28
+  field of view: 100
   orthographic: 0
   orthographic size: 2.87
   m_Depth: 0
@@ -1318,7 +1318,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13d9a4f061debd64db87b9ffd94bfdc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smoothTime: 0.3
   offSetX: 3
   offSetY: 2
   offSetZ: 0
@@ -1897,7 +1896,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 39010418}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: BulletSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17050,7 +17049,7 @@ GameObject:
   - component: {fileID: 499245638}
   - component: {fileID: 499245639}
   - component: {fileID: 499245640}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Gnurr
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17069,7 +17068,7 @@ Transform:
   m_Children:
   - {fileID: 1798938697}
   m_Father: {fileID: 1312674533}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &499245639
 SpriteRenderer:
@@ -37478,7 +37477,7 @@ GameObject:
   - component: {fileID: 1011059416}
   - component: {fileID: 1011059415}
   - component: {fileID: 1011059417}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Boundary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37495,8 +37494,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.9899042, y: 3.2943842, z: 1}
-  m_Center: {x: -0.12771988, y: 1.1471939, z: 0.000000037252903}
+  m_Size: {x: 3.7306342, y: 5.4523134, z: 1}
+  m_Center: {x: 0.74264574, y: 2.22616, z: 0.000000037252903}
 --- !u!4 &1011059416
 Transform:
   m_ObjectHideFlags: 0
@@ -49105,7 +49104,7 @@ GameObject:
   - component: {fileID: 1312674534}
   - component: {fileID: 1312674537}
   - component: {fileID: 1312674536}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Player2d
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -49124,6 +49123,7 @@ Transform:
   m_Children:
   - {fileID: 39010418}
   - {fileID: 1771312663}
+  - {fileID: 1565265610}
   - {fileID: 499245638}
   m_Father: {fileID: 1202993594}
   m_RootOrder: 0
@@ -49138,10 +49138,10 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 0.9
-  m_Radius: 0.43
+  m_Height: 0.8
+  m_Radius: 0.3
   m_SlopeLimit: 45
-  m_StepOffset: 0.001
+  m_StepOffset: 0.78
   m_SkinWidth: 0.045
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.17, z: 0}
@@ -49181,10 +49181,15 @@ MonoBehaviour:
   _gravity: 20
   _NumFire: 1
   _NumRecarga: 1
+  distance: 100
+  layer:
+    serializedVersion: 2
+    m_Bits: 256
   bulletPrefab: {fileID: 1544941638705908, guid: 4c181fcd9f2d4224aa412653fe803eec,
     type: 2}
   bulletSpawn: {fileID: 39010418}
   bulletSpawn2: {fileID: 1771312663}
+  RayToGround: {fileID: 1565265610}
   _destroyBullet: 2
   _velocityBullet: 15
 --- !u!1 &1318279678
@@ -57031,6 +57036,34 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1565217375}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1565265609
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1565265610}
+  m_Layer: 2
+  m_Name: RayToGround
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1565265610
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1565265609}
+  m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
+  m_LocalPosition: {x: 0.23000002, y: -0.0669999, z: -0.02000034}
+  m_LocalScale: {x: 1.0000005, y: 0.54681, z: 1.0000005}
+  m_Children: []
+  m_Father: {fileID: 1312674533}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 90, y: 90, z: 0}
 --- !u!1 &1565275606
 GameObject:
   m_ObjectHideFlags: 0
@@ -59436,7 +59469,8 @@ GameObject:
   - component: {fileID: 1652226497}
   - component: {fileID: 1652226499}
   - component: {fileID: 1652226498}
-  m_Layer: 0
+  - component: {fileID: 1652226500}
+  m_Layer: 8
   m_Name: tl1_10(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59450,7 +59484,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1652226496}
   m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 7, y: 13, z: 0}
+  m_LocalPosition: {x: 8.21, y: 13, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 31020730}
@@ -59464,7 +59498,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1652226496}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 0.8, z: 1}
@@ -59476,6 +59510,17 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1652226496}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1652226500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1652226496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c7671734bd69a1498600b03bedd3eba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1656505468
 GameObject:
   m_ObjectHideFlags: 0
@@ -63532,7 +63577,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1771312663}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: BulletSpawn2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64348,6 +64393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 312b946d77b475146ac9134f9d2ed266, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PREFAB_PATH: Assets/Prefabs/Niveles
   level_JSON: {fileID: 4900000, guid: e22edbec04ee7ba42b39ff6ed8b6bf87, type: 3}
   _prefabName: Level1Hito21
   scale: 1
@@ -64645,7 +64691,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1798938697}
   - component: {fileID: 1798938698}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ShadowCaster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72185,7 +72231,8 @@ GameObject:
   - component: {fileID: 2023059351}
   - component: {fileID: 2023059353}
   - component: {fileID: 2023059352}
-  m_Layer: 0
+  - component: {fileID: 2023059354}
+  m_Layer: 8
   m_Name: tl1_12(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72199,7 +72246,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2023059350}
   m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 7, y: 14, z: 0}
+  m_LocalPosition: {x: 7.77, y: 15.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2146867180}
@@ -72213,7 +72260,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2023059350}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 0.8, z: 1}
@@ -72225,6 +72272,17 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2023059350}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2023059354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2023059350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c7671734bd69a1498600b03bedd3eba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2023748506
 GameObject:
   m_ObjectHideFlags: 0
@@ -75793,7 +75851,7 @@ GameObject:
   - component: {fileID: 2146867183}
   - component: {fileID: 2146867182}
   - component: {fileID: 2146867181}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tl1_flyR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75807,7 +75865,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2146867179}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2023059351}

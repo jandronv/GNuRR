@@ -29,7 +29,7 @@ public class Player : MonoBehaviour {
 
         if (_VidaMin == _Vida - numVidas)
         {
-            //TODO Morir
+            
             Vector3 scale = new Vector3(_VidaMin / _VidaMax, _VidaMin / _VidaMax, _VidaMin / _VidaMax);
             this.transform.localScale = scale;
             _Vida -= numVidas;

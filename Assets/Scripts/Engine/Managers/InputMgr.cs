@@ -206,22 +206,23 @@ public class InputMgr : AComponent {
 	{
 		return m_currentController != null;
 	}
-	
-	// Use this for initialization
-	protected override void Update()
+
+    void FixedUpdate()
+    {
+
+    }
+
+    // Use this for initialization
+    protected override void Update()
 	{
 		base.Update();
 
-   
-        moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, 0);
-        moveDirection = transform.TransformDirection(moveDirection);
-        //Movimiento lateral TODO esto es eficiente? o declaramos varaible
-
-        bool jump = Input.GetButton("Jump");
+        //TODO 31/03 Sigue detectano el salto y lo aplica dos veces
+        jump = Input.GetButtonDown("Jump");
 
         m_DelegateMove(Input.GetAxis("Horizontal"), jump);
 
-        //Carga Pelusas
+        //Carga Pelusas y evitar mover
         if (Input.GetButton("Fire") && _contadorCarga > _coolDawnCarga && _numPelusasCarga < TamPelusaRecarga)
         {
             _numPelusasCarga++;
@@ -233,7 +234,7 @@ public class InputMgr : AComponent {
         {
             m_DelegateCargaPelusas(_numPelusasCarga);
             _numPelusasCarga = 0;
-            //TODO
+       
         }
         
         _contadorCarga += Time.deltaTime;
@@ -246,10 +247,7 @@ public class InputMgr : AComponent {
         }
         _contadorRecarga += Time.deltaTime;
 
-        if (Input.GetButtonUp("Cargar"))
-        {
-
-        }
+   
 
      
     }
@@ -436,8 +434,8 @@ public class InputMgr : AComponent {
 	//Eventos de boton pulsado y soltado.
 	
 	private Vector3 m_targetPoint;
-    private Vector3 moveDirection = Vector3.zero;
-
+  
+    private bool jump;
     private float m_distanceTotouch;
    
     private bool m_pressed = false;

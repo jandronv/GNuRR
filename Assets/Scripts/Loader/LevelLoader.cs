@@ -22,7 +22,7 @@ public class TileTranslate
 public class LevelLoader : MonoBehaviour
 {
 
-    public const string PREFAB_PATH = "Assets/Prefabs/";
+    public string PREFAB_PATH = "Assets/Prefabs/Niveles";
     public TextAsset level_JSON;
     public string _prefabName;
     public float scale = 1;
@@ -128,6 +128,7 @@ public class LevelLoader : MonoBehaviour
                 }
 
             }
+
             if (l.type == "objectgroup")//Pos de los collider
             {
                 print("Creando colliders...");
