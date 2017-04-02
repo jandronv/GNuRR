@@ -9,7 +9,13 @@ public class CameraSmooth : MonoBehaviour {
     private CameraBoundary mCameraBoundary;
     private float _targetPositionY;
     private float _targetPositionX;
-  
+
+
+    public float RotateX = 0;
+    public float RotateY = 0;
+    public float RotateZ = 0;
+    public float RotateW = 0;
+
     //Nuevos valores de la posicion de la camara
     private float x, y, z;
     private Vector3 velocity = Vector3.zero;
@@ -58,8 +64,10 @@ public class CameraSmooth : MonoBehaviour {
       
         y = Mathf.SmoothDamp(y, _targetPositionY + offSetY, ref velocity.y, smoothing.y);
 
-        transform.position = new Vector3(x, y , z + offSetZ);
 
+
+        transform.position = new Vector3(x, y , z + offSetZ);
+        transform.rotation = new Quaternion(RotateX, RotateY, RotateZ, RotateW);
     }
 
  

@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour {
                 ultimoTiled.GetComponent<Collider>().isTrigger = true;
             }
             ultimoTiled = hit.collider.gameObject;
-            //Debug.Log("Colisionamos con la plataforma!!: " + hit.transform.name);
+            Debug.Log("Colisionamos con la plataforma!!: " + hit.transform.name);
             //SendMessage("CheckPlatforms", true, SendMessageOptions.RequireReceiver);
             hit.collider.isTrigger = false;
         }
@@ -148,23 +148,23 @@ public class PlayerController : MonoBehaviour {
             SentidoBulet = true;
             m_Player.FlipInX(true);
         }
-        Debug.Log("Vector de movimiento antes del if: " + m_CharacterController.velocity.ToString());
+        
         //Estas saltando
         if (!m_CharacterController.isGrounded)
         {
             direction = new Vector3(directionX * _speedInJump, m_CharacterController.velocity.y, 0);
-            Debug.Log("Vector de movimiento dentro de no en el suelo: "+ direction.ToString());
+            
         }
         else {
             direction = new Vector3(directionX * _speed, m_CharacterController.velocity.y, 0);
-            Debug.Log("Vector de movimiento dentro de en el suelo: "+direction.ToString());
+            
         }
-        Debug.Log("Vector de movimiento despues del if: " + direction.ToString());
+       
         //Estas en el suelo y vas a saltar
         if (m_CharacterController.isGrounded && jump)
         {
             direction.y = _jumpSpeed;
-            Debug.Log("Vector de movimiento y aplicamos el salto: " + direction.ToString());
+            
             //direction = new Vector3(directionX * _speedInJump, m_CharacterController.velocity.y, 0);
         }
         direction.y -= _gravity * Time.deltaTime;
