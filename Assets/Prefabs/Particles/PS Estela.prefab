@@ -96,7 +96,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 288819218
+  randomSeed: 1374264045
   InitialModule:
     serializedVersion: 3
     enabled: 1
