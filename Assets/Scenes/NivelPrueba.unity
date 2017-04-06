@@ -1245,13 +1245,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 33867977}
-  m_LocalRotation: {x: 0.05704127, y: 0, z: 0, w: 0.9983719}
-  m_LocalPosition: {x: 5.232, y: -9.38, z: -17.39}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 769593808}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 6.54, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!81 &33867979
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1291,7 +1291,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 100
-  field of view: 24
+  field of view: 60
   orthographic: 0
   orthographic size: 2.87
   m_Depth: 0
@@ -1318,10 +1318,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13d9a4f061debd64db87b9ffd94bfdc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offSetX: 3
-  offSetY: 2
-  offSetZ: 0
-  smoothing: {x: 1, y: 0.2}
+  RotateX: 0.23
+  RotateY: 0
+  RotateZ: 0
+  RotateW: 4
+  offSetX: 3.41
+  offSetY: 0.73
+  offSetZ: -5.81
+  smoothing: {x: 1, y: 0.3}
 --- !u!1 &36241429
 GameObject:
   m_ObjectHideFlags: 0
@@ -29002,7 +29006,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 769593807}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -12.18}
+  m_LocalPosition: {x: 3, y: -11, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1202993594}
@@ -34609,7 +34613,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 947619112}
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -12.18}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1066507595}
@@ -37494,7 +37498,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.062002, y: 3.704455, z: 1}
+  m_Size: {x: 3.062002, y: 3.268662, z: 1}
   m_Center: {x: -0.12771988, y: 1.1471939, z: 0.000000037252903}
 --- !u!4 &1011059416
 Transform:
@@ -37503,7 +37507,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1011059414}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.03, y: -11.062, z: -0.04}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 769593808}
@@ -44233,7 +44237,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1202993593}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.98, y: -11.21, z: -0.09}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1312674533}
@@ -49180,10 +49184,15 @@ MonoBehaviour:
   _gravity: 20
   _NumFire: 1
   _NumRecarga: 1
+  distance: 800
+  layer:
+    serializedVersion: 2
+    m_Bits: 0
   bulletPrefab: {fileID: 1544941638705908, guid: 4c181fcd9f2d4224aa412653fe803eec,
     type: 2}
   bulletSpawn: {fileID: 39010418}
   bulletSpawn2: {fileID: 1771312663}
+  RayToGround: {fileID: 0}
   _destroyBullet: 2
   _velocityBullet: 15
 --- !u!1 &1318279678
@@ -49566,7 +49575,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1329830367}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.32, y: -11.21, z: -12.27}
+  m_LocalPosition: {x: 3, y: -11, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -64347,6 +64356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 312b946d77b475146ac9134f9d2ed266, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PREFAB_PATH: Assets/Prefabs/Niveles
   level_JSON: {fileID: 4900000, guid: e22edbec04ee7ba42b39ff6ed8b6bf87, type: 3}
   _prefabName: Level1Hito21
   scale: 1

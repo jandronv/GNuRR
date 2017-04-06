@@ -6,7 +6,7 @@ using UnityEditor;
 using System.IO;
 
 
-public enum Tiles{ TILE_0=0, TILE_1, TILE_2, TILE_3, TILE_4, TILE_5, TILE_6, TILE_7, TILE_8, TILE_9, TILE_10, TILE_11, TILE_12}
+public enum Tiles{ TILE_0=0, TILE_1, TILE_2, TILE_3, TILE_4, TILE_5, TILE_6, TILE_7, TILE_8, TILE_9, TILE_10, TILE_11, TILE_12, TILE_13, TILE_14, TILE_15, TILE_16, TILE_17, TILE_18, TILE_19, TILE_20, TILE_21, TILE_22, TILE_23, TILE_24, TILE_25, TILE_26, TILE_27, TILE_28, TILE_29, TILE_30, TILE_31, TILE_32, TILE_33, TILE_34, TILE_35}
 
 /// <summary>
 /// Clase para asociar los tiles 2d con los prefabs 3d
