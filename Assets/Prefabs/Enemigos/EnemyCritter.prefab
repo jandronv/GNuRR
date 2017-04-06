@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 95664560031111548}
   - component: {fileID: 111683580995308450}
   m_Layer: 0
-  m_Name: Enemy2
+  m_Name: EnemyCritter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

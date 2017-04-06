@@ -18,6 +18,14 @@ public class DeathZone : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
+		if(InitialZone == null)
+		{
+
+			Debug.LogWarning("InitialZone camera no configurado");
+            enabled = false;
+            return;
+		}
+
         if (other.tag == "Player") {
             other.gameObject.transform.position = InitialZone.transform.position;
             other.GetComponent<Player>().RestaVidaEnemigo(deatZone);

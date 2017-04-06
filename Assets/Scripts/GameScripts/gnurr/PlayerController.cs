@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour {
 
     private CharacterController m_CharacterController;
     private Player m_Player;
-    private bool SentidoBulet = false;
+    private bool SentidoBullet = false;
     private bool saltandoPlataformaFlotante;
     public float _speedInJump = 6.0F;
     public float _speed = 6.0F;
@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour {
         if (m_Player.GetVida() > m_Player._VidaMin )
         {
             _animations.SetTrigger("Fire");
-            if (SentidoBulet)
+            if (SentidoBullet)
             {
 
                 //Hacia la izquierda
@@ -139,13 +139,13 @@ public class PlayerController : MonoBehaviour {
         {
             _animations.SetFloat("VelocidadX", directionX);
 
-            SentidoBulet = false;
+            SentidoBullet = false;
             m_Player.FlipInX(false);
         } else if (directionX < 0)
         {
             _animations.SetFloat("VelocidadX", -1 * directionX);
 
-            SentidoBulet = true;
+            SentidoBullet = true;
             m_Player.FlipInX(true);
         }
         
@@ -184,7 +184,7 @@ public class PlayerController : MonoBehaviour {
             // Create the Bullet from the Bullet Prefab
 
             // Add velocity to the bullet
-            if (SentidoBulet) {
+            if (SentidoBullet) {
 
                 //Hacia la izquierda
                 var bullet2 = (GameObject)Instantiate(bulletPrefab, bulletSpawn2.position, bulletSpawn2.rotation);

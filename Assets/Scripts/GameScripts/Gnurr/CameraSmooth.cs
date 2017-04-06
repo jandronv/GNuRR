@@ -39,7 +39,7 @@ public class CameraSmooth : MonoBehaviour {
       
     }
 
-    void Update()
+    void LateUpdate()
     {
         x = transform.position.x;
         y = transform.position.y;

@@ -23,7 +23,10 @@ public class Player : MonoBehaviour {
 	void Update () {
 		
 	}
-
+    /// <summary>
+    /// REstar vida disparando, nunca te podras matar
+    /// </summary>
+    /// <param name="numVidas"></param>
     public void RestarVida(int numVidas)
     {
 
@@ -42,11 +45,14 @@ public class Player : MonoBehaviour {
     }
     
 
-    //TODO hacer todo en una funcion
+   /// <summary>
+   /// Resta vida de un enemigo, si te mata te manda a la initial zone.
+   /// </summary>
+   /// <param name="numVidas"></param>
     public void RestaVidaEnemigo(int numVidas)
     {
 
-        if ((_Vida - numVidas) < _VidaMin)
+        if ((_Vida - numVidas) < _VidaMin)//Te mata
         {
             this.gameObject.transform.position = InitialZone.transform.position;
             this._Vida = 20;

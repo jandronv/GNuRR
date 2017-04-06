@@ -149,8 +149,8 @@ GameObject:
   - component: {fileID: 4816950546622880}
   - component: {fileID: 212450819384653406}
   - component: {fileID: 95538623438371542}
-  - component: {fileID: 65776922030920262}
-  - component: {fileID: 114896013770183580}
+  - component: {fileID: 65808396508783366}
+  - component: {fileID: 114777886327312552}
   m_Layer: 0
   m_Name: BasicEnemy
   m_TagString: Untagged
@@ -259,8 +259,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1913601069949290}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14.261448, y: -1.8282366, z: 12.360921}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 17.31, y: -4.64, z: -19.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4577143309874450}
@@ -283,7 +283,7 @@ Transform:
   m_Father: {fileID: 4577143309874450}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &65776922030920262
+--- !u!65 &65808396508783366
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -293,8 +293,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.5999197, y: 1.0471936, z: 0.95255923}
-  m_Center: {x: -0.00566864, y: -0.34844017, z: 0.07446897}
+  m_Size: {x: 2, y: 1.1471863, z: 0.68227136}
+  m_Center: {x: 0, y: -0.42640686, z: -0.040380478}
 --- !u!95 &95538623438371542
 Animator:
   serializedVersion: 3
@@ -312,7 +312,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114896013770183580
+--- !u!114 &114777886327312552
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -320,16 +320,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1913601069949290}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a23016b8c2dea4f40beb707e669b7a60, type: 3}
+  m_Script: {fileID: 11500000, guid: a453db269fb90d645aff1fa34556cb32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Pos1: {fileID: 0}
-  Pos2: {fileID: 0}
-  EnemyAttack: 5
-  EnemyLife: 2
-  speed: 0.5
-  sentido: 1
-  delay: 0.5
+  _component: {fileID: 114777886327312552}
+  _life: 1
+  _speed: 1
+  _initPoint: {fileID: 0}
+  _endPoint: {fileID: 0}
+  _stoppingDistance: 1
+  _AttackTime: 1
+  _visionDistance: 1
+  _ColliderEnemigo: {fileID: 65808396508783366}
 --- !u!212 &212101673486538014
 SpriteRenderer:
   m_ObjectHideFlags: 1
