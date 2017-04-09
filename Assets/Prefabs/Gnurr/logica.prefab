@@ -784,13 +784,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 0.9
-  m_Radius: 0.43
+  m_Height: 0.44
+  m_Radius: 0.35
   m_SlopeLimit: 45
-  m_StepOffset: 0.001
-  m_SkinWidth: 0.045
+  m_StepOffset: 0.06
+  m_SkinWidth: 0.065
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.17, z: 0}
+  m_Center: {x: 0, y: 0.08, z: 0}
 --- !u!198 &198051322086678758
 ParticleSystem:
   m_ObjectHideFlags: 1
