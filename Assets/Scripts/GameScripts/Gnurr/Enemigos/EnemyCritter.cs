@@ -47,10 +47,13 @@ public class EnemyCritter : FSMExecutor<EnemyCritter>  {
             if (Physics.Raycast(r1, out hitInfo, _visionDistance) || Physics.Raycast(r2, out hitInfo, _visionDistance))
             {
 
-       
-                Target = hitInfo.collider.gameObject;
+
+
                 if (hitInfo.collider.gameObject.tag == "Player")
+                {
+                    Target = hitInfo.collider.gameObject;
                     fsm.Emmit("PLAYER_VISTO");
+                }
             }
         }
         else if (fsm.CurrentState == "AttackCritter")
@@ -70,12 +73,27 @@ public class EnemyCritter : FSMExecutor<EnemyCritter>  {
                 Target = null;
             }
         }
+
+        if (_life == 0)
+        {
+            //TODO Lanzar animacion muerte
+            Destroy(this);
+        }
     }
 
     public GameObject Target
     {
         get { return _target; }
         set { _target = value; }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+   
+        if (other.gameObject.tag == "Bullet")
+        {
+            _life--;
+        }
     }
 
 
@@ -176,6 +194,11 @@ public class AttackCritter : State<EnemyCritter>
 
     private void Attack()
     {
-        Debug.LogWarning("Atacando a " + Component.Target);
+        if (Component.Target.GetComponent<Player>() != null) {
+            Debug.Log("Atacando a " + Component.Target);
+            Component.Target.GetComponent<Player>().RestaVidaEnemigo(Component._ataque);
+
+        }
+       
     }
 }

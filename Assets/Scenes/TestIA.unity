@@ -190,6 +190,7 @@ GameObject:
   - component: {fileID: 516917194}
   - component: {fileID: 516917193}
   - component: {fileID: 516917197}
+  - component: {fileID: 516917198}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Player
@@ -254,7 +255,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 516917192}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.07, y: -5.1, z: -18.96}
+  m_LocalPosition: {x: 13.01, y: -5, z: -17.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -275,6 +276,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &516917198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 516917192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62ac9a0608a76b14cb406aec3861e4c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _VidaMax: 15
+  _VidaMin: 5
+  _PorcentajeRestarVida: 1
+  _PorcentajeAumetarVida: 1
+  _Vida: 15
+  _BolaPelusas: 5
+  _SpriteGnurr: {fileID: 0}
+  InitialZone: {fileID: 0}
 --- !u!1 &784297929
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,7 +428,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 938007187}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 10.606973, y: -5.64, z: -16.722752}
+  m_LocalPosition: {x: 11.65, y: -5.64, z: -16.722752}
   m_LocalScale: {x: 20.64646, y: 25.466515, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -452,18 +472,6 @@ Prefab:
     - target: {fileID: 4729278047416438, guid: df0f55686f655cb458855cf5aa12c041, type: 2}
       propertyPath: m_RootOrder
       value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4729278047416438, guid: df0f55686f655cb458855cf5aa12c041, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4729278047416438, guid: df0f55686f655cb458855cf5aa12c041, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1550203023448082, guid: df0f55686f655cb458855cf5aa12c041, type: 2}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: df0f55686f655cb458855cf5aa12c041, type: 2}
@@ -519,6 +527,11 @@ Prefab:
       objectReference: {fileID: 784297930}
     - target: {fileID: 1913601069949290, guid: f04ac7b447e240c4abe038f328389e12, type: 2}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114777886327312552, guid: f04ac7b447e240c4abe038f328389e12,
+        type: 2}
+      propertyPath: _ataque
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -609,39 +622,3 @@ MonoBehaviour:
     _prefab: {fileID: 100000, guid: 477d1f11a08956244afb5007aa89497b, type: 3}
   - _tiles: 0
     _prefab: {fileID: 100000, guid: 084b9c4201ab08b4d8f29efdfb6688c3, type: 3}
---- !u!1 &1968813013 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1550203023448082, guid: df0f55686f655cb458855cf5aa12c041,
-    type: 2}
-  m_PrefabInternal: {fileID: 1208585339}
---- !u!114 &1968813014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1968813013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2a67d354de885843a24443e8727431f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _component: {fileID: 1968813014}
-  _ataque: 0
-  _life: 0
-  _speed: 0.5
-  _point: 0
-  _stoppingDistance: 1
-  _AttackTime: 1
-  _visionDistance: 3
---- !u!65 &1968813015
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1968813013}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 5.12, y: 3.8999803, z: 1.0058107}
-  m_Center: {x: 0, y: 0.40756893, z: 0.034095764}

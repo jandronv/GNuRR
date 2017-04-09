@@ -56,6 +56,13 @@ public class Enemy : FSMExecutor<Enemy> {
                 Target = OldTarget;
             }
         }
+
+        if (_life == 0)
+        {
+            //TODO Lanzar animacion muerte
+            Destroy(this);
+        }
+
     }
 
     /// <summary>
@@ -66,6 +73,12 @@ public class Enemy : FSMExecutor<Enemy> {
     {
         _playerVisto = true;
         hit = other.gameObject;
+
+        if (other.gameObject.tag == "Bullet")
+        {
+            //TODO lanzar animacion recibir daño
+            _life--;
+        }
     }
 
     /// <summary>
@@ -187,7 +200,11 @@ public class AttackState : State<Enemy>
 
     private void Attack()
     {
-        //Component.GetComponent<Player>().RestaVidaEnemigo(Component._ataque);
-        Debug.LogWarning("Atacando a " + Component.Target);
+        if (Component.Target.GetComponent<Player>() != null)
+        {
+            Debug.Log("Atacando a " + Component.Target);
+            Component.Target.GetComponent<Player>().RestaVidaEnemigo(Component._ataque);
+
+        }
     }
 }

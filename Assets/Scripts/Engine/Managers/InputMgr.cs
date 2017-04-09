@@ -11,7 +11,7 @@ public class InputMgr : AComponent {
 	//Eventos a los que quiero avisar. El raton o cualquier dispositivo de puntero a presionado sobre alguna parte de la pantalla.
 	public delegate void PointAndClickEvent(GameObject onCollision,Vector3 point, float distance);
 	public delegate void ReturnDel();
-    public delegate void Move(float directionX, bool jump);
+    public delegate void Move(float directionX, bool jump, bool blockControl);
     public delegate void Fire();
     public delegate void RecargaPelusas();
     public delegate void CargaPelusas(int numPelusas);
@@ -217,39 +217,51 @@ public class InputMgr : AComponent {
 	{
 		base.Update();
 
-        //TODO 31/03 Sigue detectano el salto y lo aplica dos veces
-        jump = Input.GetButtonDown("Jump");
 
-        m_DelegateMove(Input.GetAxis("Horizontal"), jump);
-
-        //Carga Pelusas y evitar mover
-        if (Input.GetButton("Fire") && _contadorCarga > _coolDawnCarga && _numPelusasCarga < TamPelusaRecarga)
+        if (Input.GetButton("Fire") && _contadorCarga > _coolDawnCarga && _numPelusasCarga < TamPelusaRecarga && !_blockControl)
         {
+            
             _numPelusasCarga++;
             _contadorCarga = 0;
-            Debug.Log("Aumentando Pelusas: " + _numPelusasCarga);
+            //Debug.Log("Aumentando Pelusas: " + _numPelusasCarga);
 
         }
-        else if (Input.GetButtonUp("Fire") && _numPelusasCarga > 0)
+        else if (Input.GetButtonUp("Fire") && _numPelusasCarga > 0 && !_blockControl)
         {
+
             m_DelegateCargaPelusas(_numPelusasCarga);
             _numPelusasCarga = 0;
-       
+
         }
+      
         
         _contadorCarga += Time.deltaTime;
-        
-      
+
+
         if (Input.GetButton("Recargar") && _contadorRecarga > _coolDawnRecarga)
         {
+        
             m_DelegateRecargarPelusas();
             _contadorRecarga = 0f;
+
         }
-        _contadorRecarga += Time.deltaTime;
 
-   
 
-     
+        //Comprobamos si tenemos que bloquear el movimiento
+        if (Input.GetButton("Recargar"))
+        {
+            _blockControl = true;
+        }
+        else
+        {
+            _blockControl = false;
+        }
+
+        _contadorRecarga += Time.deltaTime;      
+        jump = Input.GetButtonDown("Jump");
+        Debug.Log("Bloqueo de control: " + _blockControl);
+        m_DelegateMove(Input.GetAxis("Horizontal"), jump, _blockControl);
+        
     }
 
     //Comprobamos si se ha pulsado el Return.
@@ -436,6 +448,7 @@ public class InputMgr : AComponent {
 	private Vector3 m_targetPoint;
   
     private bool jump;
+    private bool _blockControl = false;
     private float m_distanceTotouch;
    
     private bool m_pressed = false;

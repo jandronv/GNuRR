@@ -38,6 +38,8 @@ GameObject:
   - component: {fileID: 212237656662964254}
   - component: {fileID: 95664560031111548}
   - component: {fileID: 111683580995308450}
+  - component: {fileID: 65661660763367462}
+  - component: {fileID: 114516057381540762}
   m_Layer: 0
   m_Name: EnemyCritter
   m_TagString: Untagged
@@ -284,8 +286,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1550203023448082}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.21, z: -4.8}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 17.13, y: -4.815, z: -18.77}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 4913822468506908}
   - {fileID: 4368717566740690}
@@ -312,6 +314,18 @@ Transform:
   m_Father: {fileID: 4729278047416438}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &65661660763367462
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1550203023448082}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.12, y: 3.8999803, z: 1.0058107}
+  m_Center: {x: 0, y: 0.40756893, z: 0.034095764}
 --- !u!95 &95664560031111548
 Animator:
   serializedVersion: 3
@@ -343,6 +357,25 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &114516057381540762
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1550203023448082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2a67d354de885843a24443e8727431f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _component: {fileID: 114516057381540762}
+  _ataque: 1
+  _life: 0
+  _speed: 5
+  _point: 0
+  _stoppingDistance: 1
+  _AttackTime: 1
+  _visionDistance: 3
 --- !u!212 &212078828573152618
 SpriteRenderer:
   m_ObjectHideFlags: 1
