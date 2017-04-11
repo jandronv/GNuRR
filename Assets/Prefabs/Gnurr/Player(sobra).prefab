@@ -54,7 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4906045783591242}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Player(sobra)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -532,6 +532,7 @@ MonoBehaviour:
   _BolaPelusas: 5
   _SpriteGnurr: {fileID: 212407698957725814}
   InitialZone: {fileID: 0}
+  DamageParticles: {fileID: 0}
 --- !u!114 &114961942385481978
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -560,6 +561,7 @@ MonoBehaviour:
   RayToGround: {fileID: 0}
   _destroyBullet: 2
   _velocityBullet: 15
+  RechargeParticles: {fileID: 0}
 --- !u!119 &119640692249403144
 Projector:
   m_ObjectHideFlags: 1

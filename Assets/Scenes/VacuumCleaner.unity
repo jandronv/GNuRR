@@ -280,7 +280,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 395194682}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.001, y: 1.448, z: -1.003}
+  m_LocalPosition: {x: 0.995, y: 1.448, z: -0.977}
   m_LocalScale: {x: 0.099756084, y: 0.52486235, z: 0}
   m_Children: []
   m_Father: {fileID: 1304339511}
@@ -727,6 +727,7 @@ MonoBehaviour:
   _BolaPelusas: 5
   _SpriteGnurr: {fileID: 1348603373}
   InitialZone: {fileID: 0}
+  DamageParticles: {fileID: 0}
 --- !u!114 &1310326558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -756,6 +757,7 @@ MonoBehaviour:
   RayToGround: {fileID: 0}
   _destroyBullet: 2
   _velocityBullet: 15
+  RechargeParticles: {fileID: 0}
 --- !u!4 &1310326559
 Transform:
   m_ObjectHideFlags: 0
