@@ -268,7 +268,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 58abc16543a28af4d9ad04f22689094e, type: 2}
     - target: {fileID: 2300000, guid: 282cb5ae4ca02314082a140c7f7d168d, type: 3}
       propertyPath: m_ReceiveShadows
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 282cb5ae4ca02314082a140c7f7d168d, type: 3}
