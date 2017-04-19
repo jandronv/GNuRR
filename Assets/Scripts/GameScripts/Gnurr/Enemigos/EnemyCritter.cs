@@ -28,7 +28,7 @@ public class EnemyCritter : FSMExecutor<EnemyCritter>  {
     protected override void _Update(FiniteStateMachine<EnemyCritter> fsm)
     {
         RaycastHit hitInfo;
-        Ray r1 = new Ray(transform.position, Vector3.left );
+        Ray r1 = new Ray(transform.position, Vector3.left);
         Ray r2 = new Ray(transform.position, Vector3.right);
 
         Debug.DrawRay(transform.position, Vector3.right, Color.red);
@@ -46,8 +46,6 @@ public class EnemyCritter : FSMExecutor<EnemyCritter>  {
  
             if (Physics.Raycast(r1, out hitInfo, _visionDistance) || Physics.Raycast(r2, out hitInfo, _visionDistance))
             {
-
-
 
                 if (hitInfo.collider.gameObject.tag == "Player")
                 {
@@ -76,8 +74,9 @@ public class EnemyCritter : FSMExecutor<EnemyCritter>  {
 
         if (_life == 0)
         {
-            //TODO Lanzar animacion muerte
-            Destroy(this);
+
+            GetComponentInChildren<Animator>().SetBool("Dead", true);
+            Destroy(gameObject, 1f);
         }
     }
 
@@ -124,7 +123,7 @@ public class SleepState : State<EnemyCritter>
     {
 
         base.Update();
-        Component.GetComponent<Animator>().SetBool("PlayerDetect", false);
+        Component.GetComponentInChildren<Animator>().SetBool("PlayerDetect", false);
     }
 
  
@@ -187,7 +186,7 @@ public class AttackCritter : State<EnemyCritter>
 
     public void MoveEnemy(Vector3 pos)
     {
-        Component.GetComponent<Animator>().SetBool("PlayerDetect", true);
+        Component.GetComponentInChildren<Animator>().SetBool("PlayerDetect", true);
         Component.transform.position = Vector3.Lerp(Component.transform.position, pos, Time.deltaTime * smoothLevel);
 
     }

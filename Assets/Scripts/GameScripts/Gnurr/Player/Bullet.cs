@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour {
     void OnTriggerEnter(Collider other)
     {
         Debug.Log("Entra");
-        if (other.tag == "Platforms")
+        if (other.tag == "Platforms" || other.tag == "Enemies")
         {
             Destroy(gameObject);
         }

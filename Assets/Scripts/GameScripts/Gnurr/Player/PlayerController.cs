@@ -31,8 +31,10 @@ public class PlayerController : MonoBehaviour {
     public float _velocityBullet = 6.0f;
 
     public Transform RechargeParticles;
- 
+    public ParticleSystem Estela;
+
     private ParticleSystem[] _ParticulasRecarga;
+    
   
 
     // Use this for initialization
@@ -48,12 +50,17 @@ public class PlayerController : MonoBehaviour {
         GameMgr.GetInstance().GetServer<InputMgr>().RegisterCargaPelusas = CargaPelusas;
 
         _animations = GetComponentInChildren<Animator>();
-        if (RechargeParticles == null )
+        if (RechargeParticles == null)
         {
             Debug.LogWarning("Asigna el sistema de particulas de recarga en el PlayerController!!");
 
         }else
             _ParticulasRecarga = RechargeParticles.GetComponentsInChildren<ParticleSystem>();
+
+        if (Estela == null)
+        {
+            Debug.LogWarning("Asigna la estela del jugador al PlayerController!!");
+        }
            
     }
 
@@ -167,10 +174,12 @@ public class PlayerController : MonoBehaviour {
 
         if (directionX > 0)
         {
+            //Estela.Play();
             SentidoBullet = false;
             m_Player.FlipInX(false);
         } else if (directionX < 0)
         {
+            //Estela.Play();
             SentidoBullet = true;
             m_Player.FlipInX(true);
         }

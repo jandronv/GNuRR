@@ -59,6 +59,8 @@ public class CameraSmooth : MonoBehaviour {
         if (_targetPositionX <= InitialWorld.position.x || _targetPositionX >= EndWorld.position.x)
         {
             y = Mathf.SmoothDamp(y, _targetPositionY + offSetY, ref velocity.y, smoothing.y);
+            transform.position = new Vector3(x, y, z + offSetZ);
+            transform.rotation = new Quaternion(RotateX, RotateY, RotateZ, RotateW);
         }
         else
         {
