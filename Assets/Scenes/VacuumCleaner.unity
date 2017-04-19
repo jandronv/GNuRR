@@ -265,7 +265,7 @@ Prefab:
     - target: {fileID: 2300000, guid: 282cb5ae4ca02314082a140c7f7d168d, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 58abc16543a28af4d9ad04f22689094e, type: 2}
+      objectReference: {fileID: 2100000, guid: e289626549a252142b2d2e2bc0c29834, type: 2}
     - target: {fileID: 2300000, guid: 282cb5ae4ca02314082a140c7f7d168d, type: 3}
       propertyPath: m_ReceiveShadows
       value: 1
@@ -695,6 +695,7 @@ MonoBehaviour:
   _destroyBullet: 2
   _velocityBullet: 15
   RechargeParticles: {fileID: 0}
+  Estela: {fileID: 0}
 --- !u!4 &1310326559
 Transform:
   m_ObjectHideFlags: 0
