@@ -7,6 +7,7 @@ TagManager:
   - Bullet
   - Camera
   - Platforms
+  - Enemies
   layers:
   - Default
   - TransparentFX
