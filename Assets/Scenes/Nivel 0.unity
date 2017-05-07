@@ -2870,6 +2870,16 @@ Prefab:
       propertyPath: m_BackGroundColor.b
       value: 0.054901965
       objectReference: {fileID: 0}
+    - target: {fileID: 119953694638788212, guid: ec1a2be8d2282ca4ba81543624034e8d,
+        type: 2}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: 9b429a44d5facae448923e9026900907, type: 2}
+    - target: {fileID: 119953694638788212, guid: ec1a2be8d2282ca4ba81543624034e8d,
+        type: 2}
+      propertyPath: m_Orthographic
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ec1a2be8d2282ca4ba81543624034e8d, type: 2}
   m_IsPrefabParent: 0

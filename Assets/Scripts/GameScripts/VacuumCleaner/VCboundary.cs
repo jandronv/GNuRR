@@ -35,16 +35,16 @@ public class VCboundary : MonoBehaviour
         {
             //La pelusa llega al limite derecho
 
-            if (_playerMax.x >= _WindowMax.x) //+0.2?
+            if (_playerMax.x >= (_WindowMax.x - 0.3))
             {
-                if (move>= 0.9)
+                if (move >= 0.9)
                 {
                     m_VCController.transform.Rotate(0, _VCvelocity * Time.deltaTime, 0);
                 }
             }
 
             //la pelusa llega al límite izquierdo
-            else if (_playerMin.x <= _WindowMin.x) //+0.1?
+            else if (_playerMin.x <= _WindowMin.x + 0.3)
             {
                 if (move <= -0.9)
                 {
