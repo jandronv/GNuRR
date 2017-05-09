@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
 
@@ -11,11 +12,12 @@ public class Player : MonoBehaviour {
     public float _Vida = 15;
     public int _BolaPelusas = 5;
     public SpriteRenderer _SpriteGnurr;
-    public GameObject InitialZone;
+    public float fadeTime = 0.1f;
 
+    public Image fadeBlack;
     public Transform DamageParticles;
     private ParticleSystem[] _ParticulasDanio;
-
+    private SpawnMgrs mSpawManager;
 
 
     // Use this for initialization
@@ -29,7 +31,14 @@ public class Player : MonoBehaviour {
         {
             _ParticulasDanio = DamageParticles.GetComponentsInChildren<ParticleSystem>();
         }
-	}
+
+        mSpawManager = GetComponentInParent<SpawnMgrs>();
+
+        if (mSpawManager == null)
+        {
+            Debug.LogError("No se ha podido inicializar el SpawnManager!!");
+        }
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -67,9 +76,13 @@ public class Player : MonoBehaviour {
         {
             ps.Play();
         }
+
+        //TODO feedback sprite
+
         if ((_Vida - numVidas) < _VidaMin)//Te mata
         {
-            this.gameObject.transform.position = InitialZone.transform.position;
+            //TODO Llamar al spawnManager
+            this.transform.position = mSpawManager.GetSpawPoint().position;
             this._Vida = 20;
             Vector3 scale = new Vector3(_Vida / _VidaMax, _Vida / _VidaMax, _Vida / _VidaMax);
             this.transform.localScale = scale;
@@ -99,6 +112,36 @@ public class Player : MonoBehaviour {
         }
 
         this.transform.localScale = scale;
+    }
+
+    public void FallInDeathZone(int numVidas)
+    {
+        StartCoroutine("FadeBlack");
+        //Restamos la vida al caer por la zona de muerte
+        RestaVidaEnemigo(numVidas);
+        //Llamamos al manager de spawn para volver a aparecer
+        this.transform.position = mSpawManager.GetSpawPoint().position;
+        GameObject cam = GameObject.Find("Camera");
+        cam.transform.position = mSpawManager.GetSpawPoint().position; 
+
+    }
+
+    IEnumerator FadeBlack()
+    {
+        float amount = Time.deltaTime / fadeTime;
+        Color c1 = fadeBlack.color;
+        c1.a = 1;
+        fadeBlack.color = c1;
+
+        for (float f = 1f; f >= 0f; f = f - amount)
+        {
+            Color c = fadeBlack.color;
+            c.a = f;
+            fadeBlack.color = c;
+            yield return new WaitForEndOfFrame();
+        }
+
+        yield return null;
     }
 
     public float GetVida()

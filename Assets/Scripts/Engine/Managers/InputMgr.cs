@@ -11,16 +11,19 @@ public class InputMgr : AComponent {
 	//Eventos a los que quiero avisar. El raton o cualquier dispositivo de puntero a presionado sobre alguna parte de la pantalla.
 	public delegate void PointAndClickEvent(GameObject onCollision,Vector3 point, float distance);
 	public delegate void ReturnDel();
-    public delegate void Move(float directionX, bool jump, bool blockControl);
+    public delegate void Move(float directionX, bool jump, bool dobleJump,bool blockControl);
     public delegate void Fire();
     public delegate void RecargaPelusas();
     public delegate void CargaPelusas(int numPelusas);
+    public delegate void PlanearEvento(bool planear);
 
     private float _contadorRecarga = 0f;
-    private float _contadorDiparo = 0f;
+    private float _contadorJump = 0f;
     private float _contadorCarga = 0;
     private int _numPelusasCarga = 0;
+    private bool _planeo = false;
 
+    public bool Planear = true;
     public int TamPelusaRecarga = 5;
     public float _coolDawnDisparo = 0.5f;
     public float _coolDawnCarga = 0.5f;
@@ -68,6 +71,16 @@ public class InputMgr : AComponent {
     public Fire UnRegisterFire
     {
         set { m_DelegateFire -= value; }
+    }
+
+    public PlanearEvento Register
+    {
+        set { m_planear += value; }
+    }
+
+    public PlanearEvento Unregister
+    {
+        set { m_planear -= value; }
     }
 
     public RecargaPelusas RegisterRecargarPelusas
@@ -214,13 +227,13 @@ public class InputMgr : AComponent {
 
     // Use this for initialization
     protected override void Update()
-	{
-		base.Update();
+    {
+        base.Update();
 
 
         if (Input.GetButton("Fire") && _contadorCarga > _coolDawnCarga && _numPelusasCarga < TamPelusaRecarga && !_blockControl)
         {
-            
+
             _numPelusasCarga++;
             _contadorCarga = 0;
             //Debug.Log("Aumentando Pelusas: " + _numPelusasCarga);
@@ -233,17 +246,15 @@ public class InputMgr : AComponent {
             _numPelusasCarga = 0;
 
         }
-      
-        
+
+
         _contadorCarga += Time.deltaTime;
 
 
         if (Input.GetButton("Recargar") && _contadorRecarga > _coolDawnRecarga)
         {
-        
             m_DelegateRecargarPelusas();
             _contadorRecarga = 0f;
-
         }
 
 
@@ -257,10 +268,25 @@ public class InputMgr : AComponent {
             _blockControl = false;
         }
 
-        _contadorRecarga += Time.deltaTime;      
+        _contadorRecarga += Time.deltaTime;
         jump = Input.GetButtonDown("Jump");
-        Debug.Log("Bloqueo de control: " + _blockControl);
-        m_DelegateMove(Input.GetAxis("Horizontal"), jump, _blockControl);
+        //Debug.Log("Bloqueo de control: " + _blockControl);
+
+
+        if (Input.GetAxis("Planear") > 0) {
+            Debug.Log("Planear.. ");
+            _planeo = true;
+        }else
+            _planeo = false;
+
+        if (m_planear != null)
+            m_planear(_planeo);
+
+        //De momento no se va a utilizar el doble salto
+        if (m_DelegateMove != null)
+            m_DelegateMove(Input.GetAxis("Horizontal"), jump, false,_blockControl);
+
+
         
     }
 
@@ -443,8 +469,7 @@ public class InputMgr : AComponent {
 	protected PointAndClickEvent m_pcBegin;
 	protected PointAndClickEvent m_pcEnd;
 	protected PointAndClickEvent m_pcPressed;
-	//Eventos de boton pulsado y soltado.
-	
+	//Eventos de boton pulsado y soltado.	
 	private Vector3 m_targetPoint;
   
     private bool jump;
@@ -457,6 +482,7 @@ public class InputMgr : AComponent {
     private GameObject m_objectTouch;
 
     private Camera m_cameraUsedToTouch = null;
+    private PlanearEvento m_planear;
 
     private Move m_DelegateMove;
     private Fire m_DelegateFire;

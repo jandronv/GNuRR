@@ -60,7 +60,7 @@ public class Enemy : FSMExecutor<Enemy> {
         if (_life == 0)
         {
             //TODO Lanzar animacion muerte
-            Destroy(this);
+            Destroy(gameObject);
         }
 
     }
@@ -200,11 +200,13 @@ public class AttackState : State<Enemy>
 
     private void Attack()
     {
-        if (Component.Target.GetComponent<Player>() != null)
+        if (Component.Target != null && Component.Target.GetComponent<Player>() != null)
         {
             Debug.Log("Atacando a " + Component.Target);
             Component.Target.GetComponent<Player>().RestaVidaEnemigo(Component._ataque);
 
         }
+        //else if (Component.Target == null)
+          //  Component.Emmit("PLAYER_DEJADO_VER");
     }
 }

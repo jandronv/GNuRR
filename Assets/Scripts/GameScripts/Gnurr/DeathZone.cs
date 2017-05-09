@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class DeathZone : MonoBehaviour {
 
-    public GameObject InitialZone;
-    private int deatZone = 20;
+    private SpawnMgrs mSpawManager;
+    private int damageZone = 20;
 	// Use this for initialization
 	void Start () {
 		
@@ -18,17 +18,9 @@ public class DeathZone : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-		if(InitialZone == null)
-		{
-
-			Debug.LogWarning("InitialZone camera no configurado");
-            enabled = false;
-            return;
-		}
-
+	
         if (other.tag == "Player") {
-            other.gameObject.transform.position = InitialZone.transform.position;
-            other.GetComponent<Player>().RestaVidaEnemigo(deatZone);
+            other.GetComponent<Player>().FallInDeathZone(damageZone);
         }
     }
 }

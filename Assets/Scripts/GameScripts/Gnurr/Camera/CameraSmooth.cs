@@ -94,5 +94,11 @@ public class CameraSmooth : MonoBehaviour {
 
     }
 
+    public void FadeBlack() {
+
+
+
+    }
+
  
 }

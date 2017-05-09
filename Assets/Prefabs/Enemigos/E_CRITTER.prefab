@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4367837181988310}
   - component: {fileID: 212934635267805088}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: E2_pder2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 212769431080778934}
   - component: {fileID: 95317896171746454}
   - component: {fileID: 111325904083884888}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: EnemyCritter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4390541541889908}
   - component: {fileID: 212902466680929464}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: E2_pder1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4094623669044934}
   - component: {fileID: 212999974452723376}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: E2_pizq1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4924854872767422}
   - component: {fileID: 212458759380202186}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: E2_pder3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4255466357781232}
   - component: {fileID: 212799352663869314}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: E2_cabeza
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4152171749172148}
   - component: {fileID: 212808014404921040}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: E2_pinza1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,7 +134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4715705732523014}
   - component: {fileID: 212886198259916116}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: E2_pizq2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,7 +150,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4780367068907292}
   - component: {fileID: 212338787225337190}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: E2_pizq3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,10 +166,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4067650420470250}
   - component: {fileID: 114000446528899988}
-  - component: {fileID: 65426938007745350}
-  m_Layer: 0
-  m_Name: E_CRITTER
-  m_TagString: Enemies
+  - component: {fileID: 143842760321317352}
+  - component: {fileID: 65799552326863832}
+  m_Layer: 2
+  m_Name: E_Critter
+  m_TagString: EnemyCritter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -183,7 +184,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4728057994581112}
   - component: {fileID: 212516330396132044}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: E2_pinza2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -196,14 +197,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1907240577237786}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 57.54, y: -16.4, z: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 15.51, y: -4.96, z: -14.86}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children:
   - {fileID: 4268932035079706}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!4 &4094623669044934
 Transform:
   m_ObjectHideFlags: 1
@@ -343,7 +344,7 @@ Transform:
   m_Father: {fileID: 4268932035079706}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &65426938007745350
+--- !u!65 &65799552326863832
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -353,8 +354,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.1661026, y: 3.511354, z: 2.6988304}
-  m_Center: {x: -0.6111526, y: -0.086854294, z: 0.065339595}
+  m_Size: {x: 4.334653, y: 4.5867615, z: 3.3996053}
+  m_Center: {x: 0.11964161, y: 0.0984621, z: -0.09441057}
 --- !u!95 &95317896171746454
 Animator:
   serializedVersion: 3
@@ -400,11 +401,35 @@ MonoBehaviour:
   _component: {fileID: 114000446528899988}
   _ataque: 1
   _life: 2
-  _speed: 1
+  _speed: 0.3
+  maxDistance: 1
+  feedBack: {r: 1, g: 0, b: 0, a: 0.678}
+  NumTimes: 3
+  DelayFeedBack: 0.1
+  firsTime: 1
   _point: 1
-  _stoppingDistance: 0.3
-  _AttackTime: 2
+  _gravity: 20
+  _attack: 0
+  _stoppingDistance: 0.1
+  _AttackTime: 1
   _visionDistance: 3
+--- !u!143 &143842760321317352
+CharacterController:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1907240577237786}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 4.16
+  m_Radius: 0.91
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.03, z: 0}
 --- !u!212 &212338787225337190
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -438,7 +463,7 @@ SpriteRenderer:
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: e5f5941bca052864bb1f33f0e486b3cc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
 --- !u!212 &212458759380202186
 SpriteRenderer:
@@ -473,7 +498,7 @@ SpriteRenderer:
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 44f5e5770e8ce8b4a8aad3d5f306f878, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
 --- !u!212 &212516330396132044
 SpriteRenderer:
@@ -508,7 +533,7 @@ SpriteRenderer:
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: d7d4eace1cc7a9a47993265964b0f7a4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
 --- !u!212 &212769431080778934
 SpriteRenderer:
@@ -543,7 +568,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d8e29de60543e6d47b0092f6f5f90638, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
 --- !u!212 &212799352663869314
 SpriteRenderer:
@@ -578,7 +603,7 @@ SpriteRenderer:
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 2fbc5d05ae68f0b45b4bc2224d85f2a2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
 --- !u!212 &212808014404921040
 SpriteRenderer:
@@ -613,7 +638,7 @@ SpriteRenderer:
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: e6df03cf85e78e044a3749e23cb2c214, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
 --- !u!212 &212886198259916116
 SpriteRenderer:
@@ -648,7 +673,7 @@ SpriteRenderer:
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: c6f98db1cca6ec346ae0fd5fe34b75da, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
 --- !u!212 &212902466680929464
 SpriteRenderer:
@@ -683,7 +708,7 @@ SpriteRenderer:
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 255121413abad2e409e4df94ebba4603, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
 --- !u!212 &212934635267805088
 SpriteRenderer:
@@ -718,7 +743,7 @@ SpriteRenderer:
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: b4497fec529afd14784fafe2f256483a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
 --- !u!212 &212999974452723376
 SpriteRenderer:
@@ -753,5 +778,5 @@ SpriteRenderer:
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 358210bac316da14b885255f5c6cab22, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0

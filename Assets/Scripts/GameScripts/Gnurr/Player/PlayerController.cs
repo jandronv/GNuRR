@@ -7,16 +7,19 @@ public class PlayerController : MonoBehaviour {
 
     private CharacterController m_CharacterController;
     private Player m_Player;
+    private bool _planear;
     private bool SentidoBullet = false;
     private bool saltandoPlataformaFlotante;
     public float _speedInJump = 6.0F;
     public float _speed = 6.0F;
     public float _jumpSpeed = 8.0F;
     public float _gravity = 20.0F;
+    public float _gravityPlaning = 10.0F;
     public int _NumFire = 1;
     public int _NumRecarga = 1;
     public float distance = 800;
     public LayerMask layer;
+    public bool DoubleJump = false;
 
     private GameObject ultimoTiled = null;
 
@@ -26,7 +29,7 @@ public class PlayerController : MonoBehaviour {
     public GameObject bulletPrefab;
     public Transform bulletSpawn;
     public Transform bulletSpawn2;
-    public Transform RayToGround;
+
     public float _destroyBullet = 2.0f;
     public float _velocityBullet = 6.0f;
 
@@ -41,10 +44,12 @@ public class PlayerController : MonoBehaviour {
     void Start ()
     {
         //_camera = GameObject.FindGameObjectWithTag("Camera");
-
+        _planear = false;
         m_CharacterController = GetComponent<CharacterController>();
         m_Player = GetComponent<Player>();
-        GameMgr.GetInstance().GetServer<InputMgr>().RegisterMove = Move;
+        // si tengo el poder => lo registro.
+        GameMgr.GetInstance().GetServer<InputMgr>().Register = Planear;
+       GameMgr.GetInstance().GetServer<InputMgr>().RegisterMove = Move;
         GameMgr.GetInstance().GetServer<InputMgr>().RegisterFire = Fire;
         GameMgr.GetInstance().GetServer<InputMgr>().RegisterRecargarPelusas = RecargaPelusas;
         GameMgr.GetInstance().GetServer<InputMgr>().RegisterCargaPelusas = CargaPelusas;
@@ -68,12 +73,9 @@ public class PlayerController : MonoBehaviour {
     {
 
     }
-
     
     void Update () {
-
-
-        
+ 
         Ray ray = new Ray(transform.position, Vector3.down);
 
         Vector3 PosRay = new Vector3(transform.position.x, (transform.position.y - 0.2f), transform.position.z);
@@ -108,7 +110,7 @@ public class PlayerController : MonoBehaviour {
 
     private void CargaPelusas(int numPelusas)
     {
-
+        _animations.SetTrigger("Carga");
         if (numPelusas > (m_Player.GetVida() - m_Player._VidaMin))
         {
             numPelusas = (int)(m_Player.GetVida() - m_Player._VidaMin);
@@ -123,6 +125,7 @@ public class PlayerController : MonoBehaviour {
                 //Hacia la izquierda
                 var bullet2 = (GameObject)Instantiate(bulletPrefab, bulletSpawn2.position, bulletSpawn2.rotation);
                 bullet2.transform.localScale = new Vector3(bullet2.transform.localScale.x * numPelusas, bullet2.transform.localScale.y * numPelusas, bullet2.transform.localScale.z * numPelusas);
+                bullet2.GetComponent<Bullet>().SetTamBullet(numPelusas);
                 bullet2.GetComponent<Rigidbody>().velocity = (bullet2.transform.forward) * _velocityBullet;
 
                 Destroy(bullet2, _destroyBullet);
@@ -132,6 +135,7 @@ public class PlayerController : MonoBehaviour {
             {
                 var bullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
                 bullet.transform.localScale = new Vector3(bullet.transform.localScale.x * numPelusas, bullet.transform.localScale.y * numPelusas, bullet.transform.localScale.z * numPelusas);
+                bullet.GetComponent<Bullet>().SetTamBullet(numPelusas);
                 bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * _velocityBullet;
                 Destroy(bullet, _destroyBullet);
             }
@@ -153,7 +157,12 @@ public class PlayerController : MonoBehaviour {
 
     }
 
-    private void Move(float directionX, bool jump, bool blockControl)
+    private void Planear(bool planear)
+    {
+        _planear = planear;
+    }
+
+    private void Move(float directionX, bool jump, bool dobleJump,bool blockControl)
     {
         Vector3 direction = Vector3.zero;
 
@@ -183,7 +192,7 @@ public class PlayerController : MonoBehaviour {
             SentidoBullet = true;
             m_Player.FlipInX(true);
         }
-        
+     
         //Estas saltando
         if (!m_CharacterController.isGrounded && !blockControl)
         {
@@ -195,10 +204,10 @@ public class PlayerController : MonoBehaviour {
             direction = new Vector3(directionX * _speed, m_CharacterController.velocity.y, 0);
             
         }
+        
 
-       
         //Estas en el suelo y vas a saltar
-        if (m_CharacterController.isGrounded && jump )
+        if (IsGround && jump )
         {
            
             direction.y = _jumpSpeed;  
@@ -209,14 +218,34 @@ public class PlayerController : MonoBehaviour {
         {
             direction = new Vector3(0, m_CharacterController.velocity.y, 0);
         }
-        direction.y -= _gravity * Time.deltaTime;
+
+        direction = transform.TransformDirection(direction);
+        if (_planear) {
+            Debug.Log("Planeando...");
+            direction.y -= _gravityPlaning * Time.deltaTime;
+        }else
+            direction.y -= _gravity * Time.deltaTime;
+
+       
         //Debug.Log("Direction ante de moverte: "+ direction.ToString());
         m_CharacterController.Move(direction * Time.deltaTime);
         _animations.SetBool("isGrounded", m_CharacterController.isGrounded);
         
     }
+    public bool IsGround
+    {
+        get {
+            bool b = (m_CharacterController.collisionFlags & CollisionFlags.Below) != 0;
+            //todo
+            RaycastHit hit;
+            bool r = Physics.Raycast(transform.position, Vector3.down, out hit, 1.5f);
+           /* if(r)
+                hit.normal*/
+            return b || r;
+        }
+    }
 
-    //TODO Crear un numero fijo de balas. No crear balas continuamente.
+   
     private void Fire()
     {
 

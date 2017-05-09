@@ -8,6 +8,9 @@ TagManager:
   - Camera
   - Platforms
   - Enemies
+  - EnemyCritter
+  - Slope
+  - EnemyBat
   layers:
   - Default
   - TransparentFX

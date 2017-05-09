@@ -22,7 +22,7 @@ public class TileTranslate
 public class LevelLoader : MonoBehaviour
 {
 
-    public string PREFAB_PATH = "Assets/Prefabs/Niveles";
+    public string PREFAB_PATH = "Assets/Prefabs/Niveles/";
     public TextAsset level_JSON;
     public string _prefabName;
     public float scale = 1;
@@ -112,8 +112,19 @@ public class LevelLoader : MonoBehaviour
                                 //GameObject g = tileSet[0];
                                 GameObject tile = Instantiate(g, new Vector3(i, j, 0), Quaternion.Euler(new Vector3(-180, 90, 0)) );
                                 tile.transform.parent = ground.transform; //pone como padre del cubo el go ground.
-                                //tile.transform.position = new Vector3(i, j, 0);
-                                //PrefabUtility.InstantiatePrefab(g);
+                                tile.gameObject.tag = "Platforms";                                        
+                                if ((matrixLevel[i, j] - 1) == (int)Tiles.TILE_10 || (matrixLevel[i, j] - 1) == (int)Tiles.TILE_11 || (matrixLevel[i, j] - 1) == (int)Tiles.TILE_12)//Si es una plataforma flotante le ponemos el tag
+                                {
+                                    
+                                    tile.layer = LayerMask.NameToLayer("PlataformaFlotante");
+                                    foreach (Transform trans in tile.GetComponentsInChildren<Transform>(true))
+                                    {
+                                        trans.gameObject.layer = LayerMask.NameToLayer("PlataformaFlotante");
+                                    }
+                                    
+                                    tile.GetComponentInChildren<BoxCollider>().isTrigger = true;
+                                }
+
                             }
                             else {
                                 Debug.Log("Tiled Nº:"+ matrixLevel[i, j]+", no ha sido encontrado.");
