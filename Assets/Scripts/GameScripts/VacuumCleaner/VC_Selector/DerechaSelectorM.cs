@@ -8,6 +8,7 @@ public class DerechaSelectorM : MonoBehaviour
 
     public Image fondo;
     public Sprite ima1, ima2, ima3;
+    public Image mundos;
 
     // Use this for initialization
     void Start()
@@ -26,6 +27,7 @@ public class DerechaSelectorM : MonoBehaviour
         //_animations.SetBool("TriggerIzq", true);
         //Debug.LogWarning("Entra");
         fondo.sprite = ima1;
+        mundos.transform.Rotate(0, 0, -180);
 
     }
 
