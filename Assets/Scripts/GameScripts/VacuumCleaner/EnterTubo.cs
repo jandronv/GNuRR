@@ -8,12 +8,13 @@ public class EnterTubo : MonoBehaviour {
 
     void OnTriggerStay (Collider _player)
     {
-        enter = Input.GetKey(KeyCode.O);
+        enter = Input.GetButton("Cargar");
         if (_player.gameObject.tag == "Player")
         {
             if (enter == true)
             {
-                //SceneManager.LoadScene("TUBO");
+                Debug.Log("enter es true");
+                SceneManager.LoadScene("VC_Selector");
             }
         }
     }

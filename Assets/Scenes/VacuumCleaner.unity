@@ -130,6 +130,21 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 65817690735209860, guid: fe2a5cd4a7447ed4aa31e1d6c591b3cc,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 65060183330228486, guid: fe2a5cd4a7447ed4aa31e1d6c591b3cc,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 23038942087848830, guid: fe2a5cd4a7447ed4aa31e1d6c591b3cc,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fe2a5cd4a7447ed4aa31e1d6c591b3cc, type: 2}
   m_IsPrefabParent: 0
@@ -503,7 +518,8 @@ MonoBehaviour:
   _Vida: 20
   _BolaPelusas: 5
   _SpriteGnurr: {fileID: 1348603373}
-  InitialZone: {fileID: 0}
+  fadeTime: 0.1
+  fadeBlack: {fileID: 0}
   DamageParticles: {fileID: 0}
 --- !u!114 &1310326558
 MonoBehaviour:
@@ -521,17 +537,18 @@ MonoBehaviour:
   _speed: 2
   _jumpSpeed: 5
   _gravity: 20
+  _gravityPlaning: 10
   _NumFire: 1
   _NumRecarga: 1
   distance: 800
   layer:
     serializedVersion: 2
     m_Bits: 0
+  DoubleJump: 0
   bulletPrefab: {fileID: 1544941638705908, guid: 4c181fcd9f2d4224aa412653fe803eec,
     type: 2}
   bulletSpawn: {fileID: 0}
   bulletSpawn2: {fileID: 0}
-  RayToGround: {fileID: 0}
   _destroyBullet: 2
   _velocityBullet: 15
   RechargeParticles: {fileID: 0}

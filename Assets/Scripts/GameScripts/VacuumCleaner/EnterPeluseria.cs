@@ -9,12 +9,12 @@ public class EnterPeluseria : MonoBehaviour
 
     void OnTriggerStay(Collider _player)
     {
-        enter = Input.GetKey(KeyCode.O);
+        enter = Input.GetButton("Cargar");
         if (_player.gameObject.tag == "Player")
         {
             if (enter == true)
             {
-                //SceneManager.LoadScene("PELUSERIA");
+                SceneManager.LoadScene("VC_Peluseria");
             }
         }
     }
