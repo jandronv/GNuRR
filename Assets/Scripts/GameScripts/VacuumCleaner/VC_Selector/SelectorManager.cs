@@ -11,6 +11,8 @@ public class SelectorManager : MonoBehaviour {
     public Image mundos;
     private Quaternion mundoseleccionado;
     private bool enter;
+    private string Dinos = "AA PlantillDeNiveles";
+    private string Ropa = "Lvl_0";
 
     // Use this for initialization
     void Start () {
@@ -21,15 +23,15 @@ public class SelectorManager : MonoBehaviour {
     void Update() {
         mundoseleccionado = mundos.transform.rotation;
         Debug.Log(mundoseleccionado);
-        enter = Input.GetButton("Cargar");
+        enter = Input.GetButton("Fire");
         if (enter == true)
         {
             if (mundoseleccionado.z == 0) {
-                SceneManager.LoadScene("AA PlantillaDeNiveles");
+                SceneManager.LoadScene(Dinos);
             }
             else
             {
-                SceneManager.LoadScene("Nivel 0");
+                SceneManager.LoadScene(Ropa);
             }
         }
 		
