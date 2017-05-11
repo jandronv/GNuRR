@@ -13,6 +13,7 @@ public class Player : MonoBehaviour {
     public int _BolaPelusas = 5;
     public SpriteRenderer _SpriteGnurr;
     public float fadeTime = 0.1f;
+    public bool initLoad;
 
     public Image fadeBlack;
     public Transform DamageParticles;
@@ -37,6 +38,12 @@ public class Player : MonoBehaviour {
         if (mSpawManager == null)
         {
             Debug.LogError("No se ha podido inicializar el SpawnManager!!");
+        }
+        if (!initLoad)
+        {
+
+            _Vida = GameMgr.GetInstance().GetCustomMgrs().GetPlayerMgr().Vida;
+
         }
     }
 	
@@ -162,6 +169,13 @@ public class Player : MonoBehaviour {
     public void FlipinY(bool flip)
     {
         _SpriteGnurr.flipY = flip;
+    }
+
+
+    private void OnDestroy()
+    {
+
+        GameMgr.GetInstance().GetCustomMgrs().GetPlayerMgr().Vida = _Vida;
     }
 
 }

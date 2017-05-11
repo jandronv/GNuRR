@@ -127,7 +127,7 @@ public class PlayerController : MonoBehaviour {
                 bullet2.transform.localScale = new Vector3(bullet2.transform.localScale.x * numPelusas, bullet2.transform.localScale.y * numPelusas, bullet2.transform.localScale.z * numPelusas);
                 bullet2.GetComponent<Bullet>().SetTamBullet(numPelusas);
                 bullet2.GetComponent<Rigidbody>().velocity = (bullet2.transform.forward) * _velocityBullet;
-
+                //_animations.SetTrigger("Fire");
                 Destroy(bullet2, _destroyBullet);
 
             }
@@ -141,6 +141,7 @@ public class PlayerController : MonoBehaviour {
             }
             //Restamos vida
             //Debug.Log("Cargando ataque especial!! " + numPelusas);
+            
             m_Player.RestarVida(numPelusas);
         }
 

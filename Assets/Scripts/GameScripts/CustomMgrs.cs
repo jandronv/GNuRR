@@ -10,24 +10,17 @@ public class CustomMgrs : GameMgr.ProjectSpecificMgrs
     public CustomMgrs(GameMgr gameMgr) : base (gameMgr)
     {
         //ejemplo para añadir un server que no sea MonoBehaviour.
-        m_playerMgr = new PlayerMgr();
+        m_playerMgr = new PlayerMngr();
         //Ejemplo para añadir un server de unity MonoBehaviour.
         //this.AddServerInGameMgr<MyComponent>();
     }
 
-    public PlayerMgr GetPlayerMgr()
+    public PlayerMngr GetPlayerMgr()
     {
         return m_playerMgr;
     }
 
 
-    private PlayerMgr m_playerMgr;
-
-}
-
-
-public class PlayerMgr
-{
-    public string Name = "PlayerName";
+    private PlayerMngr m_playerMgr;
 
 }
