@@ -277,4 +277,13 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    private void OnDestroy()
+    {
+        GameMgr.GetInstance().GetServer<InputMgr>().Unregister = Planear;
+        GameMgr.GetInstance().GetServer<InputMgr>().UnRegisterMove = Move;
+        GameMgr.GetInstance().GetServer<InputMgr>().UnRegisterFire = Fire;
+        GameMgr.GetInstance().GetServer<InputMgr>().UnRegisterRecargarPelusas = RecargaPelusas;
+        GameMgr.GetInstance().GetServer<InputMgr>().UnRegisterCargaPelusas = CargaPelusas;
+    }
+
 }

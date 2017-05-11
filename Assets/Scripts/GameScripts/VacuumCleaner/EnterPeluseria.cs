@@ -6,15 +6,16 @@ using UnityEngine.SceneManagement;
 public class EnterPeluseria : MonoBehaviour
 {
     private bool enter;
+    private string Peluseria = "Lvl_VC_Peluseria";
 
     void OnTriggerStay(Collider _player)
     {
-        enter = Input.GetButton("Cargar");
+        enter = Input.GetButton("Fire");
         if (_player.gameObject.tag == "Player")
         {
             if (enter == true)
             {
-                SceneManager.LoadScene("VC_Peluseria");
+                SceneManager.LoadScene(Peluseria);
             }
         }
     }
