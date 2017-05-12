@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4612212832820454}
   - component: {fileID: 33510013577802414}
   - component: {fileID: 65260553105425154}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 33554856180655566}
   - component: {fileID: 23446496517249782}
   - component: {fileID: 95728219126310078}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tl_flyL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,9 +54,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4764175108124868}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tl0_10
-  m_TagString: Untagged
+  m_TagString: Platforms
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -80,9 +80,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1960706723309294}
-  m_LocalRotation: {x: 0.5, y: -0.5, z: -0.5, w: -0.5}
-  m_LocalPosition: {x: -11.817513, y: 1.22648, z: 5.727795}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0.7071068, y: -0.000000030908623, z: 0.7071068, w: -0.000000030908623}
+  m_LocalPosition: {x: 16, y: 48, z: 0}
+  m_LocalScale: {x: 1, y: 1.0000019, z: 1.000001}
   m_Children:
   - {fileID: 4991366549407882}
   - {fileID: 4612212832820454}
@@ -96,8 +96,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1655482501582350}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.52, y: 0, z: -0}
+  m_LocalScale: {x: 0.3593017, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4764175108124868}
   m_RootOrder: 0
@@ -154,7 +154,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1342748512402448}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
