@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour {
     private Player m_Player;
     private bool _planear;
     private bool SentidoBullet = false;
-    private bool saltandoPlataformaFlotante;
+    private bool downPlatform = false, upPlatform = false;
     public float _speedInJump = 6.0F;
     public float _speed = 6.0F;
     public float _jumpSpeed = 8.0F;
@@ -76,34 +76,43 @@ public class PlayerController : MonoBehaviour {
     
     void Update () {
  
-        Ray ray = new Ray(transform.position, Vector3.down);
+        //TODO lo hacemos al reves si estas debajo de una plataforma se desactiva el collider
+        //Logica plataforma flotante
+        Vector3 PosRay = new Vector3(transform.position.x, (transform.position.y + 0.4f), transform.position.z);
+        Vector3 PosRayDown = new Vector3(transform.position.x, (transform.position.y - 0.2f), transform.position.z);
 
-        Vector3 PosRay = new Vector3(transform.position.x, (transform.position.y - 0.2f), transform.position.z);
 
-        Debug.DrawRay(PosRay, Vector3.down);
+        Debug.DrawRay(PosRay, Vector3.up, Color.green);
+        Debug.DrawRay(PosRayDown, Vector3.down, Color.red);
+
         RaycastHit hit;
-        saltandoPlataformaFlotante = Physics.Raycast(PosRay, Vector3.down, out hit, distance, layer);
+        RaycastHit hitDown;
 
+
+        downPlatform = Physics.Raycast(PosRay, Vector3.up, out hit, distance, layer);
+        upPlatform = Physics.Raycast(PosRayDown, Vector3.down, out hitDown, distance, layer);
         //Raycast(Ray ray, out RaycastHit hitInfo, float maxDistance = Mathf.Infinity, int layerMask = DefaultRaycastLayers, QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.UseGlobal);
 
-        if (saltandoPlataformaFlotante)
+        if (downPlatform)
         {
-            if (ultimoTiled != null)
+            if (hit.collider.gameObject != null)
             {
-                ultimoTiled.GetComponent<Collider>().isTrigger = true;
+                ultimoTiled = hit.collider.gameObject;
+                hit.collider.isTrigger = true;
             }
-            ultimoTiled = hit.collider.gameObject;
-            //Debug.Log("Colisionamos con la plataforma!!: " + hit.transform.name);
-            //SendMessage("CheckPlatforms", true, SendMessageOptions.RequireReceiver);
-            hit.collider.isTrigger = false;
         }
-        else
+        else if (upPlatform)
         {
-            if (ultimoTiled != null)
+            if (hitDown.collider.gameObject != null)
             {
-                ultimoTiled.GetComponent<Collider>().isTrigger = true;
+                hitDown.collider.isTrigger = false;
             }
-            //gameObject.SendMessage("CheckPlatforms", false, SendMessageOptions.RequireReceiver);
+     
+        }
+        else {
+            if (ultimoTiled != null) {
+                //ultimoTiled.GetComponent<Collider>().isTrigger = false;
+            }
         }
     }
 
@@ -149,11 +158,13 @@ public class PlayerController : MonoBehaviour {
 
     private void RecargaPelusas()
     {
-        m_Player.AumentaVida(_NumRecarga);
-        _animations.SetTrigger("Recargar");
-        foreach (ParticleSystem ps in _ParticulasRecarga)
-        {
-            ps.Play();
+        if (m_CharacterController.isGrounded) {
+            m_Player.AumentaVida(_NumRecarga);
+            _animations.SetTrigger("Recargar");
+            foreach (ParticleSystem ps in _ParticulasRecarga)
+            {
+                ps.Play();
+            }
         }
 
     }
@@ -171,28 +182,28 @@ public class PlayerController : MonoBehaviour {
         if (directionX > 0 && !blockControl)
         {
             _animations.SetFloat("VelocidadX", directionX);
-
+            Estela.Play();
             SentidoBullet = false;
             m_Player.FlipInX(false);
         } else if (directionX < 0 && !blockControl)
         {
             _animations.SetFloat("VelocidadX", -1 * directionX);
-
+            Estela.Play();
             SentidoBullet = true;
             m_Player.FlipInX(true);
         }
 
-        if (directionX > 0)
+        /*if (directionX > 0)
         {
-            //Estela.Play();
+            Estela.Play();
             SentidoBullet = false;
             m_Player.FlipInX(false);
         } else if (directionX < 0)
         {
-            //Estela.Play();
+            Estela.Play();
             SentidoBullet = true;
             m_Player.FlipInX(true);
-        }
+        }*/
      
         //Estas saltando
         if (!m_CharacterController.isGrounded && !blockControl)
