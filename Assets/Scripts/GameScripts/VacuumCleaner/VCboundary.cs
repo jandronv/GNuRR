@@ -35,7 +35,7 @@ public class VCboundary : MonoBehaviour
         {
             //La pelusa llega al limite derecho
 
-            if (_playerMax.x >= (_WindowMax.x - 0.3))
+            if (_playerMax.x >= (_WindowMax.x))
             {
                 if (move >= 0.9)
                 {
@@ -44,7 +44,7 @@ public class VCboundary : MonoBehaviour
             }
 
             //la pelusa llega al límite izquierdo
-            else if (_playerMin.x <= _WindowMin.x + 0.3)
+            else if (_playerMin.x <= _WindowMin.x)
             {
                 if (move <= -0.9)
                 {
