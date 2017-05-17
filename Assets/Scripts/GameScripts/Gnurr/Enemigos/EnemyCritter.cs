@@ -292,7 +292,7 @@ public class AttackCritter : State<EnemyCritter> {
     private void Attack()
     {
         Player p = Component.Target.GetComponent<Player>();
-        p.RestaVidaEnemigo(Component._ataque);
+        p.RestaVidaEnemigo(Component._ataque, false);
     }
 
 }

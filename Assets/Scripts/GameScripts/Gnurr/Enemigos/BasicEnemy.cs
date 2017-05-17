@@ -67,7 +67,7 @@ public class BasicEnemy : MonoBehaviour {
         }
         if (other.tag == "Player")
         {
-            other.GetComponent<Player>().RestaVidaEnemigo(EnemyAttack);
+            other.GetComponent<Player>().RestaVidaEnemigo(EnemyAttack, false);
             //Debug.Log("Entra el personaje.");
         }
 

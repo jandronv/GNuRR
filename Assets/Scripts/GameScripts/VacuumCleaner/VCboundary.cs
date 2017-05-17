@@ -29,7 +29,7 @@ public class VCboundary : MonoBehaviour
         _WindowMax = _WidowsBoxCollider.bounds.max;
 
         move = Input.GetAxis("Horizontal");
-        Debug.Log(move);
+        //Debug.Log(move);
 
         if (move != 0)
         {

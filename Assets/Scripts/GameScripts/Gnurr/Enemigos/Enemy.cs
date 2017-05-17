@@ -203,7 +203,7 @@ public class AttackState : State<Enemy>
         if (Component.Target != null && Component.Target.GetComponent<Player>() != null)
         {
             Debug.Log("Atacando a " + Component.Target);
-            Component.Target.GetComponent<Player>().RestaVidaEnemigo(Component._ataque);
+            Component.Target.GetComponent<Player>().RestaVidaEnemigo(Component._ataque, false);
 
         }
         //else if (Component.Target == null)
