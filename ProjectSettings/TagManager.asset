@@ -11,6 +11,7 @@ TagManager:
   - EnemyCritter
   - Slope
   - EnemyBat
+  - TriggerPlatFlot
   layers:
   - Default
   - TransparentFX
