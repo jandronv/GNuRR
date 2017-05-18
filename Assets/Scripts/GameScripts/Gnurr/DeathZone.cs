@@ -5,7 +5,7 @@ using UnityEngine;
 public class DeathZone : MonoBehaviour {
 
     private SpawnMgrs mSpawManager;
-    private int damageZone = 20;
+    public int damageZone = 5;
 	// Use this for initialization
 	void Start () {
 		

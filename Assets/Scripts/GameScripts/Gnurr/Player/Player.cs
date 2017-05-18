@@ -77,13 +77,14 @@ public class Player : MonoBehaviour {
    /// Resta vida de un enemigo, si te mata te manda a la initial zone.
    /// </summary>
    /// <param name="numVidas"></param>
-    public void RestaVidaEnemigo(int numVidas)
+    public void RestaVidaEnemigo(int numVidas, bool deadZone)
     {
-        foreach (ParticleSystem ps in _ParticulasDanio)
-        {
-            ps.Play();
+        if (!deadZone) {
+            foreach (ParticleSystem ps in _ParticulasDanio)
+            {
+                ps.Play();
+            }
         }
-
         //TODO feedback sprite
 
         if ((_Vida - numVidas) < _VidaMin)//Te mata
@@ -125,7 +126,7 @@ public class Player : MonoBehaviour {
     {
         StartCoroutine("FadeBlack");
         //Restamos la vida al caer por la zona de muerte
-        RestaVidaEnemigo(numVidas);
+        RestaVidaEnemigo(numVidas, true);
         //Llamamos al manager de spawn para volver a aparecer
         this.transform.position = mSpawManager.GetSpawPoint().position;
         GameObject cam = GameObject.Find("Camera");

@@ -216,7 +216,7 @@ public class FlyFollow : State<EnemyBat>
     {
 
         Player p = Component.Target.GetComponent<Player>();
-        p.RestaVidaEnemigo(Component._ataque);
+        p.RestaVidaEnemigo(Component._ataque, false);
 
 
     }
