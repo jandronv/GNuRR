@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour {
     public float _gravityPlaning = 10.0F;
     public int _NumFire = 1;
     public int _NumRecarga = 1;
-    public float distance = 800;
+    public float distance = 10;
     public LayerMask layer;
     public bool DoubleJump = false;
 
@@ -95,14 +95,17 @@ public class PlayerController : MonoBehaviour {
 
         if (downPlatform)
         {
+            
             if (hit.collider.gameObject != null)
             {
                 ultimoTiled = hit.collider.gameObject;
                 hit.collider.isTrigger = true;
             }
         }
-        else if (upPlatform)
+        if (upPlatform)
         {
+            Debug.Log("Estoy");
+            
             if (hitDown.collider.gameObject != null)
             {
                 hitDown.collider.isTrigger = false;
