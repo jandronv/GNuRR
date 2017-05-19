@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: a75a5b4a441ab0042b0c7d53fbb20825
-timeCreated: 1494508465
+guid: d3b44e4a70df1e7409fa958b4e6916a8
+timeCreated: 1495210770
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -44,7 +44,7 @@ TextureImporter:
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
