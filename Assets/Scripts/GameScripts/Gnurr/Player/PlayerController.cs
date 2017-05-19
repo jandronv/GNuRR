@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour {
     public float _speed = 6.0F;
     public float _jumpSpeed = 8.0F;
     public float _gravity = 20.0F;
+    public float _gravityScale = 0.5f;
     public float _gravityPlaning = 10.0F;
     public int _NumFire = 1;
     public int _NumRecarga = 1;
@@ -135,20 +136,22 @@ public class PlayerController : MonoBehaviour {
             {
 
                 //Hacia la izquierda
-                var bullet2 = (GameObject)Instantiate(bulletPrefab, bulletSpawn2.position, bulletSpawn2.rotation);
+                var bullet2 = (GameObject)Instantiate(bulletPrefab, bulletSpawn2.position, bulletPrefab.transform.rotation);
+                
                 bullet2.transform.localScale = new Vector3(bullet2.transform.localScale.x * numPelusas, bullet2.transform.localScale.y * numPelusas, bullet2.transform.localScale.z * numPelusas);
                 bullet2.GetComponent<Bullet>().SetTamBullet(numPelusas);
-                bullet2.GetComponent<Rigidbody>().velocity = (bullet2.transform.forward) * _velocityBullet;
+                bullet2.GetComponent<Rigidbody>().velocity = -1*(bullet2.transform.right) * _velocityBullet;
                 //_animations.SetTrigger("Fire");
                 Destroy(bullet2, _destroyBullet);
 
             }
             else
             {
-                var bullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
+                var bullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, bulletPrefab.transform.rotation);
+               
                 bullet.transform.localScale = new Vector3(bullet.transform.localScale.x * numPelusas, bullet.transform.localScale.y * numPelusas, bullet.transform.localScale.z * numPelusas);
                 bullet.GetComponent<Bullet>().SetTamBullet(numPelusas);
-                bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * _velocityBullet;
+                bullet.GetComponent<Rigidbody>().velocity = bullet.transform.right * _velocityBullet;
                 Destroy(bullet, _destroyBullet);
             }
             //Restamos vida
@@ -241,22 +244,50 @@ public class PlayerController : MonoBehaviour {
         }else
             direction.y -= _gravity * Time.deltaTime;
 
-       
+
         //Debug.Log("Direction ante de moverte: "+ direction.ToString());
-        m_CharacterController.Move(direction * Time.deltaTime);
+        if (IsGround && !jump)
+        {
+            Vector3 point;
+            Vector3 normal = GetSurfaceNormal(out point);
+            //Vector3 surface = Vector3.RotateTowards(normal, transform.position, 90f + Mathf.Deg2Rad, 0f);
+            Vector3 surface = Vector3.Cross(normal, Vector3.forward);
+            //surface.x = surface.x * direction.x;
+            //surface.y = surface.y - _gravity*Time.deltaTime;
+            surface = surface * direction.x;
+            m_CharacterController.Move(surface   * Time.deltaTime);
+            Debug.DrawRay(transform.position, normal *5f, Color.blue);
+            Debug.DrawRay(transform.position, surface , Color.red);
+            m_CharacterController.Move(Vector3.down * _gravity* _gravityScale * Time.deltaTime);
+        }
+        else
+            m_CharacterController.Move(direction * Time.deltaTime);
         _animations.SetBool("isGrounded", m_CharacterController.isGrounded);
         
     }
+
+    public Vector3 GetSurfaceNormal(out Vector3 point )
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 2f))
+        {
+            point = hit.point;
+            return hit.normal;
+        }
+        point = Vector3.zero;
+        return Vector3.zero;
+    }
+
     public bool IsGround
     {
         get {
             bool b = (m_CharacterController.collisionFlags & CollisionFlags.Below) != 0;
             //todo
-            RaycastHit hit;
-            bool r = Physics.Raycast(transform.position, Vector3.down, out hit, 1.5f);
+            //RaycastHit hit;
+           // bool r = Physics.Raycast(transform.position, Vector3.down, out hit, 1.5f);
            /* if(r)
                 hit.normal*/
-            return b || r;
+            return b;
         }
     }
 

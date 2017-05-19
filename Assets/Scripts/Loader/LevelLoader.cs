@@ -121,8 +121,9 @@ public class LevelLoader : MonoBehaviour
                                     {
                                         trans.gameObject.layer = LayerMask.NameToLayer("PlataformaFlotante");
                                     }
-                                    
-                                    tile.GetComponentInChildren<BoxCollider>().isTrigger = true;
+                                    if (tile.GetComponentInChildren<BoxCollider>() != null) {
+                                        tile.GetComponentInChildren<BoxCollider>().isTrigger = true;
+                                    }
                                 }
 
                             }

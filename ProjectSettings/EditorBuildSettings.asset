@@ -23,3 +23,5 @@ EditorBuildSettings:
     path: Assets/Scenes/Lvl_VC_Selector.unity
   - enabled: 1
     path: Assets/Scenes/Lvl_0.unity
+  - enabled: 1
+    path: Assets/Scenes/Menu.unity
