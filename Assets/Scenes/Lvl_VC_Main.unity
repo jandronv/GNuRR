@@ -167,6 +167,16 @@ Prefab:
       propertyPath: m_Center.y
       value: 0.088101625
       objectReference: {fileID: 0}
+    - target: {fileID: 114159572268053036, guid: fe2a5cd4a7447ed4aa31e1d6c591b3cc,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114253010693386268, guid: fe2a5cd4a7447ed4aa31e1d6c591b3cc,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fe2a5cd4a7447ed4aa31e1d6c591b3cc, type: 2}
   m_IsPrefabParent: 0
@@ -362,7 +372,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -838029376
+  randomSeed: -167007419
   InitialModule:
     serializedVersion: 3
     enabled: 1

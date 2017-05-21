@@ -775,10 +775,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f06837717bb5cc4f8aa93e694e51439, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speedInJump: 3
+  _speedInJump: 6
   _speed: 3
-  _jumpSpeed: 5
+  _jumpSpeed: 8
   _gravity: 20
+  _gravityScale: 0.5
   _gravityPlaning: 15
   _NumFire: 1
   _NumRecarga: 1

@@ -10,7 +10,7 @@ public class EnterPeluseria : MonoBehaviour
 
     void OnTriggerStay(Collider _player)
     {
-        enter = Input.GetButton("Jump");
+        enter = Input.GetButton("Fire");
         if (_player.gameObject.tag == "Player")
         {
             if (enter == true)

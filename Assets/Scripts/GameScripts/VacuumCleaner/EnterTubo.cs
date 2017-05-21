@@ -14,7 +14,6 @@ public class EnterTubo : MonoBehaviour {
         {
             if (enter == true)
             {
-                Debug.Log("enter es true");
                 SceneManager.LoadScene(Selector);
             }
         }
