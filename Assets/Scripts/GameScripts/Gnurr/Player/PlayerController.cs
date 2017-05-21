@@ -197,8 +197,11 @@ public class PlayerController : MonoBehaviour {
             Estela.Play();
             SentidoBullet = true;
             m_Player.FlipInX(true);
+        } else
+        {
+            Estela.Stop();
         }
-
+        
         /*if (directionX > 0)
         {
             Estela.Play();
