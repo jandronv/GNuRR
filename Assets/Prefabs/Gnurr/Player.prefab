@@ -475,7 +475,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1358913173123590}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 10.77, y: -7.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4419985926023168}
@@ -488,7 +488,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1896667052371858}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.7, y: -9.9, z: 0}
+  m_LocalPosition: {x: 3, y: -8.94, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4912674194212796}
@@ -785,6 +785,7 @@ MonoBehaviour:
   _speed: 6
   _jumpSpeed: 11
   _gravity: 20
+  _gravityScale: 0.5
   _gravityPlaning: 15
   _NumFire: 1
   _NumRecarga: 1
@@ -16604,7 +16605,7 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1975698709308322}
   serializedVersion: 5
-  lengthInSec: 5
+  lengthInSec: 2
   simulationSpeed: 1
   looping: 1
   prewarm: 0
@@ -16652,12 +16653,12 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 98841927
+  randomSeed: -505439044
   InitialModule:
     serializedVersion: 3
     enabled: 1
     startLifetime:
-      scalar: 5
+      scalar: 2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -17062,11 +17063,11 @@ ParticleSystem:
         m_RotationOrder: 4
       minMaxState: 0
     randomizeRotationDirection: 0
-    maxNumParticles: 200
+    maxNumParticles: 150
     size3D: 0
     rotation3D: 0
     gravityModifier:
-      scalar: 0.2
+      scalar: 0.1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -17131,7 +17132,7 @@ ParticleSystem:
     enabled: 1
     serializedVersion: 3
     rateOverTime:
-      scalar: 10
+      scalar: 80
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -17220,7 +17221,7 @@ ParticleSystem:
     time1: 0
     time2: 0
     time3: 0
-    m_BurstCount: 1
+    m_BurstCount: 0
   SizeModule:
     enabled: 0
     curve:
