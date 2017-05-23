@@ -98,7 +98,7 @@ public class PlayerController : MonoBehaviour {
         upPlatform = Physics.Raycast(PosRayDown, Vector3.down, out hitDown, distance, layer);
         //Raycast(Ray ray, out RaycastHit hitInfo, float maxDistance = Mathf.Infinity, int layerMask = DefaultRaycastLayers, QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.UseGlobal);
 
-        if (downPlatform)
+       /* if (downPlatform)
         {
             
             if (hit.collider.gameObject != null)
@@ -118,7 +118,7 @@ public class PlayerController : MonoBehaviour {
             }
      
         }
-       
+       */
 
 		if (transform.localPosition.z != 0.0f && !upPlatform && !downPlatform)
 		{
