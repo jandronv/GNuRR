@@ -73,13 +73,13 @@ public class InputMgr : AComponent {
         set { m_DelegateFire -= value; }
     }
 
-    public PlanearEvento Register
+    public PlanearEvento RegisterPlanear
     {
         set { m_planear += value; }
     }
 
-    public PlanearEvento Unregister
-    {
+    public PlanearEvento UnregisterPlanear
+	{
         set { m_planear -= value; }
     }
 

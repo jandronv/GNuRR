@@ -152,9 +152,16 @@ public class Player : MonoBehaviour {
         yield return null;
     }
 
-    public float GetVida()
+    public float Vida
     {
-        return _Vida;
+       get
+        {
+            return _Vida;
+        }
+        set
+        {
+            _Vida = value;
+        }
     }
 
     public int CargaPelusas()

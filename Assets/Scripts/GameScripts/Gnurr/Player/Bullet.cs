@@ -16,6 +16,7 @@ public class Bullet : MonoBehaviour {
     {
         if (other.tag == "Platforms" || other.tag == "EnemyCritter" || other.tag == "EnemyBat")
         {
+			Debug.Log("Entra..");
             if (other.tag == "EnemyCritter")
             {
                 other.GetComponent<EnemyCritter>().RestaVida(TamBullet);
@@ -24,9 +25,10 @@ public class Bullet : MonoBehaviour {
             {
                 other.GetComponent<EnemyBat>().RestaVida(TamBullet);
             }
-            Destroy(gameObject);
-        }
-    }
+			Destroy(gameObject);
+		}
+		
+	}
 
 
 }

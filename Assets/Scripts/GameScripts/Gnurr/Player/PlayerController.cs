@@ -20,7 +20,11 @@ public class PlayerController : MonoBehaviour {
     public int _NumRecarga = 1;
     public float distance = 10;
     public LayerMask layer;
-    public bool DoubleJump = false;
+
+	public Transform Player2D;
+
+    public Transform ray1;
+    public Transform ray2;
 
     private GameObject ultimoTiled = null;
 
@@ -48,9 +52,9 @@ public class PlayerController : MonoBehaviour {
         _planear = false;
         m_CharacterController = GetComponent<CharacterController>();
         m_Player = GetComponent<Player>();
-        // si tengo el poder => lo registro.
-        GameMgr.GetInstance().GetServer<InputMgr>().Register = Planear;
-       GameMgr.GetInstance().GetServer<InputMgr>().RegisterMove = Move;
+        // si tengo el poder => lo registro. TODO esta registrado de momento
+        GameMgr.GetInstance().GetServer<InputMgr>().RegisterPlanear = Planear;
+        GameMgr.GetInstance().GetServer<InputMgr>().RegisterMove = Move;
         GameMgr.GetInstance().GetServer<InputMgr>().RegisterFire = Fire;
         GameMgr.GetInstance().GetServer<InputMgr>().RegisterRecargarPelusas = RecargaPelusas;
         GameMgr.GetInstance().GetServer<InputMgr>().RegisterCargaPelusas = CargaPelusas;
@@ -67,8 +71,8 @@ public class PlayerController : MonoBehaviour {
         {
             Debug.LogWarning("Asigna la estela del jugador al PlayerController!!");
         }
-           
-    }
+	
+	}
 
     void FixedUpdate()
     {
@@ -103,33 +107,37 @@ public class PlayerController : MonoBehaviour {
                 hit.collider.isTrigger = true;
             }
         }
-        if (upPlatform)
+		
+
+		if (upPlatform)
         {
-            Debug.Log("Estoy");
-            
+      
             if (hitDown.collider.gameObject != null)
             {
                 hitDown.collider.isTrigger = false;
             }
      
         }
-        else {
-            if (ultimoTiled != null) {
-                //ultimoTiled.GetComponent<Collider>().isTrigger = false;
-            }
-        }
-    }
+       
+
+		if (transform.localPosition.z != 0.0f && !upPlatform && !downPlatform)
+		{
+			Debug.Log("Te has movido del eje Z");
+			transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, 0);
+		}
+
+	}
 
 
     private void CargaPelusas(int numPelusas)
     {
         _animations.SetTrigger("Carga");
-        if (numPelusas > (m_Player.GetVida() - m_Player._VidaMin))
+        if (numPelusas > (m_Player.Vida - m_Player._VidaMin))
         {
-            numPelusas = (int)(m_Player.GetVida() - m_Player._VidaMin);
+            numPelusas = (int)(m_Player.Vida - m_Player._VidaMin);
         }
 
-        if (m_Player.GetVida() > m_Player._VidaMin )
+        if (m_Player.Vida > m_Player._VidaMin )
         {
             _animations.SetTrigger("Fire");
             if (SentidoBullet)
@@ -197,25 +205,11 @@ public class PlayerController : MonoBehaviour {
             Estela.Play();
             SentidoBullet = true;
             m_Player.FlipInX(true);
-        } else
-        {
-            Estela.Stop();
-        }
-        
-        /*if (directionX > 0)
-        {
-            Estela.Play();
-            SentidoBullet = false;
-            m_Player.FlipInX(false);
-        } else if (directionX < 0)
-        {
-            Estela.Play();
-            SentidoBullet = true;
-            m_Player.FlipInX(true);
-        }*/
-     
-        //Estas saltando
-        if (!m_CharacterController.isGrounded && !blockControl)
+        }else
+			Estela.Stop();
+
+		//Estas saltando
+		if (!m_CharacterController.isGrounded && !blockControl)
         {
             direction = new Vector3(directionX * _speedInJump, m_CharacterController.velocity.y, 0);
             
@@ -253,26 +247,29 @@ public class PlayerController : MonoBehaviour {
         {
             Vector3 point;
             Vector3 normal = GetSurfaceNormal(out point);
-            //Vector3 surface = Vector3.RotateTowards(normal, transform.position, 90f + Mathf.Deg2Rad, 0f);
+         
             Vector3 surface = Vector3.Cross(normal, Vector3.forward);
-            //surface.x = surface.x * direction.x;
-            //surface.y = surface.y - _gravity*Time.deltaTime;
-            surface = surface * direction.x;
-            m_CharacterController.Move(surface   * Time.deltaTime);
-            Debug.DrawRay(transform.position, normal *5f, Color.blue);
-            Debug.DrawRay(transform.position, surface , Color.red);
-            m_CharacterController.Move(Vector3.down * _gravity* _gravityScale * Time.deltaTime);
+          
+            surface = surface * direction.x;			
+            m_CharacterController.Move(surface * Time.deltaTime);
+            Debug.DrawRay(transform.position, normal * 5f, Color.blue);
+            Debug.DrawRay(transform.position, surface, Color.red);
+            m_CharacterController.Move(Vector3.down * _gravity * _gravityScale * Time.deltaTime);
         }
         else
+        {
+            Debug.DrawRay(transform.position, direction, Color.red);
             m_CharacterController.Move(direction * Time.deltaTime);
+        }
         _animations.SetBool("isGrounded", m_CharacterController.isGrounded);
         
     }
 
     public Vector3 GetSurfaceNormal(out Vector3 point )
     {
+        //TODO else if con Ray1 y Ray2
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, 2f))
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 20f))
         {
             point = hit.point;
             return hit.normal;
@@ -285,11 +282,6 @@ public class PlayerController : MonoBehaviour {
     {
         get {
             bool b = (m_CharacterController.collisionFlags & CollisionFlags.Below) != 0;
-            //todo
-            //RaycastHit hit;
-           // bool r = Physics.Raycast(transform.position, Vector3.down, out hit, 1.5f);
-           /* if(r)
-                hit.normal*/
             return b;
         }
     }
@@ -298,7 +290,7 @@ public class PlayerController : MonoBehaviour {
     private void Fire()
     {
 
-        if (m_Player.GetVida() > m_Player._VidaMin) {
+        if (m_Player.Vida > m_Player._VidaMin) {
            
             _animations.SetTrigger("Fire");
             // Create the Bullet from the Bullet Prefab
@@ -328,7 +320,7 @@ public class PlayerController : MonoBehaviour {
 
     private void OnDestroy()
     {
-        GameMgr.GetInstance().GetServer<InputMgr>().Unregister = Planear;
+        //GameMgr.GetInstance().GetServer<InputMgr>().UnregisterPlanear = Planear;
         GameMgr.GetInstance().GetServer<InputMgr>().UnRegisterMove = Move;
         GameMgr.GetInstance().GetServer<InputMgr>().UnRegisterFire = Fire;
         GameMgr.GetInstance().GetServer<InputMgr>().UnRegisterRecargarPelusas = RecargaPelusas;

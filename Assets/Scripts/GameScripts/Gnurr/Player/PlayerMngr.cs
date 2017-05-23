@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMngr {
 
     private float vida = 20;
-    private bool planear;
+    private bool planear = false;
 
     public float Vida
     {

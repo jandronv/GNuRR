@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class PlatFlotBehaviour : MonoBehaviour {
 
-    public GameObject _player;
+	public GameObject _player;
 
-    void OnTriggerEnter(Collider _player)
-    {
-        _player.transform.Translate(0, 0, 0.4f);
-    }
+	private void OnTriggerStay(Collider other)
+	{
+		_player.transform.position = new Vector3(_player.transform.position.x, _player.transform.position.y, 0.4f);
+	}
+	void OnTriggerEnter(Collider _player)
+	{
+		_player.transform.position = new Vector3(_player.transform.position.x, _player.transform.position.y, 0.4f);
+	}
 
-    private void OnTriggerExit(Collider _player)
-    {
-        _player.transform.Translate(0, 0, -0.4f);
-    }
-
+	private void OnTriggerExit(Collider _player)
+	{
+		_player.transform.position = new Vector3(_player.transform.position.x, _player.transform.position.y, 0.0f);
+	}
 }
