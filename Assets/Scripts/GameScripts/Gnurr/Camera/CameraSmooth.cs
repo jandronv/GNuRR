@@ -21,7 +21,7 @@ public class CameraSmooth : MonoBehaviour {
 
     //Nuevos valores de la posicion de la camara
     private float x, y, z;
-    private Vector3 velocity = Vector3.zero;
+    public float velocityX = 0.0F, velocityY = 0.0F;
     private SpriteRenderer gnurr;
 
     public float offSetX, offSetY, offSetZ;
@@ -58,7 +58,7 @@ public class CameraSmooth : MonoBehaviour {
 
         if (_targetPositionX <= InitialWorld.position.x || _targetPositionX >= EndWorld.position.x)
         {
-            y = Mathf.SmoothDamp(y, _targetPositionY + offSetY, ref velocity.y, smoothing.y);
+            y = Mathf.SmoothDamp(y, _targetPositionY + offSetY, ref velocityY, smoothing.y);
             transform.position = new Vector3(x, y, z + offSetZ);
             transform.rotation = new Quaternion(RotateX, RotateY, RotateZ, RotateW);
         }
@@ -67,26 +67,28 @@ public class CameraSmooth : MonoBehaviour {
             if (mCameraBoundary.lookAhead == 1 && (Mathf.Round(x) == Mathf.Round(_targetPositionX)))
             {
                 //Debug.Log("x de la camara: " + x + "Target: " + _targetPositionX);
-                x = Mathf.SmoothDamp(x, _targetPositionX + _offsetRun, ref velocity.x, smoothing.x);
+                x = Mathf.SmoothDamp(x, _targetPositionX + _offsetRun, ref velocityX, smoothing.x);
 
             }
             else if (mCameraBoundary.lookAhead == -1 && (Mathf.Round(x) == Mathf.Round(_targetPositionX)))
             {
-                x = Mathf.SmoothDamp(x, _targetPositionX - _offsetRun, ref velocity.x, smoothing.x);
+                x = Mathf.SmoothDamp(x, _targetPositionX - _offsetRun, ref velocityX, smoothing.x);
             }
             else
             {
                 if (gnurr.flipX)
                 {
-                    x = Mathf.SmoothDamp(x, _targetPositionX - offSetX, ref velocity.x, smoothing.x);
+                   
+                    x = Mathf.SmoothDamp(x, _targetPositionX - offSetX, ref velocityX, smoothing.x);
                 }
                 else
                 {
-                    x = Mathf.SmoothDamp(x, _targetPositionX + offSetX, ref velocity.x, smoothing.x);
+                   
+                    x = Mathf.SmoothDamp(x, _targetPositionX + offSetX, ref velocityX, smoothing.x);
                 }
             }
 
-            y = Mathf.SmoothDamp(y, _targetPositionY + offSetY, ref velocity.y, smoothing.y);
+            y = Mathf.SmoothDamp(y, _targetPositionY + offSetY, ref velocityY, smoothing.y);
             transform.position = new Vector3(x, y, z + offSetZ);
             transform.rotation = new Quaternion(RotateX, RotateY, RotateZ, RotateW);
 

@@ -63,7 +63,7 @@ public class CameraBoundary : MonoBehaviour {
             x = _Player.transform.position.x;
             lookAhead = 0;
         }
-            if (_playerMax.y > _WindowMax.y)
+        if (_playerMax.y > _WindowMax.y)
         {
             y = _Player.transform.position.y;
         }
@@ -72,7 +72,10 @@ public class CameraBoundary : MonoBehaviour {
             y = _Player.transform.position.y;
 
         }
-
+        if (_playerMin.y < _WindowMin.y && _playerMax.y > _WindowMax.y)
+        {
+            y = _Player.transform.position.y;
+        }
         //Actualizamos la posicion de la camara
         transform.position = new Vector3(x, y, transform.position.z);
     }
