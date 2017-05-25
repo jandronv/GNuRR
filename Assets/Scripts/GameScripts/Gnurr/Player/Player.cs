@@ -89,7 +89,7 @@ public class Player : MonoBehaviour {
 
         if ((_Vida - numVidas) < _VidaMin)//Te mata
         {
-            //TODO Llamar al spawnManager
+            //TODO Lanzar animacion de muerte
             this.transform.position = mSpawManager.GetSpawPoint().position;
             this._Vida = 20;
             Vector3 scale = new Vector3(_Vida / _VidaMax, _Vida / _VidaMax, _Vida / _VidaMax);
@@ -128,6 +128,7 @@ public class Player : MonoBehaviour {
         //Restamos la vida al caer por la zona de muerte
         RestaVidaEnemigo(numVidas, true);
         //Llamamos al manager de spawn para volver a aparecer
+        //GetComponent<PlayerController>().Move
         this.transform.position = mSpawManager.GetSpawPoint().position;
         GameObject cam = GameObject.Find("Camera");
         cam.transform.position = mSpawManager.GetSpawPoint().position; 

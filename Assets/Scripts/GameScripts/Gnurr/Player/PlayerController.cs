@@ -98,7 +98,7 @@ public class PlayerController : MonoBehaviour {
         upPlatform = Physics.Raycast(PosRayDown, Vector3.down, out hitDown, distance, layer);
         //Raycast(Ray ray, out RaycastHit hitInfo, float maxDistance = Mathf.Infinity, int layerMask = DefaultRaycastLayers, QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.UseGlobal);
 
-       /* if (downPlatform)
+        if (downPlatform)
         {
             
             if (hit.collider.gameObject != null)
@@ -118,7 +118,7 @@ public class PlayerController : MonoBehaviour {
             }
      
         }
-       */
+       
 
 		if (transform.localPosition.z != 0.0f && !upPlatform && !downPlatform)
 		{
@@ -192,19 +192,21 @@ public class PlayerController : MonoBehaviour {
     {
         Vector3 direction = Vector3.zero;
 
-//        Debug.Log("Is Ground: " + m_CharacterController.isGrounded.ToString());
+        //Debug.Log("Is Ground: " + m_CharacterController.isGrounded.ToString());
         if (directionX > 0 && !blockControl)
         {
             _animations.SetFloat("VelocidadX", directionX);
             Estela.Play();
             SentidoBullet = false;
             m_Player.FlipInX(false);
+            
         } else if (directionX < 0 && !blockControl)
         {
             _animations.SetFloat("VelocidadX", -1 * directionX);
             Estela.Play();
             SentidoBullet = true;
             m_Player.FlipInX(true);
+           
         }else
 			Estela.Stop();
 
@@ -241,27 +243,29 @@ public class PlayerController : MonoBehaviour {
         }else
             direction.y -= _gravity * Time.deltaTime;
 
+        /*
+				//Debug.Log("Direction ante de moverte: "+ direction.ToString());
+				if (IsGround && !jump)
+				{
+					Vector3 point;
+					Vector3 normal = GetSurfaceNormal(out point);
 
-        //Debug.Log("Direction ante de moverte: "+ direction.ToString());
-        if (IsGround && !jump)
-        {
-            Vector3 point;
-            Vector3 normal = GetSurfaceNormal(out point);
-         
-            Vector3 surface = Vector3.Cross(normal, Vector3.forward);
-          
-            surface = surface * direction.x;			
-            m_CharacterController.Move(surface * Time.deltaTime);
-            Debug.DrawRay(transform.position, normal * 5f, Color.blue);
-            Debug.DrawRay(transform.position, surface, Color.red);
-            m_CharacterController.Move(Vector3.down * _gravity * _gravityScale * Time.deltaTime);
-        }
-        else
-        {
-            Debug.DrawRay(transform.position, direction, Color.red);
-            m_CharacterController.Move(direction * Time.deltaTime);
-        }
-        _animations.SetBool("isGrounded", m_CharacterController.isGrounded);
+					Vector3 surface = Vector3.Cross(normal, Vector3.forward);
+
+					surface = surface * direction.x;			
+					m_CharacterController.Move(surface * Time.deltaTime);
+					Debug.DrawRay(transform.position, normal * 5f, Color.blue);
+					Debug.DrawRay(transform.position, surface, Color.red);
+					m_CharacterController.Move(Vector3.down * _gravity * _gravityScale * Time.deltaTime);
+				}
+				else
+				{
+					Debug.DrawRay(transform.position, direction, Color.red);
+					m_CharacterController.Move(direction * Time.deltaTime);
+				}*/
+        Debug.DrawRay(transform.position, direction, Color.red);
+        m_CharacterController.Move(direction * Time.deltaTime);
+		//_animations.SetBool("isGrounded", m_CharacterController.isGrounded);
         
     }
 

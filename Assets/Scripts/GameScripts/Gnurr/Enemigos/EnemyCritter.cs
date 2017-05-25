@@ -12,7 +12,7 @@ public class EnemyCritter : FSMExecutor<EnemyCritter>  {
     public Color feedBack;
     public int NumTimes = 3;
     public float DelayFeedBack = 0.1f;
-
+    public Transform _PlayerTarget;
     public bool firsTime = true;
 
     public int _point = 0;
@@ -52,51 +52,46 @@ public class EnemyCritter : FSMExecutor<EnemyCritter>  {
         RaycastHit hitInfo;
         RaycastHit hitInfo2;
         //Variables debug
-        Ray r1 = new Ray(transform.position, Vector3.left);
-        Ray r2 = new Ray(transform.position, Vector3.right);
-        Debug.DrawRay(transform.position, Vector3.left * _visionDistance, Color.blue);
-        Debug.DrawRay(transform.position, Vector3.right * _visionDistance, Color.red);
+        Vector3 direction = (_PlayerTarget.position -transform.position).normalized;
+        //Debug.Log("Vector sin normalizar "+ (_PlayerTarget.position - transform.position) + " Vector normalizado: "+ (_PlayerTarget.position - transform.position).normalized);
+        Ray r1 = new Ray(transform.position, direction);
+       
+        Debug.DrawRay(r1.origin, r1.direction,Color.blue);
 
         //Comprobamos en que estado estamos para el comportamiento
         if (fsm.CurrentState == "SleepState")//Esta quieto esperando a que entre el jugador en su campo de vision
         {
-            if (Physics.Raycast(r1, out hitInfo, _visionDistance))//Lo detecta en la izq
+            if (Physics.Raycast(r1, out hitInfo))
             {
+                //Debug.Log("distancia de vista: "+hitInfo.distance);
+					if (hitInfo.distance < _visionDistance)
+					{
 
-                if (hitInfo.collider.gameObject.tag == "Player")
-                {
-                    _point = 0;
-                    Target = hitInfo.collider.gameObject;
+                    if (direction.x > 0)
+                    {
+                        _point = 1;
+                    }
+                    else
+                    {
+                        _point = 0;
+                    }
+					
+						Target = hitInfo.collider.gameObject;
 
-                    fsm.Emmit("PLAYER_VISTO");
-                }
-            }
-
-            if (Physics.Raycast(r2, out hitInfo2, _visionDistance))//derecha
-            {
-                if (hitInfo2.collider.gameObject.tag == "Player")
-                {
-                    _point = 1;
-                    Target = hitInfo2.collider.gameObject;
-
-                    fsm.Emmit("PLAYER_VISTO");
-                }
+						fsm.Emmit("PLAYER_VISTO");
+					}
             }
         }
         else if (fsm.CurrentState == "FollowState")//Se empieza a mover hacia el target(Player)
         {
             bool Visto = false;
 
-            if (Physics.Raycast(r1, out hitInfo, _visionDistance))//Comprobamos si el player ha salido del rango de vision
+            if (Physics.Raycast(r1, out hitInfo))//Comprobamos si el player ha salido del rango de vision
             {
-                if (hitInfo.collider.gameObject.tag == "Player")
+                if (hitInfo.distance < _visionDistance)
                     Visto = true;
             }
-            else if (Physics.Raycast(r2, out hitInfo2, _visionDistance))
-            {
-                if (hitInfo2.collider.gameObject.tag == "Player")
-                    Visto = true;
-            }
+            
             if (!Visto)
             {
                 fsm.Emmit("PLAYER_DEJADO_VER");
@@ -123,9 +118,7 @@ public class EnemyCritter : FSMExecutor<EnemyCritter>  {
             fsm.Emmit("PLAYER_DENTRO");
         }
         //Aplicamos la gravedad por si se queda un poco en el aire y se cambia de estado
-        Vector3 direction = Vector3.zero;
-        direction.y -= _gravity * Time.deltaTime;
-        _cController.Move(new Vector3(0, direction.y, 0));
+        _cController.Move(Vector3.down * _gravity * Time.deltaTime);
     }
 
     public GameObject Target
@@ -171,6 +164,7 @@ public class EnemyCritter : FSMExecutor<EnemyCritter>  {
     {
         if (other.tag == "Player")
         {
+			Debug.Log("Player Dentro del collider");
             _attack = true;
         }
 
@@ -239,8 +233,8 @@ public class FollowState : State<EnemyCritter>
 
         if (Component.Target != null)
         {
-            Vector3 direction = Component.Target.transform.position - Component.transform.position;
-            if (Component._point == 0)//Segun por que lado este el personaje hacemos el flip en los sprite
+            Vector3 direction = (Component.Target.transform.position - Component.transform.position).normalized;
+            if (direction.x < 0)//Segun por que lado este el personaje hacemos el flip en los sprite
             {
                 foreach (SpriteRenderer s in _sprite)
                 {
@@ -256,7 +250,7 @@ public class FollowState : State<EnemyCritter>
             }
             Component.GetComponentInChildren<Animator>().SetBool("PlayerDetect", true);
             direction.y -= Component._gravity * Time.deltaTime;
-            _controller.Move(new Vector3(direction.x * Component._speed * Time.deltaTime, direction.y, 0));     
+            _controller.Move(new Vector3(direction.x * Component._speed * Time.deltaTime, 0, 0));     
         } 
     }
 }
