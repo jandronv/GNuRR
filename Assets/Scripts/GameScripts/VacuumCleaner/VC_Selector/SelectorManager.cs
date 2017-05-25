@@ -23,7 +23,7 @@ public class SelectorManager : MonoBehaviour {
     void Update() {
         mundoseleccionado = mundos.transform.rotation;
         Debug.Log(mundoseleccionado);
-        enter = Input.GetButton("Fire3");
+        enter = Input.GetButton("Interact");
         if (enter == true)
         {
             if (mundoseleccionado.z == 0) {

@@ -9,7 +9,7 @@ public class EnterTienda : MonoBehaviour
 
     void OnTriggerStay(Collider _player)
     {
-        enter = Input.GetKey(KeyCode.O);
+        enter = Input.GetButton("Interact");
         if (_player.gameObject.tag == "Player")
         {
             if (enter == true)

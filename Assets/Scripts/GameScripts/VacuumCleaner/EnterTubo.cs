@@ -9,7 +9,7 @@ public class EnterTubo : MonoBehaviour {
 
     void OnTriggerStay (Collider _player)
     {
-        enter = Input.GetButton("Fire");
+        enter = Input.GetButton("Interact");
         if (_player.gameObject.tag == "Player")
         {
             if (enter == true)
