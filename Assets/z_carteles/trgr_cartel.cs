@@ -15,16 +15,25 @@ public class trgr_cartel : MonoBehaviour
 
     void OnTriggerEnter(Collider player)
     {
-        cartel.SetActive(true);
+        if (player.tag == "Player")
+        {
+            cartel.SetActive(true);
+        }
     }
 
     private void OnTriggerStay(Collider player)
     {
-        cartel.SetActive(true);
+        if (player.tag == "Player")
+        {
+            cartel.SetActive(true);
+        }
     }
 
     void OnTriggerExit(Collider player)
     {
-        cartel.SetActive(false);
+        if (player.tag == "Player")
+        {
+            cartel.SetActive(false);
+        }
     }
 }
