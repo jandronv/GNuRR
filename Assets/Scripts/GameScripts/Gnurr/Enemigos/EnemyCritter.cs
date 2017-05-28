@@ -63,8 +63,8 @@ public class EnemyCritter : FSMExecutor<EnemyCritter>  {
         {
             if (Physics.Raycast(r1, out hitInfo))
             {
-                //Debug.Log("distancia de vista: "+hitInfo.distance);
-					if (hitInfo.distance < _visionDistance)
+					Debug.Log("distancia de vista: "+hitInfo.distance);
+					if (hitInfo.distance < _visionDistance && hitInfo.collider.tag == "Player")
 					{
 
                     if (direction.x > 0)
@@ -88,7 +88,7 @@ public class EnemyCritter : FSMExecutor<EnemyCritter>  {
 
             if (Physics.Raycast(r1, out hitInfo))//Comprobamos si el player ha salido del rango de vision
             {
-                if (hitInfo.distance < _visionDistance)
+                if (hitInfo.distance < _visionDistance && hitInfo.collider.tag == "Player")
                     Visto = true;
             }
             
@@ -182,7 +182,7 @@ public class EnemyCritter : FSMExecutor<EnemyCritter>  {
     public class SleepState : State<EnemyCritter>
 {
 
-    private SpriteRenderer[] _sprite;
+    SpriteRenderer[] _sprite;
   
 
     public SleepState(EnemyCritter component) : base(component)
@@ -194,16 +194,16 @@ public class EnemyCritter : FSMExecutor<EnemyCritter>  {
     {
         base.Init();
         _sprite = Component.GetComponentsInChildren<SpriteRenderer>();
-     
-     
-        
-    }
+		Component.GetComponentInChildren<Animator>().SetBool("PlayerDetect", false);
+
+
+	}
 
     public override void Update()
     {
 
         base.Update();
-        Component.GetComponentInChildren<Animator>().SetBool("PlayerDetect", false);
+        
     }
 }
 

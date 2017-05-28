@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class PlayerController : MonoBehaviour {
     
 
@@ -9,7 +10,7 @@ public class PlayerController : MonoBehaviour {
     private Player m_Player;
     private bool _planear;
     private bool SentidoBullet = false;
-    private bool downPlatform = false, upPlatform = false;
+    private bool downPlatform = false, upPlatform = false, InSlope = false;
     public float _speedInJump = 6.0F;
     public float _speed = 6.0F;
     public float _jumpSpeed = 8.0F;
@@ -20,11 +21,6 @@ public class PlayerController : MonoBehaviour {
     public int _NumRecarga = 1;
     public float distance = 10;
     public LayerMask layer;
-
-	public Transform Player2D;
-
-    public Transform ray1;
-    public Transform ray2;
 
     private GameObject ultimoTiled = null;
 
@@ -41,15 +37,23 @@ public class PlayerController : MonoBehaviour {
     public Transform RechargeParticles;
     public ParticleSystem Estela;
 
-    private ParticleSystem[] _ParticulasRecarga;
-    
-  
+	private ParticleSystem[] _ParticulasRecarga;
 
-    // Use this for initialization
-    void Start ()
+	public AudioClip clipWalk;
+	public AudioClip clipJump;
+	public AudioClip clipFire;
+	private AudioSource audio;
+
+
+
+
+	// Use this for initialization
+	void Start ()
     {
-        //_camera = GameObject.FindGameObjectWithTag("Camera");
-        _planear = false;
+
+		//InvokeRepeating("PlaySound", time, RepeatRate);
+		//_camera = GameObject.FindGameObjectWithTag("Camera");
+		_planear = false;
         m_CharacterController = GetComponent<CharacterController>();
         m_Player = GetComponent<Player>();
         // si tengo el poder => lo registro. TODO esta registrado de momento
@@ -71,7 +75,8 @@ public class PlayerController : MonoBehaviour {
         {
             Debug.LogWarning("Asigna la estela del jugador al PlayerController!!");
         }
-	
+		audio = GetComponent<AudioSource>();
+
 	}
 
     void FixedUpdate()
@@ -131,6 +136,8 @@ public class PlayerController : MonoBehaviour {
 
     private void CargaPelusas(int numPelusas)
     {
+
+		Debug.Log("Tamaño pelusa:" + numPelusas);
         _animations.SetTrigger("Carga");
         if (numPelusas > (m_Player.Vida - m_Player._VidaMin))
         {
@@ -146,7 +153,7 @@ public class PlayerController : MonoBehaviour {
                 //Hacia la izquierda
                 var bullet2 = (GameObject)Instantiate(bulletPrefab, bulletSpawn2.position, bulletPrefab.transform.rotation);
                 
-                bullet2.transform.localScale = new Vector3(bullet2.transform.localScale.x * numPelusas, bullet2.transform.localScale.y * numPelusas, bullet2.transform.localScale.z * numPelusas);
+                bullet2.transform.localScale = new Vector3(bullet2.transform.localScale.x * (numPelusas * 0.5f), bullet2.transform.localScale.y * (numPelusas * 0.5f), bullet2.transform.localScale.z * (numPelusas * 0.5f));
                 bullet2.GetComponent<Bullet>().SetTamBullet(numPelusas);
                 bullet2.GetComponent<Rigidbody>().velocity = -1*(bullet2.transform.right) * _velocityBullet;
                 //_animations.SetTrigger("Fire");
@@ -157,15 +164,15 @@ public class PlayerController : MonoBehaviour {
             {
                 var bullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, bulletPrefab.transform.rotation);
                
-                bullet.transform.localScale = new Vector3(bullet.transform.localScale.x * numPelusas, bullet.transform.localScale.y * numPelusas, bullet.transform.localScale.z * numPelusas);
+                bullet.transform.localScale = new Vector3(bullet.transform.localScale.x * (numPelusas * 0.5f), bullet.transform.localScale.y * (numPelusas * 0.5f), bullet.transform.localScale.z * (numPelusas * 0.5f));
                 bullet.GetComponent<Bullet>().SetTamBullet(numPelusas);
                 bullet.GetComponent<Rigidbody>().velocity = bullet.transform.right * _velocityBullet;
                 Destroy(bullet, _destroyBullet);
             }
-            //Restamos vida
-            //Debug.Log("Cargando ataque especial!! " + numPelusas);
-            
-            m_Player.RestarVida(numPelusas);
+			//Restamos vida
+			//Debug.Log("Cargando ataque especial!! " + numPelusas);
+			audio.PlayOneShot(clipFire, 0.7f);
+			m_Player.RestarVida(numPelusas);
         }
 
     }
@@ -182,16 +189,27 @@ public class PlayerController : MonoBehaviour {
         }
 
     }
+	public void PlayerInSlope(bool inSlope)
+	{
+		InSlope = inSlope;
+	}
 
     private void Planear(bool planear)
     {
         _planear = planear;
     }
 
-    private void Move(float directionX, bool jump, bool dobleJump,bool blockControl)
+	/*void PlaySoundWalk()
+	{
+		if (!audio.isPlaying) {
+			audio.PlayOneShot(clipWalk);
+		}
+	}*/
+
+	private void Move(float directionX, bool jump, bool dobleJump,bool blockControl)
     {
         Vector3 direction = Vector3.zero;
-
+		
         //Debug.Log("Is Ground: " + m_CharacterController.isGrounded.ToString());
         if (directionX > 0 && !blockControl)
         {
@@ -199,15 +217,18 @@ public class PlayerController : MonoBehaviour {
             Estela.Play();
             SentidoBullet = false;
             m_Player.FlipInX(false);
-            
-        } else if (directionX < 0 && !blockControl)
+			
+
+		} else if (directionX < 0 && !blockControl)
         {
             _animations.SetFloat("VelocidadX", -1 * directionX);
             Estela.Play();
             SentidoBullet = true;
             m_Player.FlipInX(true);
-           
-        }else
+			
+
+		}
+		else
 			Estela.Stop();
 
 		//Estas saltando
@@ -218,16 +239,27 @@ public class PlayerController : MonoBehaviour {
         }
         else if(m_CharacterController.isGrounded && !blockControl)
         {
+			
             direction = new Vector3(directionX * _speed, m_CharacterController.velocity.y, 0);
             
         }
-        
 
-        //Estas en el suelo y vas a saltar
-        if (IsGround && jump )
+		if (m_CharacterController.isGrounded && directionX != 0)
+		{
+			
+			if (!audio.isPlaying)
+			{
+				audio.PlayOneShot(clipWalk, 0.08f);
+			}
+
+		}
+		//Estas en el suelo y vas a saltar
+			if (IsGround && jump)
         {
-           
-            direction.y = _jumpSpeed;  
+			_animations.SetTrigger("Jump");
+            direction.y = _jumpSpeed;
+			
+			audio.PlayOneShot(clipJump, 0.9f);
             //direction = new Vector3(directionX * _speedInJump, m_CharacterController.velocity.y, 0);
         }
 
@@ -243,31 +275,37 @@ public class PlayerController : MonoBehaviour {
         }else
             direction.y -= _gravity * Time.deltaTime;
 
-        /*
-				//Debug.Log("Direction ante de moverte: "+ direction.ToString());
-				if (IsGround && !jump)
-				{
-					Vector3 point;
-					Vector3 normal = GetSurfaceNormal(out point);
+		if (!InSlope) {
+			Debug.DrawRay(transform.position, direction, Color.red);
+			m_CharacterController.Move(direction * Time.deltaTime);
 
-					Vector3 surface = Vector3.Cross(normal, Vector3.forward);
+		} else {
 
-					surface = surface * direction.x;			
-					m_CharacterController.Move(surface * Time.deltaTime);
-					Debug.DrawRay(transform.position, normal * 5f, Color.blue);
-					Debug.DrawRay(transform.position, surface, Color.red);
-					m_CharacterController.Move(Vector3.down * _gravity * _gravityScale * Time.deltaTime);
-				}
-				else
-				{
-					Debug.DrawRay(transform.position, direction, Color.red);
-					m_CharacterController.Move(direction * Time.deltaTime);
-				}*/
-        Debug.DrawRay(transform.position, direction, Color.red);
-        m_CharacterController.Move(direction * Time.deltaTime);
+			//Debug.Log("Direction ante de moverte: "+ direction.ToString());
+			if (IsGround && !jump)
+			{
+				Vector3 point;
+				Vector3 normal = GetSurfaceNormal(out point);
+
+				Vector3 surface = Vector3.Cross(normal, Vector3.forward);
+
+				surface = surface * direction.x;
+				m_CharacterController.Move(surface * Time.deltaTime);
+				Debug.DrawRay(transform.position, normal * 5f, Color.blue);
+				Debug.DrawRay(transform.position, surface, Color.red);
+				m_CharacterController.Move(Vector3.down * _gravity * _gravityScale * Time.deltaTime);
+			}
+			else
+			{
+				Debug.DrawRay(transform.position, direction, Color.red);
+				m_CharacterController.Move(direction * Time.deltaTime);
+			}
+		}
 		//_animations.SetBool("isGrounded", m_CharacterController.isGrounded);
         
     }
+
+	
 
     public Vector3 GetSurfaceNormal(out Vector3 point )
     {
@@ -290,8 +328,9 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-   
-    private void Fire()
+	
+
+	private void Fire()
     {
 
         if (m_Player.Vida > m_Player._VidaMin) {
@@ -324,7 +363,7 @@ public class PlayerController : MonoBehaviour {
 
     private void OnDestroy()
     {
-        //GameMgr.GetInstance().GetServer<InputMgr>().UnregisterPlanear = Planear;
+        GameMgr.GetInstance().GetServer<InputMgr>().UnregisterPlanear = Planear;
         GameMgr.GetInstance().GetServer<InputMgr>().UnRegisterMove = Move;
         GameMgr.GetInstance().GetServer<InputMgr>().UnRegisterFire = Fire;
         GameMgr.GetInstance().GetServer<InputMgr>().UnRegisterRecargarPelusas = RecargaPelusas;

@@ -2,211 +2,122 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : FSMExecutor<Enemy> {
-
-    public int _ataque;
-    public int _life;
-    public float _speed;
-    public Transform _initPoint;
-    public Transform _endPoint;
-    public float _stoppingDistance;
-    public float _AttackTime;
-    public float _visionDistance;
-    public BoxCollider _ColliderEnemigo;
-
-    private GameObject _target;
-    private GameObject _oldTarget;
-    private GameObject hit;
-    private bool _playerVisto = false;
-
-    protected override void CreateStates(FiniteStateMachine<Enemy> fsm)
-    {
-
-        fsm.AddState(new WanderState(this), true);
-        fsm.AddState(new AttackState(this), false);
-        fsm.AddTransition("WanderState", "AttackState", "PLAYER_VISTO");
-        fsm.AddTransition("AttackState", "WanderState", "PLAYER_DEJADO_VER");
-    }
-
-
-    protected override void _Update(FiniteStateMachine<Enemy> fsm)
-    {
-
-        if (_ColliderEnemigo == null)
-        {
-            Debug.LogWarning("Collider de enemigo no asignado!!");
-        }
-        if (fsm.CurrentState == "WanderState")
-        {
-            if (_playerVisto)
-            {
-                OldTarget = Target;
-                Target = hit;
-                if (hit.tag == "Player")
-                {
-                    fsm.Emmit("PLAYER_VISTO");
-                }
-            }
-        }
-        else if (fsm.CurrentState == "AttackState")
-        {
-            if(!_playerVisto)
-            {
-                fsm.Emmit("PLAYER_DEJADO_VER");
-                Target = OldTarget;
-            }
-        }
-
-        if (_life == 0)
-        {
-            //TODO Lanzar animacion muerte
-            Destroy(gameObject);
-        }
-
-    }
-
-    /// <summary>
-    /// Pasamos al ataque
-    /// </summary>
-    /// <param name="other"></param>
-    void OnTriggerEnter(Collider other)
-    {
-        _playerVisto = true;
-        hit = other.gameObject;
-
-        if (other.gameObject.tag == "Bullet")
-        {
-            //TODO lanzar animacion recibir daño
-            _life--;
-        }
-    }
-
-    /// <summary>
-    /// Volvemos al patrol
-    /// </summary>
-    /// <param name="other"></param>
-    void OnTriggerExit(Collider other)
-    {
-        Debug.Log("Sale");
-        _playerVisto = false;
-        hit = other.gameObject;
-    }
-
-    public GameObject Target
-    {
-        get { return _target; }
-        set { _target = value; }
-    }
-
-    public GameObject OldTarget
-    {
-        get { return _oldTarget; }
-        set { _oldTarget = value; }
-    }
-
-}
-
-public class WanderState : State<Enemy>
+public class Enemy: MonoBehaviour
 {
-    private Transform _target;
-    private int _point = 0;
-    private SpriteRenderer[] _sprite;
-    public float smoothLevel = 1.0f;
 
-    public WanderState(Enemy executor) : base(executor)
-    {
+	public Transform Pos1;
+	public Transform Pos2;
 
-    }
+	public Transform cuerpo;
+	public int EnemyAttack;
+	public int EnemyLife;
+	private Vector3 m_pos1;
+	private Vector3 m_pos2;
+	public float speed = 0.50f;
+	private SpriteRenderer[] _sprite;
+	public Color feedBack;
+	public int NumTimes = 3;
+	public float DelayFeedBack = 0.1f;
+	public float attackTime;
+	public bool sentido = true;
+	public float delay = 0.3f;
+	private bool move = true;
 
-    public override void Init()
-    {
-        base.Init();
-        _sprite = Component.GetComponentsInChildren<SpriteRenderer>();
-        _target = Component._initPoint;
-        _point = 0;
-       
-    }
-
-    public override void Update()
-    {
-        base.Update();
-
-        Vector3 direction = _target.position - Component.transform.position;
-
-        if (direction.sqrMagnitude < (Component._stoppingDistance * Component._stoppingDistance))
-        {
-            if (_point == 0)
-            {
-                _target = Component._endPoint;
-                _point = 1;
-                foreach (SpriteRenderer s in _sprite)
-                {
-                    s.flipX = false;
-                }
-            }
-            else
-            {
-
-                foreach (SpriteRenderer s in _sprite)
-                {
-                    s.flipX = true;
-                }
-                _target = Component._initPoint;
-                _point = 0;
-            }
-        }
-
-        direction = direction.normalized;
-
-        MoveEnemy(_target.position);
-        //_controller.Move(new Vector3(direction.x * Component._speed * Time.deltaTime, 0, 0));
-
-    }
+	private float delayAttack=0;
 
 
-    public void MoveEnemy(Vector3 pos)
-    {
 
-        Component.transform.position = Vector3.Lerp(Component.transform.position, pos,Time.deltaTime * smoothLevel);
+	void Start()
+	{
+		m_pos1 = Pos1.position;
+		m_pos2 = Pos2.position;
+		_sprite = GetComponents<SpriteRenderer>();
+	}
+	void Update()
+	{
 
-    }
-}
+		
+		//TODO Hacer con corrutina
+		if (move) {
+			float aux = Mathf.PingPong(Time.time * speed, 1.0f);
+			//print(aux);
+			cuerpo.transform.position = Vector3.Lerp(m_pos1, m_pos2, aux);
+			delay += Time.deltaTime;
+			//TODO Flip
+			if (aux > 0.95f && delay >= 0.5)
+			{
+				this.transform.rotation = new Quaternion(0.0f, 180.0f, 0f, 0f);
 
-public class AttackState : State<Enemy>
-{
-    private float _time;
-    public AttackState(Enemy executor) : base(executor)
-    {
+				delay = 0.0f;
 
-    }
+			}
 
-    public override void Init()
-    {
-        base.Init();
-        Attack();
-        _time = Component._AttackTime;
-    }
+			if (aux < 0.09f && delay >= 0.5)
+			{
+				this.transform.rotation = new Quaternion(0.0f, 0.0f, 0f, 0f);
+				delay = 0.0f;
+			}
+		}
+	}
 
-    public override void Update()
-    {
-        base.Update();
-        _time -= Time.deltaTime;
-        if (_time <= 0f)
-        {
-            Attack();
-            _time = Component._AttackTime;
-        }
-    }
 
-    private void Attack()
-    {
-        if (Component.Target != null && Component.Target.GetComponent<Player>() != null)
-        {
-            Debug.Log("Atacando a " + Component.Target);
-            Component.Target.GetComponent<Player>().RestaVidaEnemigo(Component._ataque, false);
+	void OnTriggerEnter(Collider other)
+	{
 
-        }
-        //else if (Component.Target == null)
-          //  Component.Emmit("PLAYER_DEJADO_VER");
-    }
+		if (other.tag == "Bullet")
+		{
+			Destroy(other.gameObject);
+
+			if (EnemyLife > 0)
+			{
+				EnemyLife--;
+				StartCoroutine(FlashSprites(_sprite, NumTimes, DelayFeedBack, feedBack));
+				//Debug.Log("Vida enemigo: " + EnemyLife);
+
+			}
+			else Destroy(gameObject);
+		}
+
+		delayAttack += Time.deltaTime;
+		if (other.tag == "Player" )
+		{
+			
+			delayAttack = 0;
+			other.GetComponent<Player>().RestaVidaEnemigo(EnemyAttack, false);
+
+			//Debug.Log("Entra el personaje.");
+		}
+
+	}
+
+	private void OnTriggerExit(Collider other)
+	{
+		move = true;
+	}
+
+	IEnumerator FlashSprites(SpriteRenderer[] sprites, int numTimes, float delay, Color feedBack)
+	{
+
+		// number of times to loop
+		for (int loop = 0; loop < numTimes; loop++)
+		{
+			// cycle through all sprites
+			for (int i = 0; i < sprites.Length; i++)
+			{
+
+				// for changing the alpha
+				sprites[i].color = new Color(feedBack.r, feedBack.g, feedBack.b, feedBack.a);
+			}
+			// delay specified amount
+			yield return new WaitForSeconds(delay);
+			// cycle through all sprites
+			for (int i = 0; i < sprites.Length; i++)
+			{
+				sprites[i].color = new Color(255, 255, 255, 1);
+			}
+
+			// delay specified amount
+			yield return new WaitForSeconds(delay);
+		}
+	}
 }

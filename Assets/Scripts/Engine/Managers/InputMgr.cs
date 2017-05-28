@@ -25,8 +25,8 @@ public class InputMgr : AComponent {
 
     public bool Planear = true;
     public int TamPelusaRecarga = 5;
-    public float _coolDawnDisparo = 0.5f;
-    public float _coolDawnCarga = 0.5f;
+    public float _coolDawnDisparo = 0.3f;
+    public float _coolDawnCarga = 0.3f;
     public float _coolDawnRecarga = 0.5f;
 
     //Enumerado de diferentes eventos de un boton.

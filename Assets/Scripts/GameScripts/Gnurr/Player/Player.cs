@@ -37,7 +37,7 @@ public class Player : MonoBehaviour {
 
         if (mSpawManager == null)
         {
-            Debug.LogError("No se ha podido inicializar el SpawnManager!!");
+            Debug.Log("No se ha podido inicializar el SpawnManager!!");
         }
         if (!initLoad)
         {
@@ -89,8 +89,9 @@ public class Player : MonoBehaviour {
 
         if ((_Vida - numVidas) < _VidaMin)//Te mata
         {
-            //TODO Lanzar animacion de muerte
-            this.transform.position = mSpawManager.GetSpawPoint().position;
+			//TODO Lanzar animacion de muerte
+			StartCoroutine("FadeBlack");
+			this.transform.position = mSpawManager.GetSpawPoint().position;
             this._Vida = 20;
             Vector3 scale = new Vector3(_Vida / _VidaMax, _Vida / _VidaMax, _Vida / _VidaMax);
             this.transform.localScale = scale;
