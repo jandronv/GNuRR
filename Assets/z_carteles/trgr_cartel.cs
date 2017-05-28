@@ -5,19 +5,27 @@ using UnityEngine;
 public class trgr_cartel : MonoBehaviour
 {
 
-    public GameObject cartel;
+    public GameObject holograma;
+    public GameObject bocadillo;
+    public GameObject bocadillo2;
     public GameObject player;
 
     private void Start()
     {
-        cartel.SetActive(false);
+        holograma.SetActive(false);
+        bocadillo.SetActive(false);
+        bocadillo2.SetActive(false);
+
     }
 
     void OnTriggerEnter(Collider player)
     {
         if (player.tag == "Player")
         {
-            cartel.SetActive(true);
+            holograma.SetActive(true);
+            bocadillo.SetActive(true);
+            bocadillo2.SetActive(true);
+
         }
     }
 
@@ -25,7 +33,10 @@ public class trgr_cartel : MonoBehaviour
     {
         if (player.tag == "Player")
         {
-            cartel.SetActive(true);
+            holograma.SetActive(true);
+            bocadillo.SetActive(true);
+            bocadillo2.SetActive(true);
+
         }
     }
 
@@ -33,7 +44,10 @@ public class trgr_cartel : MonoBehaviour
     {
         if (player.tag == "Player")
         {
-            cartel.SetActive(false);
+            holograma.SetActive(false);
+            bocadillo.SetActive(false);
+            bocadillo2.SetActive(false);
+
         }
     }
 }
