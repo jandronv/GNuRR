@@ -47,7 +47,7 @@ public class CameraBoundary : MonoBehaviour {
         _WindowMax = _WidowsBoxCollider.bounds.max;
 
         //La pelusa llega al limite derecho
-        if (_playerMax.x >= _WindowMax.x + 0.2)
+       /* if (_playerMax.x >= _WindowMax.x + 0.2)
         {
             x = _Player.transform.position.x - Maxdistance;
             lookAhead = 1;
@@ -56,13 +56,13 @@ public class CameraBoundary : MonoBehaviour {
         {
             x = _Player.transform.position.x + Maxdistance;
             lookAhead = -1;
-        }
+        }*/
 
-        else
-        {
+        //else
+        //{
             x = _Player.transform.position.x;
             lookAhead = 0;
-        }
+       // }
         if (_playerMax.y > _WindowMax.y)
         {
             y = _Player.transform.position.y;
