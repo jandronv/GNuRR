@@ -399,8 +399,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _component: {fileID: 114000446528899988}
-  _ataque: 1
-  _life: 2
+  _ataque: 5
+  _life: 7
   _speed: 0.7
   maxDistance: 1
   feedBack: {r: 1, g: 0, b: 0, a: 0.678}
