@@ -138,7 +138,7 @@ public class PlayerController : MonoBehaviour {
     {
 
 		Debug.Log("Tamaño pelusa:" + numPelusas);
-        _animations.SetTrigger("Carga");
+        //_animations.SetTrigger("Carga");
         if (numPelusas > (m_Player.Vida - m_Player._VidaMin))
         {
             numPelusas = (int)(m_Player.Vida - m_Player._VidaMin);
@@ -209,27 +209,32 @@ public class PlayerController : MonoBehaviour {
 	private void Move(float directionX, bool jump, bool dobleJump,bool blockControl)
     {
         Vector3 direction = Vector3.zero;
-		
-        //Debug.Log("Is Ground: " + m_CharacterController.isGrounded.ToString());
-        if (directionX > 0 && !blockControl)
-        {
-            _animations.SetFloat("VelocidadX", directionX);
-            Estela.Play();
-            SentidoBullet = false;
-            m_Player.FlipInX(false);
-			
 
-		} else if (directionX < 0 && !blockControl)
-        {
-            _animations.SetFloat("VelocidadX", -1 * directionX);
-            Estela.Play();
-            SentidoBullet = true;
-            m_Player.FlipInX(true);
-			
+		//Debug.Log("Is Ground: " + m_CharacterController.isGrounded.ToString());
+		if (directionX > 0 && !blockControl)
+		{
+			_animations.SetTrigger("Run");
+			Estela.Play();
+			SentidoBullet = false;
+			m_Player.FlipInX(false);
+
+
+		}
+		else if (directionX < 0 && !blockControl)
+		{
+			_animations.SetTrigger("Run");
+			Estela.Play();
+			SentidoBullet = true;
+			m_Player.FlipInX(true);
+
 
 		}
 		else
+		{
+			_animations.SetTrigger("Idle");
 			Estela.Stop();
+		}
+		
 
 		//Estas saltando
 		if (!m_CharacterController.isGrounded && !blockControl)
