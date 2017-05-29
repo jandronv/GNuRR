@@ -29,8 +29,13 @@ public class InputMgr : AComponent {
     public float _coolDawnCarga = 0.3f;
     public float _coolDawnRecarga = 0.5f;
 
-    //Enumerado de diferentes eventos de un boton.
-    protected enum TButtonEvent { BEGIN, PRESSED, END, BEGIN_OVER, END_OVER };
+
+	public string _menuSceneName = "Menu_Pausa";
+	public bool _push = true;
+	public bool inPause = false;
+
+	//Enumerado de diferentes eventos de un boton.
+	protected enum TButtonEvent { BEGIN, PRESSED, END, BEGIN_OVER, END_OVER };
 	private Vector3 m_axis = new Vector3(0.0f,0.0f,0.0f);
 	
     /// <summary>
@@ -230,8 +235,22 @@ public class InputMgr : AComponent {
     {
         base.Update();
 
+		if (Input.GetButton("Cancel") && !inPause)
+		{
+			inPause = true;
+		
+			GameMgr.GetInstance().GetServer<SceneMgr>().PushScene(_menuSceneName);
+		
+		}
 
-        if (Input.GetButton("Fire") && _contadorCarga > _coolDawnCarga && _numPelusasCarga < TamPelusaRecarga && !_blockControl)
+		if (Input.GetButton("Cancel") && inPause)
+		{
+			inPause = false;
+			GameMgr.GetInstance().GetServer<SceneMgr>().ReturnScene(false);
+
+		}
+
+		if (Input.GetButton("Fire") && _contadorCarga > _coolDawnCarga && _numPelusasCarga < TamPelusaRecarga && !_blockControl)
         {
 
             _numPelusasCarga++;

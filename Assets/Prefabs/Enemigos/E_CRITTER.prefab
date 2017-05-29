@@ -198,7 +198,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1907240577237786}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 316.58173, y: -33.366566, z: -13.648254}
+  m_LocalPosition: {x: 4.57, y: -4.96, z: -14}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children:
   - {fileID: 4268932035079706}
@@ -400,7 +400,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _component: {fileID: 114000446528899988}
   _ataque: 5
-  _life: 8
+  _life: 7
   _speed: 0.7
   maxDistance: 1
   feedBack: {r: 1, g: 0, b: 0, a: 0.678}
