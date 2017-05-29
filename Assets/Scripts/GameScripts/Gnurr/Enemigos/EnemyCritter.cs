@@ -22,7 +22,9 @@ public class EnemyCritter : FSMExecutor<EnemyCritter>  {
     public float _AttackTime;
     public float _visionDistance;
 
-    private CharacterController _cController;
+	public LayerMask layer;
+
+	private CharacterController _cController;
     private SpriteRenderer[] _spriteEnemy;
     private GameObject _target;
 
@@ -61,10 +63,10 @@ public class EnemyCritter : FSMExecutor<EnemyCritter>  {
         //Comprobamos en que estado estamos para el comportamiento
         if (fsm.CurrentState == "SleepState")//Esta quieto esperando a que entre el jugador en su campo de vision
         {
-            if (Physics.Raycast(r1, out hitInfo))
+            if (Physics.Raycast(r1.origin, r1.direction, out hitInfo, 800f, layer))
             {
 					Debug.Log("distancia de vista: "+hitInfo.distance);
-					if (hitInfo.distance < _visionDistance && hitInfo.collider.tag == "Player")
+					if (hitInfo.distance < _visionDistance)
 					{
 
                     if (direction.x > 0)
@@ -86,9 +88,9 @@ public class EnemyCritter : FSMExecutor<EnemyCritter>  {
         {
             bool Visto = false;
 
-            if (Physics.Raycast(r1, out hitInfo))//Comprobamos si el player ha salido del rango de vision
+            if (Physics.Raycast(r1.origin, r1.direction, out hitInfo, 800f, layer))//Comprobamos si el player ha salido del rango de vision
             {
-                if (hitInfo.distance < _visionDistance && hitInfo.collider.tag == "Player")
+                if (hitInfo.distance < _visionDistance)
                     Visto = true;
             }
             
