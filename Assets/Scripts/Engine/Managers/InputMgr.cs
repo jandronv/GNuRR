@@ -235,18 +235,19 @@ public class InputMgr : AComponent {
     {
         base.Update();
 
-		if (Input.GetButton("Cancel") && !inPause)
+		if (Input.GetButtonDown("Cancel") && !inPause)
 		{
 			inPause = true;
 		
 			GameMgr.GetInstance().GetServer<SceneMgr>().PushScene(_menuSceneName);
 		
 		}
-
-		if (Input.GetButton("Cancel") && inPause)
+        else
+		if (Input.GetButtonDown("Cancel") && inPause)
 		{
 			inPause = false;
 			GameMgr.GetInstance().GetServer<SceneMgr>().ReturnScene(false);
+
 
 		}
 

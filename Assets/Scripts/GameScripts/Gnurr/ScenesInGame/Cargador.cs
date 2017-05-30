@@ -10,4 +10,9 @@ public class Cargador : MonoBehaviour {
     {
         GameMgr.GetInstance().GetServer<SceneMgr>().ChangeScene(_nombreEscena);
     }
+
+    public void VolverNivel()
+    {
+        GameMgr.GetInstance().GetServer<SceneMgr>().ReturnScene(false);
+    }
 }
