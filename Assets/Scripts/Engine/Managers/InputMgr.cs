@@ -293,12 +293,12 @@ public class InputMgr : AComponent {
         //Debug.Log("Bloqueo de control: " + _blockControl);
 
 
-        if (Input.GetAxis("Planear") > 0) {
+       /* if (Input.GetAxis("Planear") > 0) {
             Debug.Log("Planear.. ");
             _planeo = true;
         }else
             _planeo = false;
-
+		*/
         if (m_planear != null)
             m_planear(_planeo);
 

@@ -21,7 +21,7 @@ public class CambioDeNivel : MonoBehaviour {
 		if (other.tag == "Player")
         {
             PlayerMngr p = GameMgr.GetInstance().GetCustomMgrs().GetPlayerMgr();
-            Debug.Log("Vida Actual: "+p.Vida+" Puede Planear:"+p.Planear);
+            Debug.Log("Vida Actual: "+p.Vida+" Puede Planear:"+p.Planear + "Posicion en el nivel");
             p.Vida = other.GetComponent<Player>().Vida;
             GameMgr.GetInstance().GetServer<SceneMgr>().ChangeScene(_name);
         }
