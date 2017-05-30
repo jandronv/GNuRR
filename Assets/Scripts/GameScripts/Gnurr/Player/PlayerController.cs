@@ -76,6 +76,17 @@ public class PlayerController : MonoBehaviour {
             Debug.LogWarning("Asigna la estela del jugador al PlayerController!!");
         }
 		audio = GetComponent<AudioSource>();
+		Debug.Log("Entra al Player");
+		PlayerMngr p = GameMgr.GetInstance().GetCustomMgrs().GetPlayerMgr();
+		if (p.CambioEscena)
+		{
+
+			Debug.Log("Hay cambio de escena, pongo al player en la pos final y reseteo la posicion");
+			p.CambioEscena = false;
+			transform.localPosition = p.Position;
+			GameObject cam = GameObject.Find("Camera");
+			cam.transform.localPosition = p.Position;
+		}
 
 	}
 
@@ -210,7 +221,7 @@ public class PlayerController : MonoBehaviour {
     {
         Vector3 direction = Vector3.zero;
 
-		Debug.Log("Is Jump: " + jump);
+		//Debug.Log("Is Jump: " + jump);
 		if (directionX > 0 && !blockControl)
 		{
 			_animations.SetTrigger("Run");
