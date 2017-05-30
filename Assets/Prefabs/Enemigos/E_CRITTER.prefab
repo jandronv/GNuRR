@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 143842760321317352}
   - component: {fileID: 65799552326863832}
   m_Layer: 2
-  m_Name: E_Critter
+  m_Name: E_CRITTER
   m_TagString: EnemyCritter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
