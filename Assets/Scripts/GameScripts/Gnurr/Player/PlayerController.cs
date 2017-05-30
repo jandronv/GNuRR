@@ -210,7 +210,7 @@ public class PlayerController : MonoBehaviour {
     {
         Vector3 direction = Vector3.zero;
 
-		//Debug.Log("Is Ground: " + m_CharacterController.isGrounded.ToString());
+		Debug.Log("Is Jump: " + jump);
 		if (directionX > 0 && !blockControl)
 		{
 			_animations.SetTrigger("Run");

@@ -235,18 +235,19 @@ public class InputMgr : AComponent {
     {
         base.Update();
 
-		if (Input.GetButton("Cancel") && !inPause)
+		if (Input.GetButtonDown("Cancel") && !inPause)
 		{
 			inPause = true;
 		
 			GameMgr.GetInstance().GetServer<SceneMgr>().PushScene(_menuSceneName);
 		
 		}
-
-		if (Input.GetButton("Cancel") && inPause)
+        else
+		if (Input.GetButtonDown("Cancel") && inPause)
 		{
 			inPause = false;
 			GameMgr.GetInstance().GetServer<SceneMgr>().ReturnScene(false);
+
 
 		}
 
@@ -292,12 +293,12 @@ public class InputMgr : AComponent {
         //Debug.Log("Bloqueo de control: " + _blockControl);
 
 
-        if (Input.GetAxis("Planear") > 0) {
+       /* if (Input.GetAxis("Planear") > 0) {
             Debug.Log("Planear.. ");
             _planeo = true;
         }else
             _planeo = false;
-
+		*/
         if (m_planear != null)
             m_planear(_planeo);
 

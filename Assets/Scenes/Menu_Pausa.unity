@@ -702,6 +702,7 @@ GameObject:
   - component: {fileID: 1530736947}
   - component: {fileID: 1530736946}
   - component: {fileID: 1530736945}
+  - component: {fileID: 1530736944}
   m_Layer: 5
   m_Name: Resume_Button
   m_TagString: Untagged
@@ -727,6 +728,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 350, y: 193.2}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1530736944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1530736942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 555ad102e0df0b74680386e9e6964b60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _nombreEscena: 
 --- !u!114 &1530736945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -766,12 +779,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1530736942}
-        m_MethodName: 
+      - m_Target: {fileID: 1530736944}
+        m_MethodName: VolverNivel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

@@ -14,7 +14,9 @@ public class trgr_cartel : MonoBehaviour
     {
         holograma.SetActive(false);
         bocadillo.SetActive(false);
-        bocadillo2.SetActive(false);
+		if (bocadillo2 != null) {
+			bocadillo2.SetActive(false);
+		}
 
     }
 
@@ -24,7 +26,10 @@ public class trgr_cartel : MonoBehaviour
         {
             holograma.SetActive(true);
             bocadillo.SetActive(true);
-            bocadillo2.SetActive(true);
+			if (bocadillo2 != null)
+			{
+				bocadillo2.SetActive(true);
+			}
 
         }
     }
@@ -35,7 +40,10 @@ public class trgr_cartel : MonoBehaviour
         {
             holograma.SetActive(true);
             bocadillo.SetActive(true);
-            bocadillo2.SetActive(true);
+			if (bocadillo2 != null)
+			{
+				bocadillo2.SetActive(true);
+			}
 
         }
     }
@@ -46,8 +54,10 @@ public class trgr_cartel : MonoBehaviour
         {
             holograma.SetActive(false);
             bocadillo.SetActive(false);
-            bocadillo2.SetActive(false);
-
+			if (bocadillo2 != null)
+			{
+				bocadillo2.SetActive(false);
+			}
         }
     }
 }
