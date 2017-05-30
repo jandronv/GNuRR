@@ -65,7 +65,7 @@ public class EnemyCritter : FSMExecutor<EnemyCritter>  {
         {
             if (Physics.Raycast(r1.origin, r1.direction, out hitInfo, 800f, layer))
             {
-					Debug.Log("distancia de vista: "+hitInfo.distance);
+					//Debug.Log("distancia de vista: "+hitInfo.distance);
 					if (hitInfo.distance < _visionDistance)
 					{
 
