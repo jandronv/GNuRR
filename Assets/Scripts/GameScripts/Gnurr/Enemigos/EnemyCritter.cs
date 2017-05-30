@@ -66,7 +66,7 @@ public class EnemyCritter : FSMExecutor<EnemyCritter>  {
             if (Physics.Raycast(r1.origin, r1.direction, out hitInfo, 800f, layer))
             {
 					//Debug.Log("distancia de vista: "+hitInfo.distance);
-					if (hitInfo.distance < _visionDistance && hitInfo.collider.tag == "Player")
+					if (hitInfo.distance < _visionDistance )
 					{
 						if (direction.x > 0)
 						{
@@ -88,7 +88,7 @@ public class EnemyCritter : FSMExecutor<EnemyCritter>  {
 
             if (Physics.Raycast(r1.origin, r1.direction, out hitInfo, 800f, layer))//Comprobamos si el player ha salido del rango de vision
             {
-                if (hitInfo.distance < _visionDistance && hitInfo.collider.tag == "Player")
+                if (hitInfo.distance < _visionDistance)
                     Visto = true;
             }
             

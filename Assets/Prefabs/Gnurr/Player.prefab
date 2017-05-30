@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4095385434645620}
   - component: {fileID: 119721179438754704}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Projector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 4520881799420058}
   - component: {fileID: 198402074724135080}
   - component: {fileID: 199046276835318840}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: PS Recharge L (fluff)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,7 +52,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4884107196577600}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: BulletSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,7 +69,7 @@ GameObject:
   - component: {fileID: 4261321147056640}
   - component: {fileID: 65489686150963544}
   - component: {fileID: 114779648859266150}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Boundary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,7 +84,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4885798599556970}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: BulletSpawn2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 92482789542029004}
   - component: {fileID: 81375714267398114}
   - component: {fileID: 114438913030338176}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Camera
   m_TagString: Camera
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4291753163957798}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: PS Recharge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,7 +134,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4075281864229492}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: PS Damage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 4789762294014090}
   - component: {fileID: 198895812403114542}
   - component: {fileID: 199329227320985330}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: PS Damage (fluff)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 4230088874472154}
   - component: {fileID: 198731246830546194}
   - component: {fileID: 199237714020274594}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: PS Recharge R (fluff)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 4252276259751646}
   - component: {fileID: 198994164199494132}
   - component: {fileID: 199363067361507518}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: FDBCK. DEP. TRAY. SALTOS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,7 +201,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4802379140344846}
   - component: {fileID: 119002195539225486}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: ShadowCaster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -218,7 +218,7 @@ GameObject:
   - component: {fileID: 4421488174399488}
   - component: {fileID: 198844958569767334}
   - component: {fileID: 199049149496343432}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: PS Recharge L (dust)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -235,7 +235,7 @@ GameObject:
   - component: {fileID: 4151099107411862}
   - component: {fileID: 212327412781624258}
   - component: {fileID: 95106653408164834}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Gnurr
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -250,7 +250,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4912674194212796}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: 4492856788946114}
   - component: {fileID: 198683041731638410}
   - component: {fileID: 199407612162307198}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: PS Recharge R (dust)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -303,7 +303,7 @@ GameObject:
   - component: {fileID: 4551185744960284}
   - component: {fileID: 198901320645908572}
   - component: {fileID: 199871870675395248}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: PS Damage (dust)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -318,7 +318,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4419985926023168}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -333,7 +333,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4497277273799148}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Plane Transform 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -350,7 +350,7 @@ GameObject:
   - component: {fileID: 4228640890732194}
   - component: {fileID: 198909937131728876}
   - component: {fileID: 199582705173072872}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: PS Estela
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -489,7 +489,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1896667052371858}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 54.82, y: -1.48, z: 0}
+  m_LocalPosition: {x: 4.35, y: -8.94, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4912674194212796}

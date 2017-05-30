@@ -9,13 +9,13 @@ public class MenuInGame : MonoBehaviour {
 
     private void Update()
     {
-        /*if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (_push)
                 GameMgr.GetInstance().GetServer<SceneMgr>().PushScene(_menuSceneName);
             else 
                 GameMgr.GetInstance().GetServer<SceneMgr>().ReturnScene(false);
-        }*/
+        }
 
     }
 
