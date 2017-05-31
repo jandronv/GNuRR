@@ -46,7 +46,9 @@ public class CameraBoundary : MonoBehaviour {
         _WindowMin = _WidowsBoxCollider.bounds.min;
         _WindowMax = _WidowsBoxCollider.bounds.max;
 
-        //La pelusa llega al limite derecho
+		//La pelusa llega al limite derecho 
+		//TODO el problema esta en que siempre devuelve 0, por lo tanto, la camara nunca se adelanta porque el player simpre esta dentro del boundary.
+		//Lo que hay q hacer es lograr que la camara no se mueva dentro del boundary y cuando llegue a los limetes hacer que se adelante con el offsetrun.
        /* if (_playerMax.x >= _WindowMax.x + 0.2)
         {
             x = _Player.transform.position.x - Maxdistance;

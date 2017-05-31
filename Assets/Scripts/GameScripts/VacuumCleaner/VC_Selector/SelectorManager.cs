@@ -11,7 +11,7 @@ public class SelectorManager : MonoBehaviour {
     public Image mundos;
     private Quaternion mundoseleccionado;
     private bool enter;
-    private string Dinos = "Lvl_1";
+    private string Dinos = "Lvl_1A";
     private string Ropa = "Lvl_0";
 
     // Use this for initialization

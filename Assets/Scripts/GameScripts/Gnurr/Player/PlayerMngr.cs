@@ -6,13 +6,14 @@ public class PlayerMngr {
 
     private float vida = 20;
     private bool planear = false;
-	private Transform position;
+	private Vector3 position;
+	private bool cambioEscene = false;
 
-	public Transform Position
+	public Vector3 Position
 	{
 		get
 		{
-			return Position;
+			return position;
 		}
 
 		set
@@ -33,8 +34,19 @@ public class PlayerMngr {
             vida = value;
         }
     }
+	public bool CambioEscena
+	{
+		get
+		{
+			return cambioEscene;
+		}
 
-    public bool Planear
+		set
+		{
+			cambioEscene = value;
+		}
+	}
+	public bool Planear
     {
         get
         {
