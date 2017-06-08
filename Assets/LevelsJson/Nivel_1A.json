@@ -19,7 +19,7 @@
         {
          "columns":6,
          "firstgid":1,
-         "image":"tiles_tiled_gnurr_green.png",
+         "image":"..\/..\/..\/..\/..\/Downloads\/tiles_tiled_gnurr_green.png",
          "imageheight":1793,
          "imagewidth":1537,
          "margin":0,
@@ -30,6 +30,7 @@
          "tilewidth":256
         }],
  "tilewidth":256,
- "version":1,
+ "type":"map",
+ "version":"2017.05.26",
  "width":109
 }

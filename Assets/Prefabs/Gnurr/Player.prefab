@@ -868,9 +868,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f06837717bb5cc4f8aa93e694e51439, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speedInJump: 5
+  _speedInJump: 4.6
   _speed: 6
-  _jumpSpeed: 11
+  _jumpSpeed: 10
   _gravity: 20
   _gravityScale: 0.3
   _gravityPlaning: 11
@@ -962,7 +962,7 @@ CharacterController:
   serializedVersion: 2
   m_Height: 0.91
   m_Radius: 0.27
-  m_SlopeLimit: 45
+  m_SlopeLimit: 47
   m_StepOffset: 0.06
   m_SkinWidth: 0.027
   m_MinMoveDistance: 0
