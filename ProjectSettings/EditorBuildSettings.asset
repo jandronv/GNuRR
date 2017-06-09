@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Menu_Main.unity
+    guid: 6dde1af412f7a8545b89fc825e7a1ead
+  - enabled: 1
+    path: Assets/Scenes/Menu_Pausa.unity
+    guid: 324b837c228d5df4591ea06c8bc1d9fc
+  - enabled: 1
     path: Assets/Scenes/Lvl_VC_Main.unity
     guid: 5dcdacc5941aff445aa884e0766bf8b7
   - enabled: 1
@@ -15,17 +21,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Lvl_VC_Selector.unity
     guid: 4aabc9b62e483e340866b83c433348f2
   - enabled: 1
-    path: Assets/Scenes/Menu_Main.unity
-    guid: 6dde1af412f7a8545b89fc825e7a1ead
-  - enabled: 1
-    path: Assets/Scenes/Menu_Pausa.unity
-    guid: 324b837c228d5df4591ea06c8bc1d9fc
-  - enabled: 1
     path: Assets/Scenes/Lvl_0.unity
     guid: 07be3308f8a50104490ff8fe6f20ed0b
   - enabled: 1
     path: Assets/Scenes/Lvl_1A.unity
-    guid: 264a5363bfc397345bc67d9f2f4610c7
+    guid: b59b85f2b400b91409b2a44fa82246ec
   - enabled: 1
     path: Assets/Scenes/Lvl_1B.unity
     guid: eda84228ccb9f5d40b036e0a54fe61b2
@@ -34,4 +34,4 @@ EditorBuildSettings:
     guid: 6e64cf955b29dce41b6f83abd3a00dbb
   - enabled: 1
     path: Assets/Scenes/Lvl_1D.unity
-    guid: 00000000000000000000000000000000
+    guid: 0442b25ec611ca84ab9a3c9a2d313bba
