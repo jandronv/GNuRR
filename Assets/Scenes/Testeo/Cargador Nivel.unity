@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -136,8 +136,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PREFAB_PATH: Assets/Prefabs/Niveles/
-  level_JSON: {fileID: 4900000, guid: 06055d1a79ec52b4693d73cb0589cff1, type: 3}
-  _prefabName: lvl_1_D
+  level_JSON: {fileID: 4900000, guid: c6d71a6eddd0f194aad787db3f85ee2d, type: 3}
+  _prefabName: Lvl_1B_up
   scale: 1
   _arrayPrefabs:
   - _tiles: 0
@@ -157,9 +157,9 @@ MonoBehaviour:
   - _tiles: 7
     _prefab: {fileID: 1353648447441380, guid: f3a7c8fc6b149504dbea77f4249f816c, type: 2}
   - _tiles: 8
-    _prefab: {fileID: 1889465249529374, guid: 0680577252c641b4d8d5ede2cf281677, type: 2}
+    _prefab: {fileID: 1064218488946982, guid: 0680577252c641b4d8d5ede2cf281677, type: 2}
   - _tiles: 9
-    _prefab: {fileID: 1064218488946982, guid: 668d4c8c4348d0546a8658dbb91d8f66, type: 2}
+    _prefab: {fileID: 1889465249529374, guid: 668d4c8c4348d0546a8658dbb91d8f66, type: 2}
   - _tiles: 10
     _prefab: {fileID: 1263157601964688, guid: fa51b6c300f4a754ca6251b7973dc8e5, type: 2}
   - _tiles: 11
@@ -225,6 +225,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1640389717
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4490543106997694, guid: 4b6a39a9c414b13419ace5fab14e5616, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4490543106997694, guid: 4b6a39a9c414b13419ace5fab14e5616, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4490543106997694, guid: 4b6a39a9c414b13419ace5fab14e5616, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4490543106997694, guid: 4b6a39a9c414b13419ace5fab14e5616, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4490543106997694, guid: 4b6a39a9c414b13419ace5fab14e5616, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4490543106997694, guid: 4b6a39a9c414b13419ace5fab14e5616, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4490543106997694, guid: 4b6a39a9c414b13419ace5fab14e5616, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4490543106997694, guid: 4b6a39a9c414b13419ace5fab14e5616, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 4b6a39a9c414b13419ace5fab14e5616, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1768992729
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,8 +424,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PREFAB_PATH: Assets/Prefabs/Niveles/
-  level_JSON: {fileID: 4900000, guid: dc6f2082bf6d32d4e8f4e76e439d78b3, type: 3}
-  _prefabName: Pre_Lvl_0
+  level_JSON: {fileID: 4900000, guid: 084af9c04c384354099d4e3b96018029, type: 3}
+  _prefabName: prefabquenovale
   scale: 1
   _arrayPrefabs:
   - _tiles: 0
