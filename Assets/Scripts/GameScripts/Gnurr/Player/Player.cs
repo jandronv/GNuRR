@@ -43,8 +43,10 @@ public class Player : MonoBehaviour {
         {
 
             _Vida = GameMgr.GetInstance().GetCustomMgrs().GetPlayerMgr().Vida;
+			//Actualizamos el tamaño del sprite
+			RestarVida(0);
 
-        }
+		}
     }
 	
 	// Update is called once per frame

@@ -65,41 +65,52 @@ public class EnemyCritter : FSMExecutor<EnemyCritter>  {
         {
             if (Physics.Raycast(r1.origin, r1.direction, out hitInfo, 800f, layer))
             {
-					//Debug.Log("distancia de vista: "+hitInfo.distance);
-					if (hitInfo.distance < _visionDistance )
+				//Debug.Log("distancia de vista: "+hitInfo.distance);
+				if (hitInfo.distance < _visionDistance && hitInfo.collider.tag == "Player")
+				{
+					if (direction.x > 0)
 					{
-						if (direction.x > 0)
-						{
-							_point = 1;
-						}
-						else
-						{
-							_point = 0;
-						}
-					
-						Target = hitInfo.collider.gameObject;
-						fsm.Emmit("PLAYER_VISTO");
+						_point = 1;
 					}
+					else
+					{
+						_point = 0;
+					}
+
+					Target = hitInfo.collider.gameObject;
+					fsm.Emmit("PLAYER_VISTO");
+				} 
             }
         }
         else if (fsm.CurrentState == "FollowState")//Se empieza a mover hacia el target(Player)
         {
             bool Visto = false;
-
+			//TODO Lanzar rayo pequeño en horizontal y comprobar que no estas chocando con ningun bordillo
             if (Physics.Raycast(r1.origin, r1.direction, out hitInfo, 800f, layer))//Comprobamos si el player ha salido del rango de vision
             {
                 if (hitInfo.distance < _visionDistance)
                     Visto = true;
             }
-            
-            if (!Visto)
-            {
-                fsm.Emmit("PLAYER_DEJADO_VER");
 
-            }
-     
-            //cambiar a ataque
-        }
+			if (Visto)
+			{
+				//fsm.Emmit("PLAYER_DEJADO_VER");
+				Physics.Raycast(r1.origin, r1.direction, out hitInfo);
+				if (hitInfo.collider.tag == "Platforms")
+				{
+					//Debug.Log("Player visto, pero esta chocando contra una plataforma");
+					fsm.Emmit("PLAYER_DEJADO_VER");
+
+				}
+
+			} else
+			{
+				fsm.Emmit("PLAYER_DEJADO_VER");
+
+			}
+
+			//cambiar a ataque
+		}
         else if (fsm.CurrentState == "AttackCritter")
         {
             if (!_attack)
@@ -167,7 +178,6 @@ public class EnemyCritter : FSMExecutor<EnemyCritter>  {
 			Debug.Log("Player Dentro del collider");
             _attack = true;
         }
-
     }
 
     private void OnTriggerExit(Collider other)
