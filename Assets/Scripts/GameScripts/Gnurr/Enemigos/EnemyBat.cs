@@ -25,6 +25,8 @@ public class EnemyBat : FSMExecutor<EnemyBat>
     public float _visionDistance = 5;
     public bool _attack = false;
 
+
+
     //TODO Crear el estado follow y modificar el atacar
     protected override void CreateStates(FiniteStateMachine<EnemyBat> fsm)
     {
@@ -136,9 +138,9 @@ public class EnemyBat : FSMExecutor<EnemyBat>
 
 public class FlyState : State<EnemyBat>
 {
+	private SpriteRenderer[] _sprite;
 
-
-    public FlyState(EnemyBat component) : base(component)
+	public FlyState(EnemyBat component) : base(component)
     {
 
     }
@@ -146,7 +148,8 @@ public class FlyState : State<EnemyBat>
     public override void Init()
     {
         base.Init();
-        Component.VectorRadius = Component.transform.position - Component.center.position;
+		_sprite = Component.GetComponentsInChildren<SpriteRenderer>();
+		Component.VectorRadius = Component.transform.position - Component.center.position;
         
     }
 
@@ -155,10 +158,28 @@ public class FlyState : State<EnemyBat>
         base.Update();
 
         Component.VectorRadius = Quaternion.AngleAxis(Component.degreesPerSecond * Time.deltaTime, Vector3.forward) * Component.VectorRadius;
+		Debug.Log("Vector Radius: " + Component.transform.position);
+		//-1.4
+		//1.3
+		
+
         Component.transform.position = Component.center.position + Component.VectorRadius;
-
-
-    }
+		//TODO coger la pos inicial de Y y sumarle un offset y mirar q sea mayor q eso
+		/*if (Component.transform.position.y == -1.4)
+		{
+			foreach (SpriteRenderer s in _sprite)
+			{
+				s.flipX = false;
+			}
+		}
+		else if (Component.VectorRadius.x == 1.3)
+		{
+			foreach (SpriteRenderer s in _sprite)
+			{
+				s.flipX = true;
+			}
+		}*/
+	}
 }
 
 public class FlyFollow : State<EnemyBat>
@@ -217,7 +238,5 @@ public class FlyFollow : State<EnemyBat>
 
         Player p = Component.Target.GetComponent<Player>();
         p.RestaVidaEnemigo(Component._ataque, false);
-
-
     }
 }

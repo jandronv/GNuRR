@@ -6,6 +6,7 @@ public class DeathZone : MonoBehaviour {
 
     private SpawnMgrs mSpawManager;
     public int damageZone = 5;
+	public int dañoCritter = 7;
 	// Use this for initialization
 	void Start () {
 		
@@ -18,9 +19,14 @@ public class DeathZone : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-	
-        if (other.tag == "Player") {
-            other.GetComponent<Player>().FallInDeathZone(damageZone);
-        }
+
+		if (other.tag == "Player") {
+			other.GetComponent<Player>().FallInDeathZone(damageZone);
+		} else if (other.tag == "EnemyCritter")
+		{
+			other.GetComponent<EnemyCritter>().RestaVida(dañoCritter);
+		}
+
+
     }
 }
