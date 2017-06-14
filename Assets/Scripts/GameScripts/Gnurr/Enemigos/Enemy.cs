@@ -22,6 +22,7 @@ public class Enemy: MonoBehaviour
 	public bool sentido = true;
 	public float delay = 0.3f;
 	private bool move = true;
+    public Animator _animacion;
 
 	private float delayAttack=0;
 
@@ -68,14 +69,19 @@ public class Enemy: MonoBehaviour
 		{
 			Destroy(other.gameObject);
 
-			if (EnemyLife > 0)
-			{
-				EnemyLife--;
-				StartCoroutine(FlashSprites(_sprite, NumTimes, DelayFeedBack, feedBack));
-				//Debug.Log("Vida enemigo: " + EnemyLife);
+            if (EnemyLife > 0)
+            {
+                EnemyLife--;
+                StartCoroutine(FlashSprites(_sprite, NumTimes, DelayFeedBack, feedBack));
+                //Debug.Log("Vida enemigo: " + EnemyLife);
 
-			}
-			else Destroy(gameObject);
+            }
+            else
+            {
+                _animacion.SetBool("Dead", true);
+                move = false;
+                Destroy(gameObject, 2);
+            }
 		}
 
 		delayAttack += Time.deltaTime;

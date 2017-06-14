@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Collections;
 using System;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using System.IO;
 
 
@@ -21,8 +23,8 @@ public class TileTranslate
 
 public class LevelLoader : MonoBehaviour
 {
-
-    public string PREFAB_PATH = "Assets/Prefabs/Niveles/";
+#if UNITY_EDITOR
+	public string PREFAB_PATH = "Assets/Prefabs/Niveles/";
     public TextAsset level_JSON;
     public string _prefabName;
     public float scale = 1;
@@ -190,4 +192,5 @@ public class LevelLoader : MonoBehaviour
         foreach (Transform t in transform) allChildren.Add(t.gameObject);
         allChildren.ForEach(child => DestroyImmediate(child));
     }
+#endif
 }
