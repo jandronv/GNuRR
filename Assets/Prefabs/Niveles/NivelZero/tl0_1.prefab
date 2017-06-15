@@ -22,30 +22,13 @@ GameObject:
   - component: {fileID: 33337803215858064}
   - component: {fileID: 23516592459984982}
   - component: {fileID: 95730196201700280}
+  - component: {fileID: 65950058633678170}
   m_Layer: 0
   m_Name: tl_mid2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1536622431204572
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4920035430832272}
-  - component: {fileID: 33679352693712726}
-  - component: {fileID: 95563759909707016}
-  - component: {fileID: 64928576755174340}
-  m_Layer: 0
-  m_Name: tiled_00 (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &1979402198708758
 GameObject:
@@ -60,7 +43,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4129850299930352
 Transform:
@@ -73,7 +56,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4233327507796110}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: -180, z: -90}
 --- !u!4 &4233327507796110
 Transform:
@@ -82,27 +65,13 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1979402198708758}
   m_LocalRotation: {x: 0.5, y: -0.5, z: -0.5, w: -0.5}
-  m_LocalPosition: {x: -6.204703, y: -0.03274393, z: -0.40444422}
+  m_LocalPosition: {x: 7.280838, y: 23.841394, z: -10.522936}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4920035430832272}
   - {fileID: 4129850299930352}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4920035430832272
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1536622431204572}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4233327507796110}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90, y: -180, z: -90}
 --- !u!23 &23516592459984982
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -133,6 +102,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!33 &33337803215858064
 MeshFilter:
@@ -141,44 +111,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1183535781936810}
   m_Mesh: {fileID: 4300000, guid: 12f78c903aabddd4c96502a6ce17178e, type: 3}
---- !u!33 &33679352693712726
-MeshFilter:
+--- !u!65 &65950058633678170
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1536622431204572}
-  m_Mesh: {fileID: 4300000, guid: b4419b6c6079ce84bad1a03f072d2972, type: 3}
---- !u!64 &64928576755174340
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1536622431204572}
+  m_GameObject: {fileID: 1183535781936810}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
-  m_InflateMesh: 0
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: b4419b6c6079ce84bad1a03f072d2972, type: 3}
---- !u!95 &95563759909707016
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1536622431204572}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: b4419b6c6079ce84bad1a03f072d2972, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!95 &95730196201700280
 Animator:
   serializedVersion: 3
