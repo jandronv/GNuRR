@@ -12,6 +12,8 @@ TagManager:
   - Slope
   - EnemyBat
   - TriggerPlatFlot
+  - Coin
+  - CoinCogida
   layers:
   - Default
   - TransparentFX
