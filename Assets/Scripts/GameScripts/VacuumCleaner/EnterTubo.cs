@@ -6,6 +6,15 @@ using UnityEngine.SceneManagement;
 public class EnterTubo : MonoBehaviour {
     private bool enter;
     public string Selector = "Lvl_VC_Selector";
+    public GameObject y_button;
+
+    private void OnTriggerEnter(Collider _player)
+    {
+        if (_player.gameObject.tag == "Player")
+        {
+            y_button.SetActive(true);
+        }
+    }
 
     void OnTriggerStay (Collider _player)
     {
@@ -18,8 +27,17 @@ public class EnterTubo : MonoBehaviour {
             }
         }
     }
-	// Use this for initialization
-	void Start () {
+
+    private void OnTriggerExit(Collider _player)
+    {
+        if (_player.gameObject.tag == "Player")
+        {
+            y_button.SetActive(false);
+        }
+    }
+
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
