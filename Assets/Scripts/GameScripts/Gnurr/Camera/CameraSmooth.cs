@@ -71,7 +71,7 @@ public class CameraSmooth : MonoBehaviour {
                 //Debug.Log("x de la camara: " + x + "Target: " + _targetPositionX);
 				x = Mathf.SmoothDamp(x , _targetPositionX + offSetX, ref velocityX, smoothingX);
 
-            }
+            }//TODO
             else if (mCameraBoundary.lookAhead == -1)
             {
 				x = Mathf.SmoothDamp(x, _targetPositionX - offSetX, ref velocityX, smoothingX);
