@@ -15,8 +15,12 @@ public class Bullet : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Platforms" || other.tag == "EnemyCritter" || other.tag == "EnemyBat")
+		
+		if (other.tag == "Platforms" || other.tag == "EnemyCritter" || other.tag == "EnemyBat" || other.tag == "Enemies")
         {
+			GetComponent<Rigidbody>().Sleep();
+			GetComponent<SpriteRenderer>().enabled = false;
+			PSbullet.Play();
 			Debug.Log("Entra..");
             if (other.tag == "EnemyCritter")
             {
@@ -26,10 +30,11 @@ public class Bullet : MonoBehaviour {
             {
                 other.GetComponent<EnemyBat>().RestaVida(TamBullet);
             }
-            PSbullet.Play();
+			
+            
             //aqui debería haber algo plan que tarde 0.2 s o algo así
             //en destruirse, pq no da tiempo a verse la animacion
-			Destroy(gameObject);
+			Destroy(gameObject, 0.4f);
 		}
 		
 	}

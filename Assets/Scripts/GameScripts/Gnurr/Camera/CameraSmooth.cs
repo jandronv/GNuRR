@@ -13,7 +13,7 @@ public class CameraSmooth : MonoBehaviour {
 
     public Transform InitialWorld;
     public Transform EndWorld;
-    public int _offsetRun = 0;
+   
     public float RotateX = 0;
     public float RotateY = 0;
     public float RotateZ = 0;
@@ -53,7 +53,7 @@ public class CameraSmooth : MonoBehaviour {
         x = transform.position.x;
         y = transform.position.y;
 
-        _targetPositionX = mCameraBoundary.x;
+        _targetPositionX = mCameraBoundary.x ;
         _targetPositionY = mCameraBoundary.y;
 
         // Debug.Log("Camara "+Mathf.Round(x)+" Boundary "+ Mathf.Round(_targetPositionX));
@@ -66,27 +66,27 @@ public class CameraSmooth : MonoBehaviour {
         }
         else
         {
-            if (mCameraBoundary.lookAhead == 1 && (Mathf.Round(x) == Mathf.Round(_targetPositionX)))
+            if (mCameraBoundary.lookAhead == 1)
             {
                 //Debug.Log("x de la camara: " + x + "Target: " + _targetPositionX);
-                x = Mathf.SmoothDamp(x, _targetPositionX + _offsetRun, ref velocityX, smoothingX);
+				x = Mathf.SmoothDamp(x , _targetPositionX + offSetX, ref velocityX, smoothingX);
 
-            }
-            else if (mCameraBoundary.lookAhead == -1 && (Mathf.Round(x) == Mathf.Round(_targetPositionX)))
+            }//TODO
+            else if (mCameraBoundary.lookAhead == -1)
             {
-                x = Mathf.SmoothDamp(x, _targetPositionX - _offsetRun, ref velocityX, smoothingX);
+				x = Mathf.SmoothDamp(x, _targetPositionX - offSetX, ref velocityX, smoothingX);
             }
             else
             {
                 if (gnurr.flipX)
                 {
                    
-                    x = Mathf.SmoothDamp(x, _targetPositionX - offSetX, ref velocityX, smoothingX);
+					x = Mathf.SmoothDamp(x, _targetPositionX, ref velocityX, smoothingX);
                 }
                 else
                 {
                    
-                    x = Mathf.SmoothDamp(x, _targetPositionX + offSetX, ref velocityX, smoothingX);
+					x = Mathf.SmoothDamp(x, _targetPositionX, ref velocityX, smoothingX);
                 }
             }
 			if (y < _targetPositionY)

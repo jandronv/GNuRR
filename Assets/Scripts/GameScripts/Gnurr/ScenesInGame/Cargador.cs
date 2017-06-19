@@ -15,4 +15,11 @@ public class Cargador : MonoBehaviour {
     {
         GameMgr.GetInstance().GetServer<SceneMgr>().ReturnScene(false);
     }
+
+	public void Continue()
+	{
+		GameMgr.GetInstance().GetServer<InputMgr>().BloqueControles = true;
+
+		GameMgr.GetInstance ().GetServer<SceneMgr> ().ChangeScene(GameMgr.GetInstance ().GetCustomMgrs ().GetPlayerMgr ().UltimaEscena);
+	}
 }

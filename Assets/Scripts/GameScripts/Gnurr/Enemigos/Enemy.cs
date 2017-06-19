@@ -67,7 +67,7 @@ public class Enemy: MonoBehaviour
 
 		if (other.tag == "Bullet")
 		{
-			Destroy(other.gameObject);
+			//Destroy(other.gameObject);
 
             if (EnemyLife > 0)
             {
