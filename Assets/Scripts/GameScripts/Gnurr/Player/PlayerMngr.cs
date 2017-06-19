@@ -8,6 +8,7 @@ public class PlayerMngr {
     private bool planear = false;
 	private Vector3 position;
 	private bool cambioEscene = false;
+	private string nombreUltimaEscena = "";
 
 	public Vector3 Position
 	{
@@ -58,4 +59,17 @@ public class PlayerMngr {
             planear = value;
         }
     }
+
+	public string UltimaEscena
+	{
+		get
+		{
+			return nombreUltimaEscena;
+		}
+
+		set
+		{
+			nombreUltimaEscena = value;
+		}
+	}
 }

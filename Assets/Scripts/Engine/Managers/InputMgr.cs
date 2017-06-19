@@ -27,12 +27,13 @@ public class InputMgr : AComponent {
     public int TamPelusaRecarga = 5;
     public float _coolDawnDisparo = 0.3f;
     public float _coolDawnCarga = 0.3f;
-    public float _coolDawnRecarga = 0.5f;
+    public float _coolDawnRecarga = 1f;
 
 
 	public string _menuSceneName = "Menu_Pausa";
 	public bool _push = true;
 	public bool inPause = false;
+	private bool _BloquerMandos = true;
 
 	//Enumerado de diferentes eventos de un boton.
 	protected enum TButtonEvent { BEGIN, PRESSED, END, BEGIN_OVER, END_OVER };
@@ -156,7 +157,13 @@ public class InputMgr : AComponent {
         if(callback != null) callback();
 	}
 	//registramos un boton. Tenemos dos posibles eventos. pulsado y fin de pulsado.
-	
+
+	public bool BloqueControles {
+		get { return _BloquerMandos; }
+		set { _BloquerMandos = value; }
+	}
+
+
 	//Registramos los eventos de pointAndClick. Begin es cuando se inicia el pulsado. End cuando termina. pressed mientras se esta presionando
 	public void RegisterPointAndClickEvent(PointAndClickEvent begin,PointAndClickEvent end, PointAndClickEvent pressed)
 	{
@@ -234,78 +241,92 @@ public class InputMgr : AComponent {
     protected override void Update()
     {
         base.Update();
-
-		if (Input.GetButtonDown("Cancel") && !inPause)
+		if (_BloquerMandos)
 		{
-			inPause = true;
-		
-			GameMgr.GetInstance().GetServer<SceneMgr>().PushScene(_menuSceneName);
-		
+			if (Input.GetButtonDown("Cancel") && !inPause)
+			{
+				inPause = true;
+
+				GameMgr.GetInstance().GetServer<SceneMgr>().PushScene(_menuSceneName);
+
+			}
+			else
+			if (Input.GetButtonDown("Cancel") && inPause)
+			{
+				inPause = false;
+				GameMgr.GetInstance().GetServer<SceneMgr>().ReturnScene(false);
+
+
+			}
+
+			if (Input.GetButton("Fire") && _contadorCarga > _coolDawnCarga && _numPelusasCarga < TamPelusaRecarga && !_blockControl)
+			{
+
+				_numPelusasCarga++;
+				_contadorCarga = 0;
+				//Debug.Log("Aumentando Pelusas: " + _numPelusasCarga);
+
+			}
+			else if (Input.GetButtonUp("Fire") && _numPelusasCarga > 0 && !_blockControl)
+			{
+
+				m_DelegateCargaPelusas(_numPelusasCarga);
+				_numPelusasCarga = 0;
+
+			}
+
+
+			_contadorCarga += Time.deltaTime;
+
+
+			if (Input.GetButton("Recargar"))
+			{
+
+				_contadorRecarga += Time.deltaTime;
+
+				if (_contadorRecarga > _coolDawnRecarga)
+				{
+					_blockControl = true;
+					m_DelegateRecargarPelusas();
+				}
+
+			}
+			else
+			{
+				_blockControl = false;
+			}
+
+			if (Input.GetButtonUp("Recargar"))
+			{
+				_contadorRecarga = 0f;
+			}
+
+
+
+
+			jump = Input.GetButtonDown("Jump");
+			//Debug.Log("Bloqueo de control: " + _blockControl);
+
+
+			if (Input.GetAxis("Planear") > 0)
+			{
+				//Debug.Log("Planear pulsado ");
+				_planeo = true;
+			}
+			else
+				_planeo = false;
+
+			if (m_planear != null)
+				m_planear(_planeo);
+
+			//De momento no se va a utilizar el doble salto
+			if (m_DelegateMove != null)
+				m_DelegateMove(Input.GetAxis("Horizontal"), jump, false, _blockControl);
 		}
-        else
-		if (Input.GetButtonDown("Cancel") && inPause)
-		{
-			inPause = false;
-			GameMgr.GetInstance().GetServer<SceneMgr>().ReturnScene(false);
+		else {
 
-
+			m_DelegateMove(0.0f, false, false, false);
 		}
-
-		if (Input.GetButton("Fire") && _contadorCarga > _coolDawnCarga && _numPelusasCarga < TamPelusaRecarga && !_blockControl)
-        {
-
-            _numPelusasCarga++;
-            _contadorCarga = 0;
-            //Debug.Log("Aumentando Pelusas: " + _numPelusasCarga);
-
-        }
-        else if (Input.GetButtonUp("Fire") && _numPelusasCarga > 0 && !_blockControl)
-        {
-
-            m_DelegateCargaPelusas(_numPelusasCarga);
-            _numPelusasCarga = 0;
-
-        }
-
-
-        _contadorCarga += Time.deltaTime;
-
-
-        if (Input.GetButton("Recargar") && _contadorRecarga > _coolDawnRecarga)
-        {
-            m_DelegateRecargarPelusas();
-            _contadorRecarga = 0f;
-        }
-
-
-        //Comprobamos si tenemos que bloquear el movimiento
-        if (Input.GetButton("Recargar"))
-        {
-            _blockControl = true;
-        }
-        else
-        {
-            _blockControl = false;
-        }
-
-        _contadorRecarga += Time.deltaTime;
-        jump = Input.GetButtonDown("Jump");
-        //Debug.Log("Bloqueo de control: " + _blockControl);
-
-
-       if (Input.GetAxis("Planear") > 0) {
-            Debug.Log("Planear.. ");
-            _planeo = true;
-        }else
-            _planeo = false;
-		
-        if (m_planear != null)
-            m_planear(_planeo);
-
-        //De momento no se va a utilizar el doble salto
-        if (m_DelegateMove != null)
-            m_DelegateMove(Input.GetAxis("Horizontal"), jump, false,_blockControl);
-
 
         
     }

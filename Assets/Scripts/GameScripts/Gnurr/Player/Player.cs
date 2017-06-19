@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
@@ -79,7 +80,7 @@ public class Player : MonoBehaviour {
    /// Resta vida de un enemigo, si te mata te manda a la initial zone.
    /// </summary>
    /// <param name="numVidas"></param>
-    public void RestaVidaEnemigo(int numVidas, bool deadZone)
+    public bool RestaVidaEnemigo(int numVidas, bool deadZone)
     {
         if (!deadZone) {
             foreach (ParticleSystem ps in _ParticulasDanio)
@@ -93,18 +94,23 @@ public class Player : MonoBehaviour {
         {
 			//TODO Lanzar animacion de muerte
 			StartCoroutine("FadeBlack");
+			//Cuando funcione el carga de escena hay
+			// Reiniciamos los valores del pj
 			this.transform.position = mSpawManager.GetSpawPoint().position;
-            this._Vida = 20;
-            Vector3 scale = new Vector3(_Vida / _VidaMax, _Vida / _VidaMax, _Vida / _VidaMax);
-            this.transform.localScale = scale;
-        } else if ((_Vida - numVidas) >= _VidaMin)
+			this._Vida = _VidaMax;
+			Vector3 scale = new Vector3(_Vida / _VidaMax, _Vida / _VidaMax, _Vida / _VidaMax);
+			this.transform.localScale = scale;
+			return true;
+			//TODO Lanzar menu GAME OVER		
+
+		}
+		else if ((_Vida - numVidas) >= _VidaMin)
         {
             _Vida -= numVidas;
             Vector3 scale = new Vector3(_Vida / _VidaMax, _Vida / _VidaMax, _Vida / _VidaMax);
             this.transform.localScale = scale;
-        } 
-
-
+        }
+		return false;
     }
 
     public void AumentaVida(int numVidas)
@@ -127,18 +133,40 @@ public class Player : MonoBehaviour {
 
     public void FallInDeathZone(int numVidas)
     {
-        StartCoroutine("FadeBlack");
-        //Restamos la vida al caer por la zona de muerte
-        RestaVidaEnemigo(numVidas, true);
-        //Llamamos al manager de spawn para volver a aparecer
-        //GetComponent<PlayerController>().Move
-        this.transform.position = mSpawManager.GetSpawPoint().position;
+
+		
+		//Restamos la vida al caer por la zona de muerte
+		if (RestaVidaEnemigo(numVidas, true))//Si devuelve true te has muerto, game over
+		{
+			Scene scene = SceneManager.GetActiveScene();
+			//TODO mirar los nombres de las escenas y si estas en una del 1_ pues poner en la 1a
+			if (scene.name == "Lvl_0") 
+			{
+				GameMgr.GetInstance ().GetCustomMgrs ().GetPlayerMgr ().UltimaEscena = "Lvl_0";
+			} else 
+			{
+				GameMgr.GetInstance ().GetCustomMgrs ().GetPlayerMgr ().UltimaEscena = "Lvl_1A";
+			
+			}
+			GameMgr.GetInstance().GetServer<SceneMgr>().ChangeScene("Menu_GameOver2");
+			//return;
+		}
+		GameMgr.GetInstance().GetServer<InputMgr>().BloqueControles = false;
+		StartCoroutine(FadeBlack());
+		//Llamamos al manager de spawn para volver a aparecer en el ultimo check point
+		this.transform.position = mSpawManager.GetSpawPoint().position;
         GameObject cam = GameObject.Find("Camera");
-        cam.transform.position = mSpawManager.GetSpawPoint().position; 
+        cam.transform.position = mSpawManager.GetSpawPoint().position;
+	
+	}
 
-    }
+	IEnumerator WaitAseconds() {
+		print(Time.time);
+		yield return new WaitForSeconds(5);
+		print(Time.time);
+	}
 
-    IEnumerator FadeBlack()
+	IEnumerator FadeBlack()
     {
         float amount = Time.deltaTime / fadeTime;
         Color c1 = fadeBlack.color;
@@ -153,7 +181,9 @@ public class Player : MonoBehaviour {
             yield return new WaitForEndOfFrame();
         }
 
-        yield return null;
+		GameMgr.GetInstance().GetServer<InputMgr>().BloqueControles = true;
+
+		yield return null;
     }
 
     public float Vida

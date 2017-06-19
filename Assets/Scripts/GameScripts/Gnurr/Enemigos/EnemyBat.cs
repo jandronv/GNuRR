@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemyBat : FSMExecutor<EnemyBat>
 {
     
-    public float offVolando;
+    public float offVolando = 0;
     public int _life = 1;
     public int _ataque = 2;
     public Transform center;
@@ -14,7 +14,6 @@ public class EnemyBat : FSMExecutor<EnemyBat>
     public float degreesPerSecond = -65.0f;
     public int NumTimes = 3;
     public float DelayFeedBack = 0.1f;
-
 
     private Vector3 v;
     private GameObject _target;
@@ -139,6 +138,7 @@ public class EnemyBat : FSMExecutor<EnemyBat>
 public class FlyState : State<EnemyBat>
 {
 	private SpriteRenderer[] _sprite;
+	private float posInicial;
 
 	public FlyState(EnemyBat component) : base(component)
     {
@@ -148,6 +148,7 @@ public class FlyState : State<EnemyBat>
     public override void Init()
     {
         base.Init();
+		posInicial = Component.transform.position.y;
 		_sprite = Component.GetComponentsInChildren<SpriteRenderer>();
 		Component.VectorRadius = Component.transform.position - Component.center.position;
         
@@ -158,27 +159,28 @@ public class FlyState : State<EnemyBat>
         base.Update();
 
         Component.VectorRadius = Quaternion.AngleAxis(Component.degreesPerSecond * Time.deltaTime, Vector3.forward) * Component.VectorRadius;
-		Debug.Log("Vector Radius: " + Component.transform.position);
 		//-1.4
 		//1.3
 		
 
         Component.transform.position = Component.center.position + Component.VectorRadius;
+		
 		//TODO coger la pos inicial de Y y sumarle un offset y mirar q sea mayor q eso
-		/*if (Component.transform.position.y == -1.4)
+		if (Component.transform.position.y  > posInicial + Component.offVolando)
+		{
+			
+			foreach (SpriteRenderer s in _sprite)
+			{
+				s.flipX = true;
+			}
+		}
+		else if (Component.transform.position.y <= posInicial)
 		{
 			foreach (SpriteRenderer s in _sprite)
 			{
 				s.flipX = false;
 			}
 		}
-		else if (Component.VectorRadius.x == 1.3)
-		{
-			foreach (SpriteRenderer s in _sprite)
-			{
-				s.flipX = true;
-			}
-		}*/
 	}
 }
 
