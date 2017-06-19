@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour {
     private CharacterController m_CharacterController;
     private Player m_Player;
     private bool _planear;
+	private bool _puedePlanear;
     private bool SentidoBullet = false;
     private bool downPlatform = false, upPlatform = false, InSlope = false;
     public float _speedInJump = 6.0F;
@@ -44,16 +45,19 @@ public class PlayerController : MonoBehaviour {
 	public AudioClip clipFire;
 	private AudioSource audio;
 
+	private float ultimaPosY;
+
 
 
 
 	// Use this for initialization
 	void Start ()
     {
-
+		ultimaPosY = transform.localPosition.y;
 		//InvokeRepeating("PlaySound", time, RepeatRate);
 		//_camera = GameObject.FindGameObjectWithTag("Camera");
 		_planear = false;
+		_puedePlanear = false;
         m_CharacterController = GetComponent<CharacterController>();
         m_Player = GetComponent<Player>();
         // si tengo el poder => lo registro. TODO esta registrado de momento
@@ -134,14 +138,18 @@ public class PlayerController : MonoBehaviour {
             }
      
         }
-       
+		if (transform.localPosition.y >= ultimaPosY) {//Comprobamos la altura de personaje para comprobar que esta en unsalto o ya cae,asi puede planear
+			Debug.Log ("Estoy saltando!! y puedes planear");
+			_puedePlanear = false;
+		} else
+			_puedePlanear = true;
 
 		if (transform.localPosition.z != 0.0f && !upPlatform && !downPlatform)
 		{
 			Debug.Log("Te has movido del eje Z");
 			transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, 0);
 		}
-
+		ultimaPosY = transform.localPosition.y;
 	}
 
 
@@ -191,12 +199,15 @@ public class PlayerController : MonoBehaviour {
     private void RecargaPelusas()
     {
         if (m_CharacterController.isGrounded) {
-            m_Player.AumentaVida(_NumRecarga);
-            _animations.SetTrigger("Recargar");
-            foreach (ParticleSystem ps in _ParticulasRecarga)
-            {
-                ps.Play();
-            }
+			//TODO meter aqui un delay para empezar a cargar
+			
+				m_Player.AumentaVida(_NumRecarga);
+				_animations.SetTrigger("Recargar");
+				foreach (ParticleSystem ps in _ParticulasRecarga)
+				{
+					ps.Play();
+				}
+			
         }
 
     }
@@ -209,13 +220,7 @@ public class PlayerController : MonoBehaviour {
     {
         _planear = planear;
     }
-
-	/*void PlaySoundWalk()
-	{
-		if (!audio.isPlaying) {
-			audio.PlayOneShot(clipWalk);
-		}
-	}*/
+		
 
 	private void Move(float directionX, bool jump, bool dobleJump,bool blockControl)
     {
@@ -270,7 +275,7 @@ public class PlayerController : MonoBehaviour {
 
 		}
 		//Estas en el suelo y vas a saltar
-			if (IsGround && jump)
+		if (IsGround && jump)
         {
 			_animations.SetTrigger("Jump");
             direction.y = _jumpSpeed;
@@ -285,12 +290,18 @@ public class PlayerController : MonoBehaviour {
         }
 
         direction = transform.TransformDirection(direction);
-        if (_planear) {
-            Debug.Log("Planeando...");
-            direction.y -= _gravityPlaning * Time.deltaTime;
-        }else
-            direction.y -= _gravity * Time.deltaTime;
 
+	
+		//TODO solo aplicar la gravedad del planeo cuando ya has saltado, cuando has pulsado el salto, esta casi, asi no aplica la gravidad si has pulsado de antes(mirar como lo hace shantae)
+		if (_planear && _puedePlanear)
+		{
+			Debug.Log("Planeando...");
+			direction.y -= _gravityPlaning * Time.deltaTime;
+		}
+		else
+		{
+			direction.y -= _gravity * Time.deltaTime;
+		}
 		if (!InSlope) {
 			Debug.DrawRay(transform.position, direction, Color.red);
 			m_CharacterController.Move(direction * Time.deltaTime);
