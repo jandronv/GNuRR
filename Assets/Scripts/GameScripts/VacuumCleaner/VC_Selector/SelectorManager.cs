@@ -22,8 +22,10 @@ public class SelectorManager : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         mundoseleccionado = mundos.transform.rotation;
-        Debug.Log(mundoseleccionado);
+        //Debug.Log(mundoseleccionado);
         enter = Input.GetButton("Interact");
+
+
         if (enter == true)
         {
             if (mundoseleccionado.z == 0) {
@@ -41,12 +43,25 @@ public class SelectorManager : MonoBehaviour {
     {
         //_animations.SetBool("TriggerIzq", true);
         //Debug.LogWarning("Entra");
-        fondo.sprite = ima3;
-        mundos.transform.Rotate(0, 0, 180);
+
+        if (other.gameObject.tag == "Player")
+        {
+            fondo.sprite = ima3;
+            if (mundoseleccionado.z == 0)
+            {
+                mundos.transform.Rotate(0, 0, 180);
+            }
+        }
+
+
     }
 
     private void OnTriggerExit(Collider other)
     {
-        fondo.sprite = ima2;
+        if (other.gameObject.tag == "Player")
+        {
+            fondo.sprite = ima2;
+        }
+
     }
 }
