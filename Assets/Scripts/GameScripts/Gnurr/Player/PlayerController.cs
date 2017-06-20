@@ -10,7 +10,9 @@ public class PlayerController : MonoBehaviour {
     private Player m_Player;
     private bool _planear;
 	private bool _puedePlanear;
-    private bool SentidoBullet = false;
+	private bool PlaneoActivo = false;
+
+	private bool SentidoBullet = false;
     private bool downPlatform = false, upPlatform = false, InSlope = false;
     public float _speedInJump = 6.0F;
     public float _speed = 6.0F;
@@ -26,6 +28,7 @@ public class PlayerController : MonoBehaviour {
     private GameObject ultimoTiled = null;
 
     private Animator _animations;
+	public Animator _animationEyes;
     //private GameObject _camera;
     //TODO Atributos para el Fire()
     public GameObject bulletPrefab;
@@ -216,10 +219,16 @@ public class PlayerController : MonoBehaviour {
 		InSlope = inSlope;
 	}
 
-    private void Planear(bool planear)
+    public void Planear(bool planear)
     {
         _planear = planear;
     }
+
+	public void ActivaPlanear()
+	{
+
+		PlaneoActivo = true;
+	}
 		
 
 	private void Move(float directionX, bool jump, bool dobleJump,bool blockControl)
@@ -229,7 +238,9 @@ public class PlayerController : MonoBehaviour {
 		//Debug.Log("Is Jump: " + jump);
 		if (directionX > 0 && !blockControl)
 		{
+			//TODO Lanzar animacion de los OJOS!!!!!
 			_animations.SetTrigger("Run");
+			_animationEyes.SetTrigger("Walk");
 			Estela.Play();
 			SentidoBullet = false;
 			m_Player.FlipInX(false);
@@ -239,6 +250,7 @@ public class PlayerController : MonoBehaviour {
 		else if (directionX < 0 && !blockControl)
 		{
 			_animations.SetTrigger("Run");
+			_animationEyes.SetTrigger("Walk");
 			Estela.Play();
 			SentidoBullet = true;
 			m_Player.FlipInX(true);
@@ -248,6 +260,7 @@ public class PlayerController : MonoBehaviour {
 		else
 		{
 			_animations.SetTrigger("Idle");
+			_animationEyes.SetTrigger("Idle");
 			Estela.Stop();
 		}
 		
@@ -293,7 +306,7 @@ public class PlayerController : MonoBehaviour {
 
 	
 		//TODO solo aplicar la gravedad del planeo cuando ya has saltado, cuando has pulsado el salto, esta casi, asi no aplica la gravidad si has pulsado de antes(mirar como lo hace shantae)
-		if (_planear && _puedePlanear)
+		if (_planear && _puedePlanear && PlaneoActivo)
 		{
 			Debug.Log("Planeando...");
 			direction.y -= _gravityPlaning * Time.deltaTime;
