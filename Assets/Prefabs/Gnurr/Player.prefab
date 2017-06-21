@@ -186,12 +186,12 @@ GameObject:
   - component: {fileID: 198994164199494132}
   - component: {fileID: 199363067361507518}
   m_Layer: 0
-  m_Name: FDBCK. DEP. TRAY. SALTOS
+  m_Name: EstelaDebugger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1510891152690928
 GameObject:
   m_ObjectHideFlags: 1
@@ -22797,7 +22797,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1619203754
+  randomSeed: -1025027842
   InitialModule:
     serializedVersion: 3
     enabled: 1
