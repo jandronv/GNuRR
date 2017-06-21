@@ -489,7 +489,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1896667052371858}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.35, y: -8.94, z: 0}
+  m_LocalPosition: {x: -4.46, y: -88.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4912674194212796}
@@ -844,7 +844,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InitialWorld: {fileID: 0}
   EndWorld: {fileID: 0}
-  _offsetRun: 1
   RotateX: 0.23
   RotateY: 0
   RotateZ: 0
@@ -873,7 +872,7 @@ MonoBehaviour:
   _jumpSpeed: 10
   _gravity: 20
   _gravityScale: 0.3
-  _gravityPlaning: 11
+  _gravityPlaning: 5
   _NumFire: 1
   _NumRecarga: 1
   distance: 800
@@ -904,6 +903,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _PlayerCollider: {fileID: 143217796553244324}
   _Player: {fileID: 1790377537248408}
+  offSet: 0
+  _playerMin: {x: 0, y: 0}
+  _playerMax: {x: 0, y: 0}
+  _WindowMin: {x: 0, y: 0}
+  _WindowMax: {x: 0, y: 0}
   x: 0
   y: 0
   lookAhead: 0
