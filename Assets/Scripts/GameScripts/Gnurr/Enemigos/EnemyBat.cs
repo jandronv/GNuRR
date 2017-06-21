@@ -66,7 +66,7 @@ public class EnemyBat : FSMExecutor<EnemyBat>
 
         if (_life == 0)
         {
-            //GetComponentInChildren<Animator>().SetBool("Dead", true);
+            GetComponentInChildren<Animator>().SetTrigger("muerte");
             Destroy(gameObject, 1f);
         }
     }
