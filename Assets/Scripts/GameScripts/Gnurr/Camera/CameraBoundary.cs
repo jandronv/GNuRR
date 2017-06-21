@@ -51,14 +51,14 @@ public class CameraBoundary : MonoBehaviour {
 		//La pelusa llega al limite derecho 
 		//TODO el problema esta en que siempre devuelve 0, por lo tanto, la camara nunca se adelanta porque el player simpre esta dentro del boundary.
 		//Lo que hay q hacer es lograr que la camara no se mueva dentro del boundary y cuando llegue a los limetes hacer que se adelante con el offsetrun.
-       if (_playerMax.x >= _WindowMax.x)
+       if (_playerMax.x + offSet >= _WindowMax.x)
         {
-			x = _Player.transform.position.x;
+			x = _Player.transform.position.x + offSet;
             lookAhead = 1;
         }
-        else if (_playerMin.x <= _WindowMin.x)
+        else if (_playerMin.x - offSet < _WindowMin.x)
         {
-            x = _Player.transform.position.x ;
+            x = _Player.transform.position.x - offSet;
             lookAhead = -1;
         }
 
@@ -70,7 +70,7 @@ public class CameraBoundary : MonoBehaviour {
 			x = _Player.transform.position.x;
 			lookAhead = 0;
 		}
-        if (_playerMax.y > _WindowMax.y)
+        if (_playerMax.y > _WindowMax.y)//TODO mirar si estas en cuestas y subirlo contigo
         {
             y = _Player.transform.position.y;
         }
@@ -83,7 +83,7 @@ public class CameraBoundary : MonoBehaviour {
         {
             y = _Player.transform.position.y;
         }*/
-        //Actualizamos la posicion de la camara
+        //Actualizamos la posicion del boundary
         transform.position = new Vector3(x, y, transform.position.z);
     }
 }

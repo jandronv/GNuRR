@@ -19,7 +19,7 @@ public class CoinMgr : MonoBehaviour {
         {
             coinscogidas = coinscogidas + 1;
             Destroy(coincogida);
-            Debug.Log("Has cogido " + coinscogidas + " coins.");
+            //Debug.Log("Has cogido " + coinscogidas + " coins.");
         }
 
 	}

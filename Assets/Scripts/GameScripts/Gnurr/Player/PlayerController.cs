@@ -240,7 +240,7 @@ public class PlayerController : MonoBehaviour {
 		{
 			//TODO Lanzar animacion de los OJOS!!!!!
 			_animations.SetTrigger("Run");
-			_animationEyes.SetTrigger("Walk");
+			//_animationEyes.SetTrigger("Walk");
 			Estela.Play();
 			SentidoBullet = false;
 			m_Player.FlipInX(false);
@@ -250,7 +250,7 @@ public class PlayerController : MonoBehaviour {
 		else if (directionX < 0 && !blockControl)
 		{
 			_animations.SetTrigger("Run");
-			_animationEyes.SetTrigger("Walk");
+			//_animationEyes.SetTrigger("Walk");
 			Estela.Play();
 			SentidoBullet = true;
 			m_Player.FlipInX(true);
@@ -260,7 +260,7 @@ public class PlayerController : MonoBehaviour {
 		else
 		{
 			_animations.SetTrigger("Idle");
-			_animationEyes.SetTrigger("Idle");
+			//_animationEyes.SetTrigger("Idle");
 			Estela.Stop();
 		}
 		

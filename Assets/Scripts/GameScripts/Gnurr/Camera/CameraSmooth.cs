@@ -52,9 +52,12 @@ public class CameraSmooth : MonoBehaviour {
         }
         x = transform.position.x;
         y = transform.position.y;
+		//Debug.Log("Pos de la camara: "+ x);
+		
 
-        _targetPositionX = mCameraBoundary.x ;
-        _targetPositionY = mCameraBoundary.y;
+		_targetPositionX = mCameraBoundary.x ;
+		//Debug.Log("Pos del target: " + _targetPositionX);
+		_targetPositionY = mCameraBoundary.y;
 
         // Debug.Log("Camara "+Mathf.Round(x)+" Boundary "+ Mathf.Round(_targetPositionX));
 
@@ -68,26 +71,19 @@ public class CameraSmooth : MonoBehaviour {
         {
             if (mCameraBoundary.lookAhead == 1)
             {
-                //Debug.Log("x de la camara: " + x + "Target: " + _targetPositionX);
+                Debug.Log("1");
 				x = Mathf.SmoothDamp(x , _targetPositionX + offSetX, ref velocityX, smoothingX);
 
             }//TODO
             else if (mCameraBoundary.lookAhead == -1)
             {
-				x = Mathf.SmoothDamp(x, _targetPositionX - offSetX, ref velocityX, smoothingX);
+				Debug.Log("-1");
+				x = Mathf.SmoothDamp(x , _targetPositionX - offSetX, ref velocityX, smoothingX);
             }
             else
-            {
-                if (gnurr.flipX)
-                {
-                   
-					x = Mathf.SmoothDamp(x, _targetPositionX, ref velocityX, smoothingX);
-                }
-                else
-                {
-                   
-					x = Mathf.SmoothDamp(x, _targetPositionX, ref velocityX, smoothingX);
-                }
+            {                  
+				x = Mathf.SmoothDamp(x, _targetPositionX, ref velocityX, smoothingX);
+ 
             }
 			if (y < _targetPositionY)
 			{
