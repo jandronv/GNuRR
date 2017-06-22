@@ -17630,7 +17630,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1356502267454158, guid: 28785e656f87ef94db2482c41f29d568, type: 2}
       propertyPath: m_Name
-      value: Lvl_2 (1)
+      value: Ground
       objectReference: {fileID: 0}
     - target: {fileID: 65099503546931510, guid: 28785e656f87ef94db2482c41f29d568,
         type: 2}
@@ -18646,6 +18646,10 @@ Prefab:
         type: 2}
       propertyPath: m_IsTrigger
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1356502267454158, guid: 28785e656f87ef94db2482c41f29d568, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 28785e656f87ef94db2482c41f29d568, type: 2}
@@ -23894,11 +23898,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4419985926023168, guid: ec1a2be8d2282ca4ba81543624034e8d, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -4.46
+      value: -51.28
       objectReference: {fileID: 0}
     - target: {fileID: 4419985926023168, guid: ec1a2be8d2282ca4ba81543624034e8d, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -88.2
+      value: -75.7
       objectReference: {fileID: 0}
     - target: {fileID: 4419985926023168, guid: ec1a2be8d2282ca4ba81543624034e8d, type: 2}
       propertyPath: m_LocalPosition.z
