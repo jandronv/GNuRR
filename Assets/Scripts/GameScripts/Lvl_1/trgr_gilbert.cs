@@ -41,7 +41,7 @@ public class trgr_gilbert : MonoBehaviour {
                 y_button.SetActive(false);
             }
 
-			if (num_bocadillos == 10)
+			if (num_bocadillos == 18)
 			{
 				GameMgr.GetInstance().GetServer<InputMgr>().BloqueControles = true;
 			}
