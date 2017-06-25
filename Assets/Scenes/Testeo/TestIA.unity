@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074002, b: 0.3587271, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -518,6 +518,11 @@ Prefab:
       propertyPath: _VidaMin
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 114641441552476642, guid: ec1a2be8d2282ca4ba81543624034e8d,
+        type: 2}
+      propertyPath: clipRecharge
+      value: 
+      objectReference: {fileID: 8300000, guid: 06df80f9689b9334d9f8ae2de9dffd2b, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ec1a2be8d2282ca4ba81543624034e8d, type: 2}
   m_IsPrefabParent: 0
