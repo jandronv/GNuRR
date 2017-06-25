@@ -30377,6 +30377,11 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: -7.39
       objectReference: {fileID: 0}
+    - target: {fileID: 114641441552476642, guid: ec1a2be8d2282ca4ba81543624034e8d,
+        type: 2}
+      propertyPath: clipRecharge
+      value: 
+      objectReference: {fileID: 8300000, guid: 06df80f9689b9334d9f8ae2de9dffd2b, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ec1a2be8d2282ca4ba81543624034e8d, type: 2}
   m_IsPrefabParent: 0
@@ -34130,6 +34135,14 @@ Prefab:
     - target: {fileID: 4128400770425860, guid: 6a4632ef8dcb89d4cbbd4544333d0e2b, type: 2}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4817275998425584, guid: 6a4632ef8dcb89d4cbbd4544333d0e2b, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4817275998425584, guid: 6a4632ef8dcb89d4cbbd4544333d0e2b, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0.39
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6a4632ef8dcb89d4cbbd4544333d0e2b, type: 2}
