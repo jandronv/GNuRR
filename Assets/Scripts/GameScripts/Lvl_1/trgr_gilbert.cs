@@ -14,10 +14,7 @@ public class trgr_gilbert : MonoBehaviour {
     {
         if (other.gameObject.tag == "Player")
         {
-			if (entraPrimera) {
-				entraPrimera = false;
-				GameMgr.GetInstance().GetServer<InputMgr>().BloqueControles = false;
-			}
+			
 			y_button.SetActive(true);
         }
 
@@ -32,6 +29,12 @@ public class trgr_gilbert : MonoBehaviour {
             
             if (enter == true)
             {
+				if (entraPrimera)
+				{
+					entraPrimera = false;
+					GameMgr.GetInstance().GetServer<InputMgr>().BloqueControles = false;
+				}
+
 				num_bocadillos++;
                 txt_gilbert.SetActive(true);
                 y_button.SetActive(false);
