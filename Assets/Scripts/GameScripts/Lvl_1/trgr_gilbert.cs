@@ -5,6 +5,8 @@ using UnityEngine;
 public class trgr_gilbert : MonoBehaviour {
 
     public GameObject y_button;
+    private bool enter = false;
+    public GameObject txt_gilbert;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -14,11 +16,25 @@ public class trgr_gilbert : MonoBehaviour {
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            enter = Input.GetButtonDown("Interact");
+            
+            if (enter == true)
+            {
+                txt_gilbert.SetActive(true);
+                y_button.SetActive(false);
+            }
+        }
+    }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            y_button.SetActive(false);
+            //y_button.SetActive(false);
         }
     }
 
