@@ -8,6 +8,7 @@ public class Cargador : MonoBehaviour {
 
     public void OnStartPressed()
     {
+		//Asignamos que la ultima escena es el nivel 0, por ser unanueva partida
 		GameMgr.GetInstance().GetCustomMgrs().GetPlayerMgr().UltimaEscena = _nombreEscena;
 
 		GameMgr.GetInstance().GetServer<SceneMgr>().ChangeScene("Loading", _nombreEscena);

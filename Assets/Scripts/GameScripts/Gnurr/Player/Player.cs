@@ -140,10 +140,13 @@ public class Player : MonoBehaviour {
 		{
 			Scene scene = SceneManager.GetActiveScene();
 			//TODO mirar los nombres de las escenas y si estas en una del 1_ pues poner en la 1a
-			if (scene.name == "Lvl_0") 
+			if (scene.name == "Lvl_0")
 			{
-				GameMgr.GetInstance ().GetCustomMgrs ().GetPlayerMgr ().UltimaEscena = "Lvl_0";
-			} else 
+				GameMgr.GetInstance().GetCustomMgrs().GetPlayerMgr().UltimaEscena = "Lvl_0";
+			} else if (scene.name == "Lvl_2")
+			{
+				GameMgr.GetInstance().GetCustomMgrs().GetPlayerMgr().UltimaEscena = "Lvl_2";
+			} else
 			{
 				GameMgr.GetInstance ().GetCustomMgrs ().GetPlayerMgr ().UltimaEscena = "Lvl_1A";
 			

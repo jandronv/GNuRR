@@ -262,7 +262,9 @@ public class InputMgr : AComponent {
 			if (Input.GetButton("Fire") && _contadorCarga > _coolDawnCarga && _numPelusasCarga < TamPelusaRecarga && !_blockControl)
 			{
 
-				_numPelusasCarga++;
+				//_numPelusasCarga++;
+				//TODO se ha dejado el disparo siempre a 1
+				_numPelusasCarga = 1;
 				_contadorCarga = 0;
 				//Debug.Log("Aumentando Pelusas: " + _numPelusasCarga);
 
