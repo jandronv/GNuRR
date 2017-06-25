@@ -6,6 +6,7 @@ public class txt_fake_behaviour : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
         GameMgr.GetInstance().GetServer<InputMgr>().BloqueControles = true;
 
     }
