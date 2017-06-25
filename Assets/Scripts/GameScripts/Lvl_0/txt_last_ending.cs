@@ -20,6 +20,7 @@ public class txt_last_ending : MonoBehaviour {
 
         if (enter == true)
         {
+            GameMgr.GetInstance().GetServer<InputMgr>().BloqueControles = true;
             Jangah.GetComponent<Animation>().Play();
             Destroy(trigger_jangah);
             Destroy(this_txt);
