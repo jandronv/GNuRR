@@ -33886,14 +33886,6 @@ Prefab:
       propertyPath: m_Name
       value: Tard_basic 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4260027230677358, guid: f73957f28b4acac49bed219949b7414c, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -1.42
-      objectReference: {fileID: 0}
-    - target: {fileID: 4062783328858374, guid: f73957f28b4acac49bed219949b7414c, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -4.94
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f73957f28b4acac49bed219949b7414c, type: 2}
   m_IsPrefabParent: 0
