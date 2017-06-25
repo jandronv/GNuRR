@@ -8,7 +8,9 @@ public class Cargador : MonoBehaviour {
 
     public void OnStartPressed()
     {
-        GameMgr.GetInstance().GetServer<SceneMgr>().ChangeScene("Loading", _nombreEscena);
+		GameMgr.GetInstance().GetCustomMgrs().GetPlayerMgr().UltimaEscena = _nombreEscena;
+
+		GameMgr.GetInstance().GetServer<SceneMgr>().ChangeScene("Loading", _nombreEscena);
     }
 
     public void VolverNivel()

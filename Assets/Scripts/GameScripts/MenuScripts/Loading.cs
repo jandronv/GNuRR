@@ -6,6 +6,7 @@ public class Loading : MonoBehaviour {
 
 	public string nivel;
 	public bool primera = true;
+	public Animation anim;
 	// Use this for initialization
 	void Start () {
 		
@@ -16,9 +17,15 @@ public class Loading : MonoBehaviour {
 
 		if (primera)
 		{
-			GameMgr.GetInstance().GetServer<SceneMgr>().ChangeAsyncScene(nivel);
+			GameMgr.GetInstance().GetServer<SceneMgr>().ChangeAsyncScene(GameMgr.GetInstance().GetCustomMgrs().GetPlayerMgr().UltimaEscena);
 			primera = false;
 		}
+
+		if (!anim.IsPlaying("Loading_animation"))
+		{
+			anim.Play();
+		}
+			
 	}
 
 

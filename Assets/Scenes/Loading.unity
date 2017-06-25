@@ -211,6 +211,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nivel: 
   primera: 1
+  anim: {fileID: 1837727747}
 --- !u!1 &556330751
 GameObject:
   m_ObjectHideFlags: 0
@@ -222,7 +223,7 @@ GameObject:
   - component: {fileID: 556330754}
   - component: {fileID: 556330753}
   m_Layer: 5
-  m_Name: Image
+  m_Name: BackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -239,12 +240,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 618879563}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &556330753
 MonoBehaviour:
@@ -265,7 +266,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: cde2595c667b5cf4cad817452966f5f4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -369,8 +370,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 614797951}
   - {fileID: 556330752}
+  - {fileID: 614797951}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -486,7 +487,7 @@ Prefab:
     - target: {fileID: 224877288784727406, guid: 06c38f22e6315d74ab147230450ecd58,
         type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224877288784727406, guid: 06c38f22e6315d74ab147230450ecd58,
         type: 2}
@@ -538,9 +539,19 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 111856674406509494, guid: 06c38f22e6315d74ab147230450ecd58,
+        type: 2}
+      propertyPath: m_PlayAutomatically
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 06c38f22e6315d74ab147230450ecd58, type: 2}
   m_IsPrefabParent: 0
+--- !u!111 &1837727747 stripped
+Animation:
+  m_PrefabParentObject: {fileID: 111856674406509494, guid: 06c38f22e6315d74ab147230450ecd58,
+    type: 2}
+  m_PrefabInternal: {fileID: 1837727746}
 --- !u!1 &2024233401
 GameObject:
   m_ObjectHideFlags: 0
