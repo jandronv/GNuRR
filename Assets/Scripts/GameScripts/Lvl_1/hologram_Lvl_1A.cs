@@ -8,6 +8,7 @@ public class hologram_Lvl_1A : MonoBehaviour {
     private bool enter = false;
     public GameObject txt_hologram_1;
     public GameObject holograma;
+    public bool entraPrimera = true;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -24,6 +25,12 @@ public class hologram_Lvl_1A : MonoBehaviour {
         {
             if (enter == true)
             {
+                if (entraPrimera)
+                {
+                    entraPrimera = false;
+                    GameMgr.GetInstance().GetServer<InputMgr>().BloqueControles = false;
+                }
+
                 y_button.SetActive(false);
                 holograma.SetActive(true);
                 txt_hologram_1.SetActive(true);
