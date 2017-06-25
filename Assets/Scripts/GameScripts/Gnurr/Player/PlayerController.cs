@@ -226,7 +226,7 @@ public class PlayerController : MonoBehaviour {
 
 	public void ActivaPlanear()
 	{
-
+		//Debug.Log("Entra");
 		PlaneoActivo = true;
 	}
 		
