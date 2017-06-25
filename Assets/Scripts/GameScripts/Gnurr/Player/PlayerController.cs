@@ -61,8 +61,15 @@ public class PlayerController : MonoBehaviour {
 		ultimaPosY = transform.localPosition.y;
 		//InvokeRepeating("PlaySound", time, RepeatRate);
 		//_camera = GameObject.FindGameObjectWithTag("Camera");
-		_planear = false;
-		_puedePlanear = false;
+		PlayerMngr p = GameMgr.GetInstance().GetCustomMgrs().GetPlayerMgr();
+
+		if (p.Planear)
+		{
+			Debug.Log("Puede planear");
+			PlaneoActivo = p.Planear;
+		}
+		
+		//_puedePlanear = false;
         m_CharacterController = GetComponent<CharacterController>();
         m_Player = GetComponent<Player>();
         // si tengo el poder => lo registro. TODO esta registrado de momento
@@ -88,10 +95,12 @@ public class PlayerController : MonoBehaviour {
         }
 		audio = GetComponent<AudioSource>();
 		Debug.Log("Entra al Player");
-		PlayerMngr p = GameMgr.GetInstance().GetCustomMgrs().GetPlayerMgr();
+
+
+		
 		if (p.CambioEscena)
 		{
-
+			
 			Debug.Log("Hay cambio de escena, pongo al player en la pos final y reseteo la posicion");
 			p.CambioEscena = false;
 			transform.localPosition = p.Position;
@@ -440,7 +449,7 @@ public class PlayerController : MonoBehaviour {
 
     private void OnDestroy()
     {
-        GameMgr.GetInstance().GetServer<InputMgr>().UnregisterPlanear = Planear;
+       // GameMgr.GetInstance().GetServer<InputMgr>().UnregisterPlanear = Planear;
         GameMgr.GetInstance().GetServer<InputMgr>().UnRegisterMove = Move;
         GameMgr.GetInstance().GetServer<InputMgr>().UnRegisterFire = Fire;
         GameMgr.GetInstance().GetServer<InputMgr>().UnRegisterRecargarPelusas = RecargaPelusas;

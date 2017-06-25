@@ -32,6 +32,8 @@ public class trgr_gilbert : MonoBehaviour {
 				if (entraPrimera)
 				{
 					other.gameObject.GetComponent<PlayerController>().ActivaPlanear();
+					PlayerMngr p = GameMgr.GetInstance().GetCustomMgrs().GetPlayerMgr();
+					p.Planear = true;
 					entraPrimera = false;
 					GameMgr.GetInstance().GetServer<InputMgr>().BloqueControles = false;
 				}
