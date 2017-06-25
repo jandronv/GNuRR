@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour {
 
     public Transform RechargeParticles;
     public ParticleSystem Estela;
-	public SpriteRenderer ojos;
+	//public SpriteRenderer ojos;
 
 	private ParticleSystem[] _ParticulasRecarga;
 
@@ -210,9 +210,9 @@ public class PlayerController : MonoBehaviour {
         if (m_CharacterController.isGrounded) {
 			//TODO meter aqui un delay para empezar a cargar
 				
-				m_Player.AumentaVida(_NumRecarga);
+				 m_Player.AumentaVida(_NumRecarga);
 				_animations.SetTrigger("Recargar");
-			
+				_animationEyes.SetTrigger("Recarga");
 				foreach (ParticleSystem ps in _ParticulasRecarga)
 				{
 					ps.Play();
@@ -267,7 +267,8 @@ public class PlayerController : MonoBehaviour {
 		else
 		{
 			_animations.SetTrigger("Idle");
-			_animationEyes.SetTrigger("Idle");
+			if (!blockControl) { _animationEyes.SetTrigger("Idle"); }
+			
 			Estela.Stop();
 		}
 		
@@ -307,7 +308,7 @@ public class PlayerController : MonoBehaviour {
 
 		if (blockControl)
 		{
-			ojos.enabled = false;
+			//ojos.enabled = false;
 			direction = new Vector3(0, m_CharacterController.velocity.y, 0);
 		}
 		else {
@@ -430,7 +431,7 @@ public class PlayerController : MonoBehaviour {
 			if (_animations.GetCurrentAnimatorStateInfo(0).IsName("Recargar"))
 			{
 				_animations.SetTrigger("Idle");
-				ojos.enabled = true;
+				//ojos.enabled = true;
 				audio.Stop();
 			}
 		}
