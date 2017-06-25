@@ -142,7 +142,7 @@ public class PlayerController : MonoBehaviour {
      
         }
 		if (transform.localPosition.y >= ultimaPosY) {//Comprobamos la altura de personaje para comprobar que esta en unsalto o ya cae,asi puede planear
-			Debug.Log ("Estoy saltando!! y puedes planear");
+			//Debug.Log ("Estoy saltando!! y puedes planear");
 			_puedePlanear = false;
 		} else
 			_puedePlanear = true;
