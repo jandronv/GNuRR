@@ -7,6 +7,7 @@ public class pelusero : MonoBehaviour {
     public GameObject y_button;
     private bool enter = false;
     public GameObject txt_pelusero_1;
+    public bool entraPrimera = true;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -23,6 +24,12 @@ public class pelusero : MonoBehaviour {
         {
             if (enter == true)
             {
+                if (entraPrimera)
+                {
+                    entraPrimera = false;
+                    GameMgr.GetInstance().GetServer<InputMgr>().BloqueControles = false;
+                }
+
                 y_button.SetActive(false);
                 txt_pelusero_1.SetActive(true);
             }

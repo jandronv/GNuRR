@@ -7,8 +7,9 @@ public class trigger_jangah : MonoBehaviour {
     public GameObject Y_button;
     private bool enter = false;
     public GameObject txt_jangah;
+    public bool entraPrimera = true;
 
-	void Start () {
+    void Start () {
         Y_button.SetActive(false);
         txt_jangah.SetActive(false);
 	}
@@ -30,6 +31,13 @@ public class trigger_jangah : MonoBehaviour {
         {
             if (enter == true)
             {
+                if (entraPrimera)
+                {
+                    entraPrimera = false;
+                    GameMgr.GetInstance().GetServer<InputMgr>().BloqueControles = false;
+                }
+
+
                 Y_button.SetActive(false);
                 txt_jangah.SetActive(true);
             }
