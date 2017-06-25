@@ -71,13 +71,13 @@ public class CameraSmooth : MonoBehaviour {
         {
             if (mCameraBoundary.lookAhead == 1)
             {
-                Debug.Log("1");
+                //Debug.Log("1");
 				x = Mathf.SmoothDamp(x , _targetPositionX + offSetX, ref velocityX, smoothingX);
 
             }//TODO
             else if (mCameraBoundary.lookAhead == -1)
             {
-				Debug.Log("-1");
+				//Debug.Log("-1");
 				x = Mathf.SmoothDamp(x , _targetPositionX - offSetX, ref velocityX, smoothingX);
             }
             else

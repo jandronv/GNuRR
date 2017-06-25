@@ -40,9 +40,11 @@ public class PlayerController : MonoBehaviour {
 
     public Transform RechargeParticles;
     public ParticleSystem Estela;
+	public SpriteRenderer ojos;
 
 	private ParticleSystem[] _ParticulasRecarga;
 
+	public AudioClip clipRecharge;
 	public AudioClip clipWalk;
 	public AudioClip clipJump;
 	public AudioClip clipFire;
@@ -69,8 +71,10 @@ public class PlayerController : MonoBehaviour {
         GameMgr.GetInstance().GetServer<InputMgr>().RegisterFire = Fire;
         GameMgr.GetInstance().GetServer<InputMgr>().RegisterRecargarPelusas = RecargaPelusas;
         GameMgr.GetInstance().GetServer<InputMgr>().RegisterCargaPelusas = CargaPelusas;
+		GameMgr.GetInstance().GetServer<InputMgr>().RegisterSonidoRecarga = SonidoRecarga;
 
-        _animations = GetComponentInChildren<Animator>();
+
+		_animations = GetComponentInChildren<Animator>();
         if (RechargeParticles == null)
         {
             Debug.LogWarning("Asigna el sistema de particulas de recarga en el PlayerController!!");
@@ -169,6 +173,7 @@ public class PlayerController : MonoBehaviour {
         if (m_Player.Vida > m_Player._VidaMin )
         {
             _animations.SetTrigger("Fire");
+			_animationEyes.SetTrigger("Attack");
             if (SentidoBullet)
             {
 
@@ -201,11 +206,13 @@ public class PlayerController : MonoBehaviour {
 
     private void RecargaPelusas()
     {
+
         if (m_CharacterController.isGrounded) {
 			//TODO meter aqui un delay para empezar a cargar
-			
+				
 				m_Player.AumentaVida(_NumRecarga);
 				_animations.SetTrigger("Recargar");
+			
 				foreach (ParticleSystem ps in _ParticulasRecarga)
 				{
 					ps.Play();
@@ -240,7 +247,7 @@ public class PlayerController : MonoBehaviour {
 		{
 			//TODO Lanzar animacion de los OJOS!!!!!
 			_animations.SetTrigger("Run");
-			//_animationEyes.SetTrigger("Walk");
+			_animationEyes.SetTrigger("Walk");
 			Estela.Play();
 			SentidoBullet = false;
 			m_Player.FlipInX(false);
@@ -250,7 +257,7 @@ public class PlayerController : MonoBehaviour {
 		else if (directionX < 0 && !blockControl)
 		{
 			_animations.SetTrigger("Run");
-			//_animationEyes.SetTrigger("Walk");
+			_animationEyes.SetTrigger("Walk");
 			Estela.Play();
 			SentidoBullet = true;
 			m_Player.FlipInX(true);
@@ -260,7 +267,7 @@ public class PlayerController : MonoBehaviour {
 		else
 		{
 			_animations.SetTrigger("Idle");
-			//_animationEyes.SetTrigger("Idle");
+			_animationEyes.SetTrigger("Idle");
 			Estela.Stop();
 		}
 		
@@ -291,16 +298,22 @@ public class PlayerController : MonoBehaviour {
 		if (IsGround && jump)
         {
 			_animations.SetTrigger("Jump");
+			_animationEyes.SetTrigger("Jump");
             direction.y = _jumpSpeed;
 			
 			audio.PlayOneShot(clipJump, 0.9f);
             //direction = new Vector3(directionX * _speedInJump, m_CharacterController.velocity.y, 0);
         }
 
-        if (blockControl)
-        {
-            direction = new Vector3(0, m_CharacterController.velocity.y, 0);
-        }
+		if (blockControl)
+		{
+			ojos.enabled = false;
+			direction = new Vector3(0, m_CharacterController.velocity.y, 0);
+		}
+		else {
+			
+			
+		}
 
         direction = transform.TransformDirection(direction);
 
@@ -401,6 +414,28 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+
+	private void SonidoRecarga(bool play)
+	{
+		if (play)
+		{
+			if (!audio.isPlaying)
+			{
+				audio.PlayOneShot(clipRecharge, 0.9f);
+			}
+		}
+		else
+		{
+
+			if (_animations.GetCurrentAnimatorStateInfo(0).IsName("Recargar"))
+			{
+				_animations.SetTrigger("Idle");
+				ojos.enabled = true;
+				audio.Stop();
+			}
+		}
+	}
+
     private void OnDestroy()
     {
         GameMgr.GetInstance().GetServer<InputMgr>().UnregisterPlanear = Planear;
@@ -408,6 +443,8 @@ public class PlayerController : MonoBehaviour {
         GameMgr.GetInstance().GetServer<InputMgr>().UnRegisterFire = Fire;
         GameMgr.GetInstance().GetServer<InputMgr>().UnRegisterRecargarPelusas = RecargaPelusas;
         GameMgr.GetInstance().GetServer<InputMgr>().UnRegisterCargaPelusas = CargaPelusas;
-    }
+		GameMgr.GetInstance().GetServer<InputMgr>().UnRegisterSonidoRecarga = SonidoRecarga;
+
+	}
 
 }

@@ -13,6 +13,7 @@ public class Player : MonoBehaviour {
     public float _Vida = 15;
     public int _BolaPelusas = 5;
     public SpriteRenderer _SpriteGnurr;
+	public SpriteRenderer _SpriteOjos;
     public float fadeTime = 0.1f;
     public bool initLoad;
 
@@ -209,7 +210,9 @@ public class Player : MonoBehaviour {
     public void FlipInX(bool flip)
     {
         _SpriteGnurr.flipX = flip;
-    }
+		_SpriteOjos.flipX = flip;
+
+	}
 
     public void FlipinY(bool flip)
     {

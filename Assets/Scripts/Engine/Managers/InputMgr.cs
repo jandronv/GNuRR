@@ -16,8 +16,10 @@ public class InputMgr : AComponent {
     public delegate void RecargaPelusas();
     public delegate void CargaPelusas(int numPelusas);
     public delegate void PlanearEvento(bool planear);
+	public delegate void SonidoRecarga(bool play);
 
-    private float _contadorRecarga = 0f;
+
+	private float _contadorRecarga = 0f;
     private float _contadorJump = 0f;
     private float _contadorCarga = 0;
     private int _numPelusasCarga = 0;
@@ -89,7 +91,18 @@ public class InputMgr : AComponent {
         set { m_planear -= value; }
     }
 
-    public RecargaPelusas RegisterRecargarPelusas
+	public SonidoRecarga RegisterSonidoRecarga
+	{
+		set { m_soundRecarga += value; }
+	}
+
+	public SonidoRecarga UnRegisterSonidoRecarga
+	{
+		set { m_soundRecarga -= value; }
+	}
+
+
+	public RecargaPelusas RegisterRecargarPelusas
     {
         set { m_DelegateRecargarPelusas += value; }
     }
@@ -283,7 +296,8 @@ public class InputMgr : AComponent {
 
 			if (Input.GetButton("Recargar"))
 			{
-
+				//LE damos al play
+				m_soundRecarga(true);
 				_contadorRecarga += Time.deltaTime;
 
 				if (_contadorRecarga > _coolDawnRecarga)
@@ -300,6 +314,8 @@ public class InputMgr : AComponent {
 
 			if (Input.GetButtonUp("Recargar"))
 			{
+				//paramos el sonido
+				m_soundRecarga(false);
 				_contadorRecarga = 0f;
 			}
 
@@ -531,7 +547,8 @@ public class InputMgr : AComponent {
     private Fire m_DelegateFire;
     private RecargaPelusas m_DelegateRecargarPelusas;
     private CargaPelusas m_DelegateCargaPelusas;
+	private SonidoRecarga m_soundRecarga;
 
-    protected bool m_pointAndClickActive = false;
+	protected bool m_pointAndClickActive = false;
     protected TMouseButtonID m_pointAndClickButton = TMouseButtonID.LEFT;
 }
