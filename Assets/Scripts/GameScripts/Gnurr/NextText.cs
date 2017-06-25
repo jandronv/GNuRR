@@ -19,8 +19,16 @@ public class NextText : MonoBehaviour {
         enter = Input.GetButtonDown("Interact");
         if (enter == true)
         {
-            Next_txt.SetActive(true);
-            Destroy(This_txt);
+			if (Next_txt != null)
+			{
+				Next_txt.SetActive(true);
+			}
+			if (Next_txt == null)
+			{
+				GameMgr.GetInstance().GetServer<InputMgr>().BloqueControles = true;
+			}
+
+			Destroy(This_txt);
         }
 
 		

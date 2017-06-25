@@ -7,7 +7,7 @@ public class trgr_gilbert : MonoBehaviour {
     public GameObject y_button;
     private bool enter = false;
     public GameObject txt_gilbert;
-	public int num_bocadillos = 0;
+	int num_bocadillos = 0;
 	public bool entraPrimera = true;
 
     private void OnTriggerEnter(Collider other)
@@ -36,15 +36,14 @@ public class trgr_gilbert : MonoBehaviour {
 					GameMgr.GetInstance().GetServer<InputMgr>().BloqueControles = false;
 				}
 
-				num_bocadillos++;
-                txt_gilbert.SetActive(true);
+				if (txt_gilbert != null)
+				{
+					txt_gilbert.SetActive(true);
+				}
+               
                 y_button.SetActive(false);
             }
 
-			if (num_bocadillos == 10)
-			{
-				GameMgr.GetInstance().GetServer<InputMgr>().BloqueControles = true;
-			}
 
         }
     }
