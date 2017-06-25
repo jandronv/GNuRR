@@ -11,7 +11,7 @@ public class Cargador : MonoBehaviour {
 		//Asignamos que la ultima escena es el nivel 0, por ser unanueva partida
 		GameMgr.GetInstance().GetCustomMgrs().GetPlayerMgr().UltimaEscena = _nombreEscena;
 
-		GameMgr.GetInstance().GetServer<SceneMgr>().ChangeScene("Loading", _nombreEscena);
+		GameMgr.GetInstance().GetServer<SceneMgr>().ChangeScene("Intro", _nombreEscena);
     }
 
     public void VolverNivel()
