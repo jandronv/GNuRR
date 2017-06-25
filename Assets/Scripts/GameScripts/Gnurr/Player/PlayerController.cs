@@ -323,6 +323,7 @@ public class PlayerController : MonoBehaviour {
 		if (_planear && _puedePlanear && PlaneoActivo)
 		{
 			Debug.Log("Planeando...");
+			_animations.SetTrigger("Planeo");
 			direction.y -= _gravityPlaning * Time.deltaTime;
 		}
 		else
