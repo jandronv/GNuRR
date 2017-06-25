@@ -306,7 +306,7 @@ public class PlayerController : MonoBehaviour {
 
 	
 		//TODO solo aplicar la gravedad del planeo cuando ya has saltado, cuando has pulsado el salto, esta casi, asi no aplica la gravidad si has pulsado de antes(mirar como lo hace shantae)
-		if (_planear && _puedePlanear && PlaneoActivo)
+		if (_planear && _puedePlanear) //&& PlaneoActivo)
 		{
 			Debug.Log("Planeando...");
 			direction.y -= _gravityPlaning * Time.deltaTime;
