@@ -26,9 +26,8 @@ public class NextText : MonoBehaviour {
 			if (Next_txt == null)
 			{
 				GameMgr.GetInstance().GetServer<InputMgr>().BloqueControles = true;
-			}
-
-			Destroy(This_txt);
+			}else
+				Destroy(This_txt);
         }
 
 		
