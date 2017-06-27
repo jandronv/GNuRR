@@ -25,4 +25,10 @@ public class Cargador : MonoBehaviour {
 
 		GameMgr.GetInstance ().GetServer<SceneMgr> ().ChangeScene(GameMgr.GetInstance ().GetCustomMgrs ().GetPlayerMgr ().UltimaEscena);
 	}
+
+	public void Menu()
+	{
+		GameMgr.GetInstance().GetServer<SceneMgr>().ChangeScene("Menu_Main");
+
+	}
 }

@@ -254,6 +254,36 @@ public class InputMgr : AComponent {
     protected override void Update()
     {
         base.Update();
+		if (Input.GetKeyDown(KeyCode.F1))
+		{
+			//Cargar escena
+			GameMgr.GetInstance().GetServer<SceneMgr>().ChangeScene("Lvl_0");
+		}
+		if (Input.GetKeyDown(KeyCode.F2))
+		{
+			//
+			GameMgr.GetInstance().GetServer<SceneMgr>().ChangeScene("Lvl_VC_Main");
+		}
+		if (Input.GetKeyDown(KeyCode.F3))
+		{
+			GameMgr.GetInstance().GetServer<SceneMgr>().ChangeScene("Lvl_1A");
+		}
+
+		if (Input.GetKeyDown(KeyCode.F4))
+		{
+			GameMgr.GetInstance().GetServer<SceneMgr>().ChangeScene("Lvl_1B");
+		}
+
+		if (Input.GetKeyDown(KeyCode.F5))
+		{
+			GameMgr.GetInstance().GetServer<SceneMgr>().ChangeScene("Lvl_1C");
+		}
+
+		if (Input.GetKeyDown(KeyCode.F6))
+		{
+			GameMgr.GetInstance().GetServer<SceneMgr>().ChangeScene("Lvl_2");
+		}
+
 		if (_BloquerMandos)
 		{
 			if (Input.GetButtonDown("Cancel") && !inPause)
