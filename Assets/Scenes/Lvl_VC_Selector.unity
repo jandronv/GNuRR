@@ -965,11 +965,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4040608071276656, guid: bbfccf2b2b9031c4c9f511ca9129fc87, type: 2}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4040608071276656, guid: bbfccf2b2b9031c4c9f511ca9129fc87, type: 2}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4040608071276656, guid: bbfccf2b2b9031c4c9f511ca9129fc87, type: 2}
       propertyPath: m_LocalScale.z
