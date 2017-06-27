@@ -29,8 +29,13 @@ public class OjoIzzie : MonoBehaviour {
 			//TODO meter un smooth
 			//
 			//transform.position = Vector3.Lerp(new Vector3(posCuerpo.position.x, posCuerpo.position.y + offsetY, posCuerpo.position.z), new Vector3(posCuerpo.position.x - 0.13f, posCuerpo.position.y + offsetY, posCuerpo.position.z), smooth);
-			transform.position = new Vector3(posCuerpo.position.x - 0.13f, posCuerpo.position.y + offsetY, posCuerpo.position.z);
-		}else
+
+			if (cuerpo.flipX) {
+				transform.position = new Vector3(posCuerpo.position.x + 0.13f, posCuerpo.position.y + offsetY, posCuerpo.position.z);
+			}else
+				transform.position = new Vector3(posCuerpo.position.x - 0.13f, posCuerpo.position.y + offsetY, posCuerpo.position.z);
+		}
+		else
 			transform.position = new Vector3(posCuerpo.position.x + offsetX, posCuerpo.position.y + offsetY, posCuerpo.position.z);
 
 	}
