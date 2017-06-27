@@ -29,7 +29,7 @@ public class InputMgr : AComponent {
     public int TamPelusaRecarga = 5;
     public float _coolDawnDisparo = 0.3f;
     public float _coolDawnCarga = 0.3f;
-    public float _coolDawnRecarga = 1f;
+    public float _coolDawnRecarga = 0.5f;
 
 
 	public string _menuSceneName = "Menu_Pausa";
