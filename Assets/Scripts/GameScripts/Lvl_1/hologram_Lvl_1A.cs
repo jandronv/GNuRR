@@ -33,7 +33,12 @@ public class hologram_Lvl_1A : MonoBehaviour {
 
                 y_button.SetActive(false);
                 holograma.SetActive(true);
-                txt_hologram_1.SetActive(true);
+
+                if (txt_hologram_1)
+                {
+                    txt_hologram_1.SetActive(true);
+                }
+
             }
         }
     }
