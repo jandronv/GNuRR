@@ -48,7 +48,7 @@ public class trigger_jangah : MonoBehaviour {
     {
         if (other.gameObject.tag == "Player")
         {
-            //Y_button.SetActive(true);
+            Y_button.SetActive(false);
         }
     }
 

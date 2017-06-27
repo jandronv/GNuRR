@@ -8,6 +8,7 @@ public class txt_last_ending : MonoBehaviour {
     private bool enter = false;
     public GameObject Jangah;
     public GameObject trigger_jangah;
+    public GameObject block_salida;
 
 	// Use this for initialization
 	void Start () {
@@ -23,6 +24,7 @@ public class txt_last_ending : MonoBehaviour {
             GameMgr.GetInstance().GetServer<InputMgr>().BloqueControles = true;
             Jangah.GetComponent<Animation>().Play();
             Destroy(trigger_jangah);
+            Destroy(block_salida);
             Destroy(this_txt);
 
         }

@@ -40,7 +40,7 @@ public class pelusero : MonoBehaviour {
     {
         if (other.gameObject.tag == "Player")
         {
-            //y_button.SetActive(false);
+            y_button.SetActive(false);
         }
     }
 
